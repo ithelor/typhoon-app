@@ -1,0 +1,33 @@
+{
+  "name": "typhoon-app",
+  "version": "1.0.0",
+  "description": "Directory information system",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon"
+  },
+  "keywords": [
+    "directory",
+    "information",
+    "system",
+    "typhoon",
+    "web"
+  ],
+  "author": "Vladislav 'ithelor' Dietrich",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "eslint": "^8.9.0",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.5.5"
+  }
+}
