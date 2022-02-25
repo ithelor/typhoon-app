@@ -3,7 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 
-import AvarSchema from './models/Avar.model'
+import apiRouter from './api'
 
 dotenv.config()
 
@@ -13,6 +13,7 @@ app.use(
     origin: process.env.CLIENT_URL
   })
 )
+app.use('/api', apiRouter)
 
 const PORT = process.env.SERVER_PORT || 8080
 const MONGO_URI = process.env.MONGO_URI!
@@ -29,14 +30,4 @@ try {
   console.log('Database connection error', error.message)
 }
 
-app.get('/api/avar', (req, res) => {
-  AvarSchema.findOne({ MON: 1 }, (error: any, data: any) => {
-    if (error) {
-      console.log(`An error occured: ${error.res}`)
-    } else {
-      res.json(data)
-    }
-  })
-})
-
-module.exports = app
+export default app
