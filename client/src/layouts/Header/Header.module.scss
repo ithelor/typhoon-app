@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.4);
+  padding: 0 0.5rem;
+  height: var(--header-hight);
+
+  .menuIconButton {
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .menuIcon {
+    width: 24px;
+    height: 24px;
+    fill: var(--medium-gray);
+    cursor: pointer;
+
+    &:hover {
+      fill: var(--dark-gray);
+    }
+  }
+}
