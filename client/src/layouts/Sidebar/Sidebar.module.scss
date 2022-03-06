@@ -8,30 +8,59 @@
   height: calc(100vh - var(--header-height));
   padding-top: 1rem;
   align-items: center;
+  justify-content: stretch;
+  transition: width var(--animation-duration) var(--animation-timing-curve);
+  position: sticky;
+  top: var(--header-height);
+  left: 0;
 
   &.open {
-    // this is some stupid shit, non-direct children not working, probably due to nesting
-    .topSidebar .hiddenSidebar {
-      display: block;
+    width: 200px;
+
+    .topSidebar {
+      height: 125px;
+
+      .logo {
+        width: 90px;
+        height: 90px;
+      }
     }
-    // either way will FIXME: with states and / or classNames()
-    .middleSidebar .sidebarList .sidebarListItem .sidebarLink .sidebarLinkText {
-      display: block;
+
+    .hiddenSidebar {
+      opacity: 1;
+      height: auto;
+      width: 100%;
+    }
+
+    .middleSidebar .sidebarList .sidebarLink,
+    .bottomSidebar .sidebarList .sidebarLink {
+      justify-content: flex-start;
     }
   }
 
-  &.close {
+  .hiddenSidebar {
+    opacity: 0;
+    width: 0;
+    transition: opacity var(--animation-duration) var(--animation-timing-curve);
   }
 
   .topSidebar {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 30px;
+    transition: height var(--animation-duration) var(--animation-timing-curve);
+
+    .hiddenSidebar {
+      text-align: center;
+      width: 100%;
+    }
 
     .logo {
       display: block;
       width: 30px;
       height: 30px;
+      transition: var(--animation-duration) var(--animation-timing-curve);
 
       & > img {
         width: 100%;
@@ -39,36 +68,87 @@
       }
     }
 
-    .hiddenSidebar {
-      display: none;
+    .yourChannel {
+      color: var(--dark-gray);
+      font-size: 0.75rem;
+      font-weight: bold;
+      margin-bottom: 0.15rem;
+      margin-top: 0.5rem;
+    }
+
+    .channelName {
+      color: var(--medium-gray);
+      font-size: 0.75rem;
     }
   }
 
   .middleSidebar {
-    flex-grow: 1;
     overflow-y: auto;
     overflow-x: hidden;
+    flex-grow: 1;
+    margin: 1rem 0;
+  }
 
-    .sidebarList {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+  .middleSidebar,
+  .bottomSidebar {
+    width: 100%;
+  }
 
-      .sidebarListItem {
-        .sidebarLink {
-          display: flex;
+  .sidebarList {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
 
-          .sidebarIcon {
-            width: 24px;
-            height: 24px;
-            margin-right: 0.5rem;
-          }
+    .hiddenSidebar {
+      margin-left: 1.5rem;
+      white-space: nowrap;
+    }
 
-          .sidebarLinkText {
-            display: none;
-          }
+    .sidebarListItem {
+      position: relative;
+      color: var(--light-gray);
+      width: 100%;
+
+      &.active {
+        .sidebarIcon {
+          color: var(--accent-color);
+        }
+        background-color: var(--lighttest-gray);
+
+        &::before {
+          content: '';
+          background-color: var(--accent-color);
+          height: 100%;
+          left: 0;
+          width: 5px;
+          position: absolute;
+        }
+      }
+
+      &:hover {
+        background-color: var(--lighttest-gray);
+      }
+
+      .sidebarLink {
+        display: flex;
+        width: 100%;
+        padding: 0.5rem 0;
+        color: var(--light-gray);
+        text-decoration: none;
+        align-items: center;
+        padding-left: 25px;
+
+        .sidebarIcon {
+          width: 25px;
+          height: 25px;
+          flex-shrink: 0;
+        }
+
+        .sidebarLinkText {
+          display: none;
         }
       }
     }
