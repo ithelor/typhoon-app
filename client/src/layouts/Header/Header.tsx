@@ -1,4 +1,3 @@
-import React from 'react'
 import { FaBars as HamburgerIcon } from 'react-icons/fa'
 
 import { useSidebar } from 'hooks/useSidebar'
@@ -9,9 +8,12 @@ const Header = () => {
   const { sidebarOpen, setSidebarOpen } = useSidebar()
 
   return (
-    <header className={styles.header}>
-      <button className={styles.menuIconButton} onClick={() => setSidebarOpen(!sidebarOpen)}>
-        <HamburgerIcon className={styles.menuIcon} />
+    <header className={styles.container}>
+      <button
+        className={styles.sidebarToggle}
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        <HamburgerIcon className={styles.toggleIcon} />
       </button>
     </header>
   )

@@ -1,39 +1,43 @@
-.sidebar {
-  flex-shrink: 0;
-  overflow: hidden;
-  width: 75px;
-  border-right: 1px solid var(--light-gray);
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - var(--header-height));
-  padding-top: 1rem;
-  align-items: center;
-  justify-content: stretch;
-  transition: width var(--animation-duration) var(--animation-timing-curve);
+.container {
   position: sticky;
   top: var(--header-height);
   left: 0;
 
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: stretch;
+  align-items: center;
+
+  width: 75px;
+  height: calc(100vh - var(--header-height));
+  padding-top: 1rem;
+
+  border-right: 1px solid var(--light-gray);
+
+  overflow: hidden;
+  transition: width var(--animation-duration) var(--animation-timing-curve);
+
   &.open {
     width: 200px;
 
-    .topSidebar {
-      height: 125px;
+    .topSection {
+      height: 105px;
 
       .logo {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
       }
     }
 
     .hiddenSidebar {
       opacity: 1;
-      height: auto;
       width: 100%;
+      height: auto;
     }
 
-    .middleSidebar .sidebarList .sidebarLink,
-    .bottomSidebar .sidebarList .sidebarLink {
+    .middleSection .menuList .navlink,
+    .bottomSection .menuList .navlink {
       justify-content: flex-start;
     }
   }
@@ -41,26 +45,39 @@
   .hiddenSidebar {
     opacity: 0;
     width: 0;
+
     transition: opacity var(--animation-duration) var(--animation-timing-curve);
   }
 
-  .topSidebar {
+  .topSection {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 30px;
+
     transition: height var(--animation-duration) var(--animation-timing-curve);
 
     .hiddenSidebar {
-      text-align: center;
       width: 100%;
+      text-align: center;
     }
 
     .logo {
       display: block;
-      width: 30px;
-      height: 30px;
+      width: 50px;
+      height: 50px;
+
       transition: var(--animation-duration) var(--animation-timing-curve);
+      animation: logo-spin infinite 20s linear;
+
+      @keyframes logo-spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
       & > img {
         width: 100%;
@@ -68,49 +85,51 @@
       }
     }
 
-    .yourChannel {
-      color: var(--dark-gray);
+    .title {
       font-size: 0.75rem;
       font-weight: bold;
-      margin-bottom: 0.15rem;
-      margin-top: 0.5rem;
+      color: var(--dark-gray);
+
+      margin: 0.5rem 0 0.15rem;
     }
 
-    .channelName {
-      color: var(--medium-gray);
+    .subtitle {
       font-size: 0.75rem;
+      color: var(--medium-gray);
     }
   }
 
-  .middleSidebar {
-    overflow-y: auto;
-    overflow-x: hidden;
+  .middleSection {
     flex-grow: 1;
     margin: 1rem 0;
+
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
-  .middleSidebar,
-  .bottomSidebar {
+  .middleSection,
+  .bottomSection {
     width: 100%;
   }
 
-  .sidebarList {
-    margin: 0;
-    padding: 0;
+  .menuList {
+    list-style: none;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    list-style: none;
+    padding: 0;
+    margin: 0;
 
     .hiddenSidebar {
       margin-left: 1.5rem;
       white-space: nowrap;
     }
 
-    .sidebarListItem {
+    .menuListItem {
       position: relative;
-      color: var(--light-gray);
       width: 100%;
+      color: var(--light-gray);
 
       &.active {
         .sidebarIcon {
@@ -120,11 +139,12 @@
 
         &::before {
           content: '';
-          background-color: var(--accent-color);
-          height: 100%;
-          left: 0;
-          width: 5px;
           position: absolute;
+          left: 0;
+
+          width: 5px;
+          height: 100%;
+          background-color: var(--accent-color);
         }
       }
 
@@ -132,23 +152,19 @@
         background-color: var(--lighttest-gray);
       }
 
-      .sidebarLink {
+      .navlink {
         display: flex;
         width: 100%;
-        padding: 0.5rem 0;
+        align-items: center;
+        padding: 0.5rem 0 0.5rem 25px;
+
         color: var(--light-gray);
         text-decoration: none;
-        align-items: center;
-        padding-left: 25px;
 
         .sidebarIcon {
+          flex-shrink: 0;
           width: 25px;
           height: 25px;
-          flex-shrink: 0;
-        }
-
-        .sidebarLinkText {
-          display: none;
         }
       }
     }

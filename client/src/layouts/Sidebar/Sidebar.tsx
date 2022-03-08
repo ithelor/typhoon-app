@@ -1,9 +1,9 @@
-import React from 'react'
 import classNames from 'classnames'
+import { NavLink } from 'react-router-dom'
+import { IconType } from 'react-icons'
 import {
   BsMenuButtonWideFill as DashboardIcon,
   BsPlayBtnFill as ContentIcon,
-  BsMusicPlayerFill as PlaylistIcon,
   BsFileBarGraphFill as AnalyticsIcon,
   BsPersonFill as ProfileIcon,
   BsGearFill as SettingsIcon
@@ -11,64 +11,66 @@ import {
 
 import { useSidebar } from 'hooks/useSidebar'
 
-import logo from 'assets/shared/logo.svg'
+import { ReactComponent as Logo } from 'assets/shared/logo.svg'
 
 import styles from './Sidebar.module.scss'
 
+/**
+ * MenuItem Component
+ */
+interface IMenuItem {
+  title: string
+  to: string
+  icon: IconType
+  active?: boolean
+}
+const MenuItem = (props: IMenuItem) => {
+  return (
+    <li
+      className={classNames(styles.menuListItem, {
+        [styles.active]: props.active
+      })}
+    >
+      <NavLink to={props.to} className={styles.navlink}>
+        <props.icon className={styles.sidebarIcon} />
+        <div className={styles.hiddenSidebar}>{props.title}</div>
+      </NavLink>
+    </li>
+  )
+}
+
+/**
+ * Sidebar Component
+ */
 const Sidebar = () => {
   const { sidebarOpen } = useSidebar()
 
   return (
-    <aside className={classNames(styles.sidebar, { [styles.open]: sidebarOpen })}>
-      <div className={styles.topSidebar}>
-        <a href="#" className={styles.logo}>
-          <img src={logo} alt="logo" />
-        </a>
-        <div className={classNames(styles.hiddenSidebar, styles.yourChannel)}>Your Channel</div>
-        <div className={classNames(styles.hiddenSidebar, styles.channelName)}>Typhoon</div>
+    <aside
+      className={classNames(styles.container, { [styles.open]: sidebarOpen })}
+    >
+      <div className={styles.topSection}>
+        <div className={styles.logo}>
+          <Logo />
+        </div>
+        <div className={classNames(styles.hiddenSidebar, styles.title)}>
+          Title
+        </div>
+        <div className={classNames(styles.hiddenSidebar, styles.subtitle)}>
+          Subtitle
+        </div>
       </div>
-      <div className={styles.middleSidebar}>
-        <ul className={styles.sidebarList}>
-          <li className={classNames(styles.sidebarListItem, styles.active)}>
-            <a href="#" className={styles.sidebarLink}>
-              <DashboardIcon className={styles.sidebarIcon} />
-              <div className={styles.hiddenSidebar}>Dashboard</div>
-            </a>
-          </li>
-          <li className={styles.sidebarListItem}>
-            <a href="#" className={styles.sidebarLink}>
-              <ContentIcon className={styles.sidebarIcon} />
-              <div className={styles.hiddenSidebar}>Content</div>
-            </a>
-          </li>
-          <li className={styles.sidebarListItem}>
-            <a href="#" className={styles.sidebarLink}>
-              <PlaylistIcon className={styles.sidebarIcon} />
-              <div className={styles.hiddenSidebar}>Playlist</div>
-            </a>
-          </li>
-          <li className={styles.sidebarListItem}>
-            <a href="#" className={styles.sidebarLink}>
-              <AnalyticsIcon className={styles.sidebarIcon} />
-              <div className={styles.hiddenSidebar}>Analytics</div>
-            </a>
-          </li>
+      <div className={styles.middleSection}>
+        <ul className={styles.menuList}>
+          <MenuItem title="Dashboard" to="#" icon={DashboardIcon} active />
+          <MenuItem title="Content" to="#" icon={ContentIcon} />
+          <MenuItem title="Analytics" to="#" icon={AnalyticsIcon} />
         </ul>
       </div>
-      <div className={styles.bottomSidebar}>
-        <ul className={styles.sidebarList}>
-          <li className={styles.sidebarListItem}>
-            <a href="#" className={styles.sidebarLink}>
-              <ProfileIcon className={styles.sidebarIcon} />
-              <div className={styles.hiddenSidebar}>Profile</div>
-            </a>
-          </li>
-          <li className={styles.sidebarListItem}>
-            <a href="#" className={styles.sidebarLink}>
-              <SettingsIcon className={styles.sidebarIcon} />
-              <div className={styles.hiddenSidebar}>Settings</div>
-            </a>
-          </li>
+      <div className={styles.bottomSection}>
+        <ul className={styles.menuList}>
+          <MenuItem title="Profile" to="#" icon={ProfileIcon} />
+          <MenuItem title="Settings" to="#" icon={SettingsIcon} />
         </ul>
       </div>
     </aside>
