@@ -1,3 +1,6 @@
+@use '~styles/partials/mixins';
+@use '~styles/partials/variables';
+
 body {
   margin: 0;
 }
@@ -14,15 +17,26 @@ body {
   --light-gray: rgb(144, 144, 144);
   --medium-gray: rgb(96, 96, 96);
   --dark-gray: rgb(13, 13, 13);
-  --header-height: 40px;
+
   --animation-duration: 0.2s;
   --animation-timing-curve: ease-in-out;
+
+  --header-height: 40px;
+  --collapsed-sidebar-width: 74px;
+  --expanded-sidebar-width: 200px;
 }
 
-.container {
-  display: flex;
+.dim {
+  &.open {
+    @media only screen and (max-width: variables.$mobile-width) {
+      @include mixins.Backdrop(0.75);
+    }
+  }
+  .container {
+    display: flex;
 
-  .content {
-    margin: 1rem;
+    .content {
+      margin: 1rem;
+    }
   }
 }
