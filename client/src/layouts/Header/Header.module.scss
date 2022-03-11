@@ -1,30 +1,100 @@
-.container {
-  position: sticky;
-  top: 0;
+.right {
+  margin-top: 1.4rem;
 
-  display: flex;
-  align-items: center;
-  padding: 0 0.5rem;
-  height: var(--header-height);
-  z-index: 100;
+  .top {
+    display: flex;
+    justify-content: end;
+    gap: 2rem;
 
-  background-color: white;
-  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.4);
+    button {
+      display: none;
+    }
 
-  .sidebarToggle {
-    background: none;
-    border: none;
-    padding: 0;
+    .themeToggler {
+      background: var(--color-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 1.6rem;
+      width: 4.2rem;
+      cursor: pointer;
+      border-radius: 0.8rem;
+
+      svg {
+        font-size: 1.2rem;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.15rem;
+
+        &.active {
+          background: var(--color-primary);
+          fill: white;
+          border-radius: 0.5rem;
+        }
+      }
+    }
+
+    .profile {
+      display: flex;
+      gap: 2rem;
+      text-align: right;
+
+      .info small {
+        color: var(--color-info-dark);
+      }
+
+      svg {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
   }
+}
 
-  .toggleIcon {
-    width: 24px;
-    height: 24px;
-    fill: var(--medium-gray);
-    cursor: pointer;
+@media screen and (max-width: 768px) {
+  .right {
+    width: 94%;
+    margin: 0 auto 4rem;
 
-    &:hover {
-      fill: var(--dark-gray);
+    .top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 0.8rem;
+      height: 4.6rem;
+      background: var(--color-white);
+      width: 100%;
+      margin: 0;
+      z-index: 2;
+      box-shadow: 0 1rem 1rem var(--color-light);
+
+      button {
+        display: inline-block;
+        background: transparent;
+        cursor: pointer;
+        color: var(--color-dark);
+        position: absolute;
+        left: 1rem;
+
+        svg {
+          font-size: 2rem;
+        }
+      }
+
+      .themeToggler {
+        width: 4.4rem;
+        position: absolute;
+        left: 66%;
+      }
+
+      .profile .info {
+        display: none;
+      }
     }
   }
 }

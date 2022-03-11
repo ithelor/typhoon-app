@@ -1,42 +1,65 @@
-@use '~styles/partials/mixins';
-@use '~styles/partials/variables';
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-body {
-  margin: 0;
+:root {
+  --color-primary: #7380ec;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #7d8da1;
+  --color-info-light: #dce1eb;
+  --color-dark: #363949;
+  --color-light: rgba(132, 139, 200, 0.18);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f6f6f9;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
 }
 
-:root {
-  --accent-color: rgb(204, 0, 0);
-  --lighttest-gray: rgb(249, 249, 249);
-  --light-gray: rgb(144, 144, 144);
-  --medium-gray: rgb(96, 96, 96);
-  --dark-gray: rgb(13, 13, 13);
-
-  --animation-duration: 0.2s;
-  --animation-timing-curve: ease-in-out;
-
-  --header-height: 40px;
-  --collapsed-sidebar-width: 74px;
-  --expanded-sidebar-width: 200px;
+html {
+  font-size: 14px;
 }
 
-.dim {
-  &.open {
-    @media only screen and (max-width: variables.$mobile-width) {
-      @include mixins.Backdrop(0.75);
-    }
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: var(--color-background);
+  user-select: none;
+  overflow-x: hidden;
+}
+
+.container {
+  display: grid;
+  width: 96%;
+  margin: 0 auto;
+  gap: 1.8rem;
+  grid-template-columns: 14rem auto 23rem;
+
+  .content {
+    margin-top: 1rem;
   }
+}
+
+@media screen and (max-width: 768px) {
   .container {
-    display: flex;
+    width: 100%;
+    grid-template-columns: 1fr;
 
     .content {
-      margin: 1rem;
+      margin: 6rem 1rem 0;
     }
   }
 }

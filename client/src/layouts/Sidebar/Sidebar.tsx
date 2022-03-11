@@ -2,14 +2,20 @@ import classNames from 'classnames'
 import { NavLink } from 'react-router-dom'
 import { IconType } from 'react-icons'
 import {
-  BsMenuButtonWideFill as DashboardIcon,
-  BsPlayBtnFill as ContentIcon,
-  BsFileBarGraphFill as AnalyticsIcon,
-  BsPersonFill as ProfileIcon,
-  BsGearFill as SettingsIcon
-} from 'react-icons/bs'
+  MdClose as CloseIcon,
+  MdDashboard as DashboardIcon,
+  MdPersonOutline as PersonIcon,
+  MdReceiptLong as OrdersIcon,
+  MdInsights as AnalyticsIcon,
+  MdMailOutline as MessagesIcon,
+  MdInventory as ProductsIcon,
+  MdOutlineReportGmailerrorred as ReportsIcon,
+  MdSettings as SettingsIcon,
+  MdAdd as AddProductIcon,
+  MdLogout as LogoutIcon
+} from 'react-icons/md'
 
-import { useSidebar } from 'hooks/useSidebar'
+// import { useSidebar } from 'hooks/useSidebar'
 
 import { ReactComponent as Logo } from 'assets/shared/logo.svg'
 
@@ -26,16 +32,13 @@ interface IMenuItem {
 }
 const MenuItem = (props: IMenuItem) => {
   return (
-    <li
-      className={classNames(styles.menuListItem, {
-        [styles.active]: props.active
-      })}
+    <NavLink
+      to={props.to}
+      className={classNames(styles.navlink, { [styles.active]: props.active })}
     >
-      <NavLink to={props.to} className={styles.navlink}>
-        <props.icon className={styles.sidebarIcon} />
-        <div className={styles.hiddenSidebar}>{props.title}</div>
-      </NavLink>
-    </li>
+      <props.icon className={styles.menuItemIcon} />
+      <h3>{props.title}</h3>
+    </NavLink>
   )
 }
 
@@ -43,44 +46,34 @@ const MenuItem = (props: IMenuItem) => {
  * Sidebar Component
  */
 const Sidebar = () => {
-  const { sidebarOpen } = useSidebar()
+  // const { sidebarOpen } = useSidebar()
 
   return (
-    <>
-      <div
-        className={classNames(styles.placeholder, {
-          [styles.open]: sidebarOpen
-        })}
-      />
-      <aside
-        className={classNames(styles.container, { [styles.open]: sidebarOpen })}
-      >
-        <div className={styles.topSection}>
-          <div className={styles.logo}>
-            <Logo />
-          </div>
-          <div className={classNames(styles.hiddenSidebar, styles.title)}>
-            Title
-          </div>
-          <div className={classNames(styles.hiddenSidebar, styles.subtitle)}>
-            Subtitle
-          </div>
+    <aside>
+      <div className={styles.top}>
+        <div className={styles.logo}>
+          <Logo />
+          <h2>
+            T<span>itle</span>
+          </h2>
         </div>
-        <div className={styles.middleSection}>
-          <ul className={styles.menuList}>
-            <MenuItem title="Dashboard" to="#" icon={DashboardIcon} active />
-            <MenuItem title="Content" to="#" icon={ContentIcon} />
-            <MenuItem title="Analytics" to="#" icon={AnalyticsIcon} />
-          </ul>
+        <div className={styles.close} id="close-btn">
+          <CloseIcon />
         </div>
-        <div className={styles.bottomSection}>
-          <ul className={styles.menuList}>
-            <MenuItem title="Profile" to="#" icon={ProfileIcon} />
-            <MenuItem title="Settings" to="#" icon={SettingsIcon} />
-          </ul>
-        </div>
-      </aside>
-    </>
+      </div>
+      <div className={styles.sidebar}>
+        <MenuItem icon={DashboardIcon} title="Dashboard" to="#" active />
+        <MenuItem icon={PersonIcon} title="Customers" to="#" />
+        <MenuItem icon={OrdersIcon} title="Orders" to="#" />
+        <MenuItem icon={AnalyticsIcon} title="Analytics" to="#" />
+        <MenuItem icon={MessagesIcon} title="Messages" to="#" />
+        <MenuItem icon={ProductsIcon} title="Products" to="#" />
+        <MenuItem icon={ReportsIcon} title="Reports" to="#" />
+        <MenuItem icon={SettingsIcon} title="Settings" to="#" />
+        <MenuItem icon={AddProductIcon} title="Add product" to="#" />
+        <MenuItem icon={LogoutIcon} title="Logout" to="#" />
+      </div>
+    </aside>
   )
 }
 
