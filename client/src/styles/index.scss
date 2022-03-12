@@ -15,6 +15,15 @@
   --color-background: #f6f6f9;
 }
 
+[data-theme='dark'] {
+  --color-background: #181a1e;
+  --color-white: #202528;
+  --color-dark: #efeffd;
+  --color-dark-variant: #a3bdcc;
+  --color-light: rgba(0, 0, 0, 0.4);
+  --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
 *,
 *::before,
 *::after {
@@ -39,6 +48,7 @@ body {
   background: var(--color-background);
   user-select: none;
   overflow-x: hidden;
+  transition: background 0.3s ease;
 }
 
 .container {
@@ -47,6 +57,7 @@ body {
   margin: 0 auto;
   gap: 1.8rem;
   grid-template-columns: 14rem auto 23rem;
+  color: var(--color-dark);
 
   .content {
     margin-top: 1rem;

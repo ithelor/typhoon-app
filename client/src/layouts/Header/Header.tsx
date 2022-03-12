@@ -1,32 +1,51 @@
-// import classNames from 'classnames'
+import React from 'react'
 import {
   MdMenu as MenuIcon,
   MdLightMode as LightModeIcon,
   MdDarkMode as DarkModeIcon
 } from 'react-icons/md'
 
-import { ReactComponent as Logo } from 'assets/shared/logo.svg'
+import { useSidebar } from 'hooks/useSidebar'
 
-// import { useSidebar } from 'hooks/useSidebar'
+import { ReactComponent as Logo } from 'assets/shared/logo.svg'
 
 import styles from './Header.module.scss'
 
+/**
+ * Header Component
+ */
 const Header = () => {
-  // const { sidebarOpen, setSidebarOpen } = useSidebar()
+  const defaultDark =
+    window.matchMedia('(prefers-color-scheme: dark)').matches && 'dark'
+
+  const [theme, setTheme] = React.useState(
+    localStorage.getItem('theme') || defaultDark || 'light'
+  )
+
+  const { sidebarOpen, setSidebarOpen } = useSidebar()
+
+  React.useEffect(() => {
+    localStorage.setItem('theme', theme)
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
 
   return (
     <div className={styles.right}>
       <div className={styles.top}>
-        <button>
+        <button onClick={() => setSidebarOpen(!sidebarOpen)}>
           <MenuIcon />
         </button>
-        <div className={styles.themeToggler}>
+        <button
+          className={styles.themeToggler}
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        >
           <LightModeIcon
-            // className={classNames({[styles.active]: props.active})}
-            className={styles.active}
+            className={theme === 'light' ? styles.active : undefined}
           />
-          <DarkModeIcon />
-        </div>
+          <DarkModeIcon
+            className={theme === 'dark' ? styles.active : undefined}
+          />
+        </button>
         <div className={styles.profile}>
           <div className={styles.info}>
             <p>
