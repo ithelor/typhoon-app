@@ -1,6 +1,10 @@
 aside {
   height: 100vh;
 
+  &.open {
+    display: block;
+  }
+
   .top {
     display: flex;
     justify-content: space-between;
@@ -25,6 +29,10 @@ aside {
     }
     .close {
       display: none;
+      background: none;
+      color: var(--color-dark);
+
+      transition: color 0.3s ease;
     }
   }
 
@@ -92,7 +100,7 @@ aside {
 @media screen and (max-width: 768px) {
   aside {
     position: fixed;
-    left: 0;
+    left: -100%;
     background: var(--color-white);
     width: 18rem;
     z-index: 3;
@@ -100,6 +108,13 @@ aside {
     height: 100vh;
     padding-right: 1rem;
     display: none;
+    animation: showMenu 0.3s ease forwards;
+
+    @keyframes showMenu {
+      to {
+        left: 0;
+      }
+    }
 
     .top {
       .close {

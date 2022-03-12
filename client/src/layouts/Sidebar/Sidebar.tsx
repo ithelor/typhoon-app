@@ -15,7 +15,7 @@ import {
   MdLogout as LogoutIcon
 } from 'react-icons/md'
 
-// import { useSidebar } from 'hooks/useSidebar'
+import { useSidebar } from 'hooks/useSidebar'
 
 import { ReactComponent as Logo } from 'assets/shared/logo.svg'
 
@@ -46,10 +46,10 @@ const MenuItem = (props: IMenuItem) => {
  * Sidebar Component
  */
 const Sidebar = () => {
-  // const { sidebarOpen } = useSidebar()
+  const { sidebarOpen, setSidebarOpen } = useSidebar()
 
   return (
-    <aside>
+    <aside className={sidebarOpen ? styles.open : undefined}>
       <div className={styles.top}>
         <div className={styles.logo}>
           <Logo />
@@ -57,9 +57,9 @@ const Sidebar = () => {
             T<span>itle</span>
           </h2>
         </div>
-        <div className={styles.close} id="close-btn">
+        <button className={styles.close} onClick={() => setSidebarOpen(false)}>
           <CloseIcon />
-        </div>
+        </button>
       </div>
       <div className={styles.sidebar}>
         <MenuItem icon={DashboardIcon} title="Dashboard" to="#" active />
