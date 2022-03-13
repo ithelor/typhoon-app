@@ -1,53 +1,59 @@
-.right {
-  margin-top: 1.4rem;
+@use '~styles/partials/variables';
 
-  .top {
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+
+  padding: 0 1rem;
+
+  background: var(--color-background);
+  box-shadow: 0 1rem 1rem var(--color-light);
+  z-index: 5;
+
+  transition: background 0.3s ease;
+
+  display: grid;
+  align-items: center;
+
+  display: flex;
+  justify-content: space-between;
+
+  .left {
     display: flex;
-    justify-content: end;
-    gap: 2rem;
-
-    transition: background 0.3s ease;
+    align-items: center;
+    gap: 1rem;
 
     button {
-      display: none;
-    }
-
-    .themeToggler {
-      background: var(--color-light);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 1.6rem;
-      width: 4.2rem;
       cursor: pointer;
-      border-radius: 0.5rem;
+      display: none;
 
-      svg {
-        font-size: 1.2rem;
-        width: 50%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.15rem;
-
-        transition: all 0.3s ease;
-
-        &.active {
-          background: var(--color-primary);
-          fill: white;
-          border-radius: 0.5rem;
-        }
-      }
+      color: var(--color-dark);
+      background: transparent;
     }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 
     .profile {
       display: flex;
-      gap: 2rem;
+      gap: 1rem;
       text-align: right;
 
-      .info small {
-        color: var(--color-info-dark);
+      .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        line-height: 16px;
+
+        small {
+          color: var(--color-info-dark);
+        }
       }
 
       svg {
@@ -59,51 +65,20 @@
       }
     }
   }
-}
 
-@media screen and (max-width: 768px) {
-  .right {
-    width: 94%;
-    margin: 0 auto 4rem;
-
-    .top {
-      position: fixed;
-      top: 0;
-      left: 0;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 0 0.8rem;
-      height: 4.6rem;
-      background: var(--color-white);
-      width: 100%;
-      margin: 0;
-      z-index: 2;
-      box-shadow: 0 1rem 1rem var(--color-light);
-
-      transition: box-shadow 0.3s ease;
-
+  @media screen and (max-width: variables.$mobile-width) {
+    .left {
       button {
-        display: inline-block;
-        background: transparent;
-        cursor: pointer;
-        color: var(--color-dark);
-        position: absolute;
-        left: 1rem;
+        display: block;
 
         svg {
           font-size: 2rem;
         }
       }
+    }
 
-      .themeToggler {
-        width: 4.4rem;
-        position: absolute;
-        left: 66%;
-      }
-
-      .profile .info {
-        display: none;
-      }
+    .right .profile .info {
+      display: none;
     }
   }
 }

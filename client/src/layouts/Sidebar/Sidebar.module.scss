@@ -1,60 +1,39 @@
-aside {
-  height: 100vh;
+@use '~styles/partials/variables';
 
-  &.open {
-    display: block;
-  }
+.container {
+  position: sticky;
+  position: relative;
+  top: var(--content-margin);
+  height: calc(100vh - var(--content-margin));
+  z-index: 1;
 
-  .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
+  .navMenu {
+    position: relative;
+    height: 100%;
 
-    .logo {
-      display: flex;
-      margin-left: 1rem;
-
-      svg {
-        width: 2rem;
-        height: 2rem;
-        fill: var(--color-danger);
-      }
-
-      h2 {
-        span {
-          color: var(--color-danger);
-        }
-      }
-    }
-    .close {
-      display: none;
-      background: none;
-      color: var(--color-dark);
-
-      transition: color 0.3s ease;
-    }
-  }
-
-  .sidebar {
     display: flex;
     flex-direction: column;
-    height: 86vh;
-    position: relative;
-    top: 3rem;
+    flex: none;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 3;
 
     .navlink {
+      min-height: 3rem;
+
       display: flex;
-      color: var(--color-info-dark);
-      margin-left: 2rem;
       gap: 1rem;
       align-items: center;
-      position: relative;
-      height: 3.7rem;
+
+      margin-left: 2rem;
+      color: var(--color-info-dark);
+
       transition: all 0.3s ease;
 
       svg {
         font-size: 1.6rem;
+
         transition: all 0.3s ease;
       }
 
@@ -67,9 +46,10 @@ aside {
       }
 
       &.active {
-        background: var(--color-light);
-        color: var(--color-primary);
         margin-left: 0;
+
+        color: var(--color-primary);
+        background: var(--color-light);
 
         &::before {
           content: '';
@@ -84,54 +64,51 @@ aside {
       }
 
       &:last-child {
-        position: absolute;
-        bottom: 2rem;
-        width: 100%;
+        margin-top: auto;
+        margin-bottom: 1rem;
       }
 
       h3 {
         font-weight: 500;
-        font-size: 0.87rem;
+        font-size: 0.875rem;
       }
     }
   }
-}
 
-@media screen and (max-width: 768px) {
-  aside {
+  @media screen and (max-width: variables.$mobile-width) {
+    width: 16rem;
+    height: calc(100vh - var(--content-margin));
     position: fixed;
     left: -100%;
-    background: var(--color-white);
-    width: 18rem;
-    z-index: 3;
-    box-shadow: 1rem 3rem 4rem var(--color-light);
-    height: 100vh;
-    padding-right: 1rem;
+
     display: none;
+    padding-right: 2rem;
+
+    background: var(--color-background);
+    box-shadow: 1rem 3rem 4rem var(--color-light);
+    z-index: 3;
+
     animation: showMenu 0.3s ease forwards;
 
-    @keyframes showMenu {
-      to {
-        left: 0;
-      }
+    &.open {
+      display: block;
     }
 
     .top {
-      .close {
-        display: inline;
-        cursor: pointer;
+      display: flex;
+
+      svg {
+        margin-left: 1rem;
       }
     }
 
     .sidebar {
-      .navlink {
-        width: 100%;
-        height: 3.4rem;
+      margin-top: var(--content-margin);
+    }
 
-        &:last-child {
-          position: absolute;
-          bottom: 5rem;
-        }
+    @keyframes showMenu {
+      to {
+        left: 0;
       }
     }
   }

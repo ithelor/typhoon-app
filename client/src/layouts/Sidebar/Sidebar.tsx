@@ -2,7 +2,6 @@ import classNames from 'classnames'
 import { NavLink } from 'react-router-dom'
 import { IconType } from 'react-icons'
 import {
-  MdClose as CloseIcon,
   MdDashboard as DashboardIcon,
   MdPersonOutline as PersonIcon,
   MdReceiptLong as OrdersIcon,
@@ -17,8 +16,6 @@ import {
 
 import { useSidebar } from 'hooks/useSidebar'
 
-import { ReactComponent as Logo } from 'assets/shared/logo.svg'
-
 import styles from './Sidebar.module.scss'
 
 /**
@@ -30,38 +27,22 @@ interface IMenuItem {
   icon: IconType
   active?: boolean
 }
-const MenuItem = (props: IMenuItem) => {
-  return (
-    <NavLink
-      to={props.to}
-      className={classNames(styles.navlink, { [styles.active]: props.active })}
-    >
-      <props.icon className={styles.menuItemIcon} />
-      <h3>{props.title}</h3>
-    </NavLink>
-  )
-}
+const MenuItem = (props: IMenuItem) => (
+  <NavLink to={props.to} className={classNames(styles.navlink, { [styles.active]: props.active })}>
+    <props.icon className={styles.menuItemIcon} />
+    <h3>{props.title}</h3>
+  </NavLink>
+)
 
 /**
  * Sidebar Component
  */
 const Sidebar = () => {
-  const { sidebarOpen, setSidebarOpen } = useSidebar()
+  const { sidebarOpen } = useSidebar()
 
   return (
-    <aside className={sidebarOpen ? styles.open : undefined}>
-      <div className={styles.top}>
-        <div className={styles.logo}>
-          <Logo />
-          <h2>
-            T<span>itle</span>
-          </h2>
-        </div>
-        <button className={styles.close} onClick={() => setSidebarOpen(false)}>
-          <CloseIcon />
-        </button>
-      </div>
-      <div className={styles.sidebar}>
+    <aside className={classNames(styles.container, { [styles.open]: sidebarOpen })}>
+      <nav className={styles.navMenu}>
         <MenuItem icon={DashboardIcon} title="Dashboard" to="#" active />
         <MenuItem icon={PersonIcon} title="Customers" to="#" />
         <MenuItem icon={OrdersIcon} title="Orders" to="#" />
@@ -72,7 +53,7 @@ const Sidebar = () => {
         <MenuItem icon={SettingsIcon} title="Settings" to="#" />
         <MenuItem icon={AddProductIcon} title="Add product" to="#" />
         <MenuItem icon={LogoutIcon} title="Logout" to="#" />
-      </div>
+      </nav>
     </aside>
   )
 }

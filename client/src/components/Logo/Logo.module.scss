@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 3rem;
+    height: 3rem;
+    fill: var(--color-danger);
+
+    animation: spinner 30s linear infinite;
+  }
+
+  h2 {
+    span {
+      color: var(--color-danger);
+    }
+  }
+
+  @keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
