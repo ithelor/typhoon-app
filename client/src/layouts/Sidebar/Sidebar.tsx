@@ -1,18 +1,8 @@
 import classNames from 'classnames'
 import { NavLink } from 'react-router-dom'
-import { IconType } from 'react-icons'
-import {
-  MdDashboard as DashboardIcon,
-  MdPersonOutline as PersonIcon,
-  MdReceiptLong as OrdersIcon,
-  MdInsights as AnalyticsIcon,
-  MdMailOutline as MessagesIcon,
-  MdInventory as ProductsIcon,
-  MdOutlineReportGmailerrorred as ReportsIcon,
-  MdSettings as SettingsIcon,
-  MdAdd as AddProductIcon,
-  MdLogout as LogoutIcon
-} from 'react-icons/md'
+import { MdInfo as DefaultIcon, MdLogout as LogoutIcon } from 'react-icons/md'
+
+import Accordion from 'components/Accordion/Accordion'
 
 import { useSidebar } from 'hooks/useSidebar'
 
@@ -24,12 +14,13 @@ import styles from './Sidebar.module.scss'
 interface IMenuItem {
   title: string
   to: string
-  icon: IconType
+  icon?: React.ReactElement
   active?: boolean
 }
+
 const MenuItem = (props: IMenuItem) => (
   <NavLink to={props.to} className={classNames(styles.navlink, { [styles.active]: props.active })}>
-    <props.icon className={styles.menuItemIcon} />
+    {props.icon ?? <DefaultIcon />}
     <h3>{props.title}</h3>
   </NavLink>
 )
@@ -40,19 +31,49 @@ const MenuItem = (props: IMenuItem) => (
 const Sidebar = () => {
   const { sidebarOpen } = useSidebar()
 
+  // TODO: reduce to .map()
   return (
     <aside className={classNames(styles.container, { [styles.open]: sidebarOpen })}>
       <nav className={styles.navMenu}>
-        <MenuItem icon={DashboardIcon} title="Dashboard" to="#" active />
-        <MenuItem icon={PersonIcon} title="Customers" to="#" />
-        <MenuItem icon={OrdersIcon} title="Orders" to="#" />
-        <MenuItem icon={AnalyticsIcon} title="Analytics" to="#" />
-        <MenuItem icon={MessagesIcon} title="Messages" to="#" />
-        <MenuItem icon={ProductsIcon} title="Products" to="#" />
-        <MenuItem icon={ReportsIcon} title="Reports" to="#" />
-        <MenuItem icon={SettingsIcon} title="Settings" to="#" />
-        <MenuItem icon={AddProductIcon} title="Add product" to="#" />
-        <MenuItem icon={LogoutIcon} title="Logout" to="#" />
+        <MenuItem title="О системе" to="#" active />
+        <Accordion title="Паспорт Приморского Края">
+          <MenuItem title="Муниципальные образования" to="#" active />
+          <MenuItem title="Потенциально опасные объекты" to="#" />
+          <MenuItem title="Населенные пункты" to="#" />
+          <MenuItem title="Силы и средства (подразделения)" to="#" />
+          <MenuItem title="Состав комиссии по ЧС" to="#" />
+          <MenuItem title="Реки" to="#" />
+          <MenuItem title="Объекты жизнеобеспечения" to="#" />
+          <MenuItem title="Телефонные справочники" to="#" />
+        </Accordion>
+        <Accordion title="Оперативные данные">
+          <MenuItem title="Оперативная обстановка" to="#" />
+          <MenuItem title="Комиссии по ЧС" to="#" />
+          <MenuItem title="Характеристики ЧС" to="#" />
+          <MenuItem title="Справочная система" to="#" />
+          <MenuItem title="Угроза ЧС" to="#" />
+        </Accordion>
+        <MenuItem title="Краевая комиссия по ЧС" to="#" active />
+        <Accordion title="Нормативные акты">
+          <MenuItem title="Законы РФ" to="#" />
+          <MenuItem title="Указы президента РФ" to="#" />
+          <MenuItem title="Постановления и распоряжения правительства РФ" to="#" />
+          <MenuItem title="Законы Приморского края" to="#" />
+          <MenuItem
+            title="Постановления и Распоряжения Губернатира (Администрации) Приморского края"
+            to="#"
+          />
+          <MenuItem title="Документы МЧС" to="#" />
+          <MenuItem title="Документы ГО ЧС" to="#" />
+          <MenuItem title="Документы других ведомств" to="#" />
+        </Accordion>
+        <MenuItem title="Критерии информации о ЧС" to="#" />
+        <MenuItem title="Особо опасные объекты края" to="#" />
+        <MenuItem title="Силы и средства защиты" to="#" />
+        <MenuItem title="Оперативная обстановка" to="#" />
+        <MenuItem title="Сводка оперативной обстановки" to="#" />
+        <MenuItem title="Архив ЧС, снятых с контроля" to="#" />
+        <MenuItem icon={<LogoutIcon />} title="Выйти" to="#" />
       </nav>
     </aside>
   )

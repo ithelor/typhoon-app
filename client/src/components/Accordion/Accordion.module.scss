@@ -1,0 +1,59 @@
+@use '~styles/partials/mixins';
+
+.container {
+  button {
+    min-height: 3rem;
+
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    margin-left: 2rem;
+
+    color: var(--color-info-dark);
+    background: transparent;
+
+    // @include mixins.Ellipsis();
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .content {
+    overflow: hidden;
+
+    transition: height 0.2s ease;
+
+    .navlink {
+      margin-left: 3rem;
+
+      h3 {
+        // @include mixins.Ellipsis();
+      }
+
+      &:hover {
+        color: var(--color-primary);
+
+        svg {
+          margin-left: 0;
+        }
+      }
+
+      &.active {
+        margin-left: 1rem;
+
+        color: var(--color-primary);
+        background: var(--color-light);
+
+        &::before {
+          height: 3rem;
+        }
+
+        svg {
+          margin-left: calc(1rem - 3px);
+        }
+      }
+    }
+  }
+}

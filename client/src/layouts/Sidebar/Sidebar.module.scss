@@ -1,23 +1,29 @@
 @use '~styles/partials/variables';
 
 .container {
+  height: 100vh;
+
   position: sticky;
-  position: relative;
-  top: var(--content-margin);
-  height: calc(100vh - var(--content-margin));
-  z-index: 1;
+  top: 0;
+
+  background: var(--color-background);
+
+  transition: background 0.3s ease;
 
   .navMenu {
-    position: relative;
-    height: 100%;
+    height: calc(100vh - var(--content-margin) - 2rem);
 
     display: flex;
     flex-direction: column;
-    flex: none;
+    flex-shrink: 0;
+    margin-top: var(--content-margin);
 
     overflow-x: hidden;
     overflow-y: auto;
-    z-index: 3;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     .navlink {
       min-height: 3rem;
@@ -31,18 +37,23 @@
 
       transition: all 0.3s ease;
 
-      svg {
-        font-size: 1.6rem;
-
-        transition: all 0.3s ease;
-      }
-
       &:hover {
         color: var(--color-primary);
 
         svg {
           margin-left: 1rem;
         }
+      }
+
+      &:last-child {
+        margin-top: auto;
+      }
+
+      svg {
+        min-width: 1.5rem;
+        min-height: 1.5rem;
+
+        transition: all 0.3s ease;
       }
 
       &.active {
@@ -55,17 +66,14 @@
           content: '';
           width: 6px;
           height: 100%;
+          position: relative;
+          left: 0;
           background: var(--color-primary);
         }
 
         svg {
           margin-left: calc(1rem - 3px);
         }
-      }
-
-      &:last-child {
-        margin-top: auto;
-        margin-bottom: 1rem;
       }
 
       h3 {
@@ -76,9 +84,9 @@
   }
 
   @media screen and (max-width: variables.$mobile-width) {
-    width: 16rem;
-    height: calc(100vh - var(--content-margin));
+    width: 18rem;
     position: fixed;
+    margin-top: 0;
     left: -100%;
 
     display: none;
@@ -92,18 +100,6 @@
 
     &.open {
       display: block;
-    }
-
-    .top {
-      display: flex;
-
-      svg {
-        margin-left: 1rem;
-      }
-    }
-
-    .sidebar {
-      margin-top: var(--content-margin);
     }
 
     @keyframes showMenu {
