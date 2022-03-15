@@ -1,3 +1,4 @@
+import React from 'react'
 import classNames from 'classnames'
 import { NavLink } from 'react-router-dom'
 import { MdInfo as DefaultIcon, MdLogout as LogoutIcon } from 'react-icons/md'
@@ -18,10 +19,13 @@ interface IMenuItem {
   active?: boolean
 }
 
+// TODO: conditional scrollable (menuItem.current.width > menu.current.width)
 const MenuItem = (props: IMenuItem) => (
   <NavLink to={props.to} className={classNames(styles.navlink, { [styles.active]: props.active })}>
     {props.icon ?? <DefaultIcon />}
-    <h3>{props.title}</h3>
+    <h3>
+      <span>{props.title}</span>
+    </h3>
   </NavLink>
 )
 

@@ -19,13 +19,19 @@ const Accordion = (props: IAccordion) => {
     <li className={styles.container}>
       <button onClick={() => setExpanded(!expanded)}>
         {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        {props.title}
+        <h3>
+          <span>{props.title}</span>
+        </h3>
       </button>
 
       <div
         ref={contentRef}
         className={styles.content}
-        style={expanded ? { height: contentRef.current?.scrollHeight } : { height: '0' }}
+        style={
+          expanded
+            ? { height: contentRef.current?.scrollHeight, marginBottom: '1rem' }
+            : { height: '0' }
+        }
       >
         {props.children}
       </div>

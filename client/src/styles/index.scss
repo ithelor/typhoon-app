@@ -13,6 +13,11 @@
 
   --header-height: 60px;
   --content-margin: calc(var(--header-height) + 2rem);
+  --sidebar-width: 14rem;
+
+  @media screen and (max-width: variables.$mobile-width) {
+    --sidebar-width: 18rem;
+  }
 }
 
 [data-theme='dark'] {
@@ -50,7 +55,7 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: 14rem auto;
+  grid-template-columns: var(--sidebar-width) auto;
   margin: 0 auto;
 
   color: var(--color-dark);

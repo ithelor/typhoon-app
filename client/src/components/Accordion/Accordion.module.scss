@@ -5,18 +5,34 @@
     min-height: 3rem;
 
     display: flex;
-    flex-shrink: 0;
+    gap: 1rem;
     align-items: center;
+    justify-content: start;
     margin-left: 2rem;
 
     color: var(--color-info-dark);
     background: transparent;
 
-    // @include mixins.Ellipsis();
-
     svg {
       width: 1.5rem;
       height: 1.5rem;
+    }
+
+    h3 {
+      font-weight: 500;
+      font-size: 0.875rem;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:hover,
+      &:focus {
+        span {
+          display: inline-block;
+          animation: scrollText 5s ease 0s infinite normal;
+        }
+      }
     }
   }
 
@@ -24,36 +40,20 @@
     overflow: hidden;
 
     transition: height 0.2s ease;
+  }
+}
 
-    .navlink {
-      margin-left: 3rem;
-
-      h3 {
-        // @include mixins.Ellipsis();
-      }
-
-      &:hover {
-        color: var(--color-primary);
-
-        svg {
-          margin-left: 0;
-        }
-      }
-
-      &.active {
-        margin-left: 1rem;
-
-        color: var(--color-primary);
-        background: var(--color-light);
-
-        &::before {
-          height: 3rem;
-        }
-
-        svg {
-          margin-left: calc(1rem - 3px);
-        }
-      }
-    }
+@keyframes scrollText {
+  0% {
+    transform: translateX(0%);
+  }
+  90% {
+    transform: translateX(-100%);
+  }
+  95% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(0%);
   }
 }
