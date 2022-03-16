@@ -5,6 +5,7 @@ import { MdInfo as DefaultIcon, MdLogout as LogoutIcon } from 'react-icons/md'
 
 import Accordion from 'components/Accordion/Accordion'
 
+import { useIsOverflow } from 'hooks/useIsOverflow'
 import { useSidebar } from 'hooks/useSidebar'
 
 import styles from './Sidebar.module.scss'
@@ -19,15 +20,26 @@ interface IMenuItem {
   active?: boolean
 }
 
-// TODO: conditional scrollable (menuItem.current.width > menu.current.width)
-const MenuItem = (props: IMenuItem) => (
-  <NavLink to={props.to} className={classNames(styles.navlink, { [styles.active]: props.active })}>
-    {props.icon ?? <DefaultIcon />}
-    <h3>
-      <span>{props.title}</span>
-    </h3>
-  </NavLink>
-)
+// TODO: dynamic scroll distance (transition props like margin or smh idk)
+const MenuItem = (props: IMenuItem) => {
+  const headingRef = React.useRef<HTMLHeadingElement>(null)
+  const isOverflow = useIsOverflow(headingRef)
+
+  return (
+    <NavLink
+      to={props.to}
+      className={classNames(styles.navlink, {
+        [styles.active]: props.active,
+        [styles.marquee]: isOverflow
+      })}
+    >
+      {props.icon ?? <DefaultIcon />}
+      <h3 ref={headingRef}>
+        <span>{props.title}</span>
+      </h3>
+    </NavLink>
+  )
+}
 
 /**
  * Sidebar Component

@@ -23,16 +23,6 @@
       font-size: 0.875rem;
 
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      &:hover,
-      &:focus {
-        span {
-          display: inline-block;
-          animation: scrollText 5s ease 0s infinite normal;
-        }
-      }
     }
   }
 
@@ -40,20 +30,5 @@
     overflow: hidden;
 
     transition: height 0.2s ease;
-  }
-}
-
-@keyframes scrollText {
-  0% {
-    transform: translateX(0%);
-  }
-  90% {
-    transform: translateX(-100%);
-  }
-  95% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(0%);
   }
 }

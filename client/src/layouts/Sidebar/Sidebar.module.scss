@@ -39,16 +39,11 @@
 
       transition: all 0.3s ease;
 
-      h3 {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
+      &.marquee {
         &:hover,
         &:focus {
-          span {
-            display: inline-block;
-            animation: scrollText 5s ease 0s infinite normal;
+          h3 span {
+            @include mixins.Marquee();
           }
         }
       }
@@ -68,11 +63,24 @@
         transition: all 0.3s ease;
       }
 
+      h3 {
+        font-weight: 500;
+        font-size: 0.875rem;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
       &.active {
         margin-left: -4px;
 
         color: var(--color-primary);
         background: var(--color-light);
+
+        &.marquee {
+          @extend .marquee;
+        }
 
         &::before {
           content: '';
@@ -87,52 +95,23 @@
           margin-left: calc(1rem - 3px);
         }
       }
-
-      h3 {
-        font-weight: 500;
-        font-size: 0.875rem;
-      }
     }
   }
 
   @media screen and (max-width: variables.$mobile-width) {
     width: var(--sidebar-width);
     position: fixed;
-    margin-top: 0;
-    left: -100%;
+    left: calc(0px - var(--sidebar-width));
 
-    display: none;
     padding-right: 2rem;
 
-    background: var(--color-background);
     box-shadow: 1rem 3rem 4rem var(--color-light);
     z-index: 3;
 
-    animation: showMenu 0.3s ease forwards;
+    transition: left 0.3s ease-in-out;
 
     &.open {
-      display: block;
+      left: 0;
     }
-  }
-}
-
-@keyframes showMenu {
-  to {
-    left: 0;
-  }
-}
-
-@keyframes scrollText {
-  0% {
-    transform: translateX(0%);
-  }
-  90% {
-    transform: translateX(-100%);
-  }
-  95% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(0%);
   }
 }

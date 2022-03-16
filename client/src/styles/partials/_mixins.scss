@@ -9,3 +9,14 @@
 
   transition: opacity 0.5s ease;
 }
+
+@mixin Marquee() {
+  display: inline-block;
+  animation: scrollText 5s ease 0s infinite normal;
+
+  @keyframes scrollText {
+    to {
+      transform: translateX(-80%);
+    }
+  }
+}
