@@ -10,13 +10,19 @@
   transition: opacity 0.5s ease;
 }
 
+@mixin Ellipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @mixin Marquee() {
   display: inline-block;
-  animation: scrollText 5s ease 0s infinite normal;
+  animation: scrollText 3s ease 0s infinite normal;
 
   @keyframes scrollText {
-    to {
-      transform: translateX(-80%);
+    0% {
+      transform: translateX(0%);
     }
   }
 }

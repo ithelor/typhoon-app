@@ -20,10 +20,11 @@ interface IMenuItem {
   active?: boolean
 }
 
-// TODO: dynamic scroll distance (transition props like margin or smh idk)
 const MenuItem = (props: IMenuItem) => {
-  const headingRef = React.useRef<HTMLHeadingElement>(null)
-  const isOverflow = useIsOverflow(headingRef)
+  const outerRef = React.useRef<HTMLHeadingElement>(null),
+    innerRef = React.useRef<HTMLSpanElement>(null)
+
+  const { isOverflow, scrollDistance } = useIsOverflow(outerRef, innerRef)
 
   return (
     <NavLink
@@ -34,8 +35,15 @@ const MenuItem = (props: IMenuItem) => {
       })}
     >
       {props.icon ?? <DefaultIcon />}
-      <h3 ref={headingRef}>
-        <span>{props.title}</span>
+      <h3 ref={outerRef}>
+        <span
+          ref={innerRef}
+          style={{
+            transform: `translateX(-${scrollDistance}px)`
+          }}
+        >
+          {props.title}
+        </span>
       </h3>
     </NavLink>
   )

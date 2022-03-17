@@ -1,17 +1,30 @@
 @use '~styles/partials/mixins';
+@use '~styles/partials/variables';
 
 .container {
   button {
     min-height: 3rem;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
     gap: 1rem;
     align-items: center;
-    justify-content: start;
-    margin-left: 2rem;
 
+    margin-left: 2rem;
     color: var(--color-info-dark);
     background: transparent;
+
+    &:hover {
+      color: var(--color-primary);
+    }
+
+    &.marquee {
+      &:hover {
+        h3 span {
+          @include mixins.Marquee();
+        }
+      }
+    }
 
     svg {
       width: 1.5rem;
@@ -22,7 +35,7 @@
       font-weight: 500;
       font-size: 0.875rem;
 
-      white-space: nowrap;
+      @include mixins.Ellipsis();
     }
   }
 

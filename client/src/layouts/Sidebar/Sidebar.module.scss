@@ -39,21 +39,20 @@
 
       transition: all 0.3s ease;
 
-      &.marquee {
-        &:hover,
-        &:focus {
-          h3 span {
-            @include mixins.Marquee();
-          }
-        }
-      }
-
       &:hover {
         color: var(--color-primary);
       }
 
       &:last-child {
         margin-top: auto;
+      }
+
+      &.marquee {
+        &:hover {
+          h3 span {
+            @include mixins.Marquee();
+          }
+        }
       }
 
       svg {
@@ -67,9 +66,7 @@
         font-weight: 500;
         font-size: 0.875rem;
 
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        @include mixins.Ellipsis();
       }
 
       &.active {
