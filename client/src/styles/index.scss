@@ -8,8 +8,8 @@
   --color-info-dark: #7d8da1;
 
   --color-background: #f6f6f9;
-  --color-dark: #363949;
-  --color-light: rgba(132, 139, 200, 0.18);
+  --color-accent: #363949;
+  --color-dark: rgba(132, 139, 200, 0.18);
 
   --header-height: 60px;
   --content-margin: calc(var(--header-height) + 2rem);
@@ -22,8 +22,8 @@
 
 [data-theme='dark'] {
   --color-background: #181a1e;
-  --color-dark: #efeffde5;
-  --color-light: rgba(0, 0, 0, 0.4);
+  --color-accent: #efeffde5;
+  --color-dark: rgba(0, 0, 0, 0.4);
 }
 
 *,
@@ -58,7 +58,7 @@ body {
   grid-template-columns: var(--sidebar-width) auto;
   margin: 0 auto;
 
-  color: var(--color-dark);
+  color: var(--color-accent);
 
   .content {
     margin: var(--content-margin) 2rem 2rem;
