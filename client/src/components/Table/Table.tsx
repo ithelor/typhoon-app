@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { get } from 'api/services'
 
@@ -7,20 +7,19 @@ const Table = () => {
   const [data, setData] = React.useState([]),
     [loading, setLoading] = React.useState(true)
 
-  const location = useLocation(),
-    queryTarget = new URLSearchParams(location.search).get('target')
+  const { target } = useParams()
 
   React.useEffect(() => {
-    if (queryTarget)
+    if (target)
       try {
-        get(queryTarget).then((res) => {
+        get(target).then((res) => {
           setData(res.data)
           setLoading(false)
         })
       } catch (error) {
         console.error(error)
       }
-  }, [queryTarget])
+  }, [target])
 
   return !loading ? (
     <table>
@@ -43,7 +42,7 @@ const Table = () => {
       </tbody>
     </table>
   ) : (
-    <span>🦇👨</span>
+    <h2>🦇👨</h2>
   )
 }
 

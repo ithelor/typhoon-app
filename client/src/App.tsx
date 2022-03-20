@@ -1,8 +1,11 @@
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
-import SidebarProvider from 'layouts/SidebarProvider'
+import About from 'pages/About'
 import Header from 'layouts/Header/Header'
 import Sidebar from 'layouts/Sidebar/Sidebar'
+import SidebarProvider from 'layouts/SidebarProvider'
+import NotFound from 'components/NoMatch'
+import Table from 'components/Table/Table'
 
 import 'styles/index.scss'
 
@@ -14,15 +17,13 @@ const App = () => (
         <Sidebar />
       </SidebarProvider>
       <main className="content">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet error obcaecati adipisci
-        praesentium minus! Ut, itaque commodi molestias temporibus quo sint voluptate quisquam
-        expedita labore deleniti earum repellat architecto, nulla minima rem hic vero obcaecati
-        quasi? Nulla, placeat consectetur. Laudantium nihil, ad rem illum quae expedita asperiores
-        aliquam quas repudiandae! Totam maiores temporibus laudantium nihil quos pariatur eum
-        veritatis, nam sint adipisci mollitia nisi ducimus itaque alias in sit consequuntur deleniti
-        molestiae recusandae. Sequi rem ipsum temporibus officia fuga ratione at asperiores odio id
-        laborum repellat, porro voluptatum molestiae nulla voluptates, cum dicta quod inventore hic
-        reprehenderit nisi! Repudiandae, veniam.
+        <Routes>
+          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Navigate to="about" />} />
+          <Route path="about" element={<About />} />
+          <Route path="data" element={<h2>Please specify target data</h2>} />
+          <Route path="data/:target" element={<Table />} />
+        </Routes>
       </main>
     </div>
   </BrowserRouter>
