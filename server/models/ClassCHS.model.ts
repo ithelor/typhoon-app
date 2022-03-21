@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const ClassCHSSchema = new mongoose.Schema(
+const classchsSchema = new mongoose.Schema(
   {
     IST: String,
     KOD: String,
@@ -9,7 +9,7 @@ const ClassCHSSchema = new mongoose.Schema(
     PARENT: String,
     CHARACT: String
   },
-  { collection: 'ClassCHS' }
+  { collection: 'classchs' }
 )
 
-export default mongoose.model('ClassCHSSchema', ClassCHSSchema)
+export default mongoose.model('classchs', classchsSchema)

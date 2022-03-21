@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 
-const CharCHSSchema = new mongoose.Schema(
+const charchsSchema = new mongoose.Schema(
   {
     Kod1: String,
-    Kod2: Number
+    Kod2: String
   },
-  { collection: 'CharCHS' }
+  { collection: 'charchs' }
 )
 
-export default mongoose.model('CharCHSModel', CharCHSSchema)
+export default mongoose.model('charchs', charchsSchema)

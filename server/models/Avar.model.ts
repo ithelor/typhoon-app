@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const AVARSchema = new mongoose.Schema(
+const avarSchema = new mongoose.Schema(
   {
     KOD: Number,
     DCAS: Number,
@@ -15,8 +15,8 @@ const AVARSchema = new mongoose.Schema(
     Remark: String
   },
   {
-    collection: 'AVAR'
+    collection: 'avar'
   }
 )
 
-export default mongoose.model('AVARSchema', AVARSchema)
+export default mongoose.model('avar', avarSchema)

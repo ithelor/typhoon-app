@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const CASUALSchema = new mongoose.Schema(
+const casualSchema = new mongoose.Schema(
   {
     KOD: Number,
     DAY: Number,
@@ -24,8 +24,8 @@ const CASUALSchema = new mongoose.Schema(
     tech: String
   },
   {
-    collection: 'CASUAL'
+    collection: 'casual'
   }
 )
 
-export default mongoose.model('CASUALSchema', CASUALSchema)
+export default mongoose.model('casual', casualSchema)
