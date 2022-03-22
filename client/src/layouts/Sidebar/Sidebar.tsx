@@ -62,13 +62,13 @@ const Sidebar = () => {
       <nav className={styles.navMenu}>
         <MenuItem title="О системе" to="about" />
         <Accordion title="Паспорт Приморского Края">
-          <MenuItem title="Муниципальные образования" to="passport/regions" />
-          <MenuItem title="Населенные пункты" to="passport/localities" />
-          <MenuItem title="Реки" to="passport/rivers" />
-          <MenuItem title="Объекты жизнеобеспечения" to="passport/facilities" />
-          <MenuItem title="Телефонные справочники" to="passport/phonebooks" />
+          <MenuItem title="Муниципальные образования" to="regions" />
+          <MenuItem title="Населенные пункты" to="localities" />
+          <MenuItem title="Реки" to="rivers" />
+          <MenuItem title="Объекты жизнеобеспечения" to="facilities" />
+          <MenuItem title="Телефонные справочники" to="phonebooks" />
         </Accordion>
-        <MenuItem title="Угроза ЧС" to="operational/outlook" />
+        <MenuItem title="Угроза ЧС" to="outlook" />
         <MenuItem title="Краевая комиссия по ЧС" to="committee" />
         <Accordion title="Нормативные акты">
           <MenuItem title="Законы РФ" to="legal/ZRF" />

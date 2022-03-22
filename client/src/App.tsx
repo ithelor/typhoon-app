@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
-import About from 'pages/About'
-import Header from 'layouts/Header/Header'
-import Sidebar from 'layouts/Sidebar/Sidebar'
+import NoMatch from 'components/NoMatch'
+import Header from 'layouts/Header'
+import Sidebar from 'layouts/Sidebar'
 import SidebarProvider from 'layouts/SidebarProvider'
-import NotFound from 'components/NoMatch'
-import Table from 'components/Table/Table'
+import About from 'pages/About'
+import Regions from 'pages/Regions'
 
 import 'styles/index.scss'
 
@@ -18,11 +18,10 @@ const App = () => (
       </SidebarProvider>
       <main className="content">
         <Routes>
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NoMatch />} />
           <Route path="/" element={<Navigate to="about" />} />
           <Route path="about" element={<About />} />
-          <Route path="data" element={<h2>Please specify target data</h2>} />
-          <Route path="data/:target" element={<Table />} />
+          <Route path="regions" element={<Regions />} />
         </Routes>
       </main>
     </div>
