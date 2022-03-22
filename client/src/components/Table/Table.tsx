@@ -1,49 +1,35 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+/**
+ * Table Component
+ */
+interface ITable {
+  data: {}[]
+}
 
-import { get } from 'api/services'
+// TODO: custom no data message ?
+const Table = (props: ITable) => (
+  <table>
+    <thead>
+      <tr>
+        {props.data.length > 0 ? (
+          Object.keys(props.data[0]).map((item, key) => <th key={key}>{item}</th>)
+        ) : (
+          <th>
+            <h3>Nothing to display</h3>
+          </th>
+        )}
+      </tr>
+    </thead>
 
-const Table = () => {
-  const [data, setData] = React.useState([]),
-    [loading, setLoading] = React.useState(true)
-
-  const { target } = useParams()
-
-  React.useEffect(() => {
-    if (target)
-      try {
-        get(target).then((res) => {
-          setData(res.data)
-          setLoading(false)
-        })
-      } catch (error) {
-        console.error(error)
-      }
-  }, [target])
-
-  return !loading ? (
-    <table>
-      <thead>
-        <tr>
-          {Object.keys(data[0]).map((item, key) => (
-            <th key={key}>{item}</th>
+    <tbody>
+      {props.data.map((item: Object, key) => (
+        <tr key={key}>
+          {Object.values(item).map((item, key) => (
+            <td key={key}>{item}</td>
           ))}
         </tr>
-      </thead>
-
-      <tbody>
-        {data.map((item: Object, key) => (
-          <tr key={key}>
-            {Object.values(item).map((item, key) => (
-              <td key={key}>{item}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  ) : (
-    <h2>🦇👨</h2>
-  )
-}
+      ))}
+    </tbody>
+  </table>
+)
 
 export default Table
