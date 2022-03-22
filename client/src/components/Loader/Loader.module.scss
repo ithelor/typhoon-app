@@ -1,0 +1,19 @@
+@keyframes loader {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  box-sizing: border-box;
+  width: 4em;
+  height: 4em;
+  margin: 2rem auto;
+
+  border-radius: 50%;
+  border: 0.15em solid var(--color-danger);
+  border-top-color: var(--color-background);
+
+  animation: loader 0.7s linear infinite;
+  transition: border 0.3s ease;
+}
