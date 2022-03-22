@@ -2,8 +2,8 @@ import mongoose from 'mongoose'
 
 const regionsSchema = new mongoose.Schema(
   {
-    KOD: String,
-    Name: String,
+    KOD: { type: String, required: true },
+    Name: { type: String, required: true },
     RTYPE: String,
     Center: String,
     Remark: String,
