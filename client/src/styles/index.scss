@@ -26,10 +26,7 @@
   --color-dark: rgba(0, 0, 0, 0.4);
 }
 
-*,
-*::before,
-*::after {
-  appearance: none;
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
