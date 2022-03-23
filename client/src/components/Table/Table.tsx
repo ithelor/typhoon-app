@@ -2,12 +2,15 @@
  * Table Component
  */
 interface ITable {
+  caption?: string
   data: {}[]
 }
 
 // TODO: custom no data message ?
+// TODO: fill if not enough to render tds ?
 const Table = (props: ITable) => (
   <table>
+    {props.caption && <caption>{props.caption}</caption>}
     <thead>
       <tr>
         {props.data.length > 0 ? (
