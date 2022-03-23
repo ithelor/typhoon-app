@@ -18,18 +18,26 @@ const Regions = () => {
     [intersection, setIntersection] = React.useState<IRegions[]>([]),
     [loading, setLoading] = React.useState(true)
 
-  // TODO: reduce to helper ?
+  // TODO: generalize into helpers
   React.useEffect(() => {
-    async function fetchData() {
+    ;(async () => {
       let regionsResponse = await getRegions(),
         contregsResponse = await get('contreg')
 
-      setRegions(regionsResponse.data)
-      setContregs(contregsResponse.data)
-      setSelectedRegion(regionsResponse.data[0].KOD)
-    }
+      Promise.all([regionsResponse, contregsResponse])
+        .then(() => {
+          const sortedRegions: IRegions[] = regionsResponse.data.sort((a: IRegions, b: IRegions) =>
+            a.Name < b.Name ? -1 : a.Name > b.Name ? 1 : 0
+          )
 
-    fetchData().then(() => setLoading(false))
+          const getFirstNotEmpty = sortedRegions.find((region) => region.KOD && region.Name)!
+
+          setRegions(sortedRegions)
+          setContregs(contregsResponse.data)
+          setSelectedRegion(getFirstNotEmpty.KOD)
+        })
+        .then(() => setLoading(false))
+    })()
   }, [])
 
   React.useEffect(() => {
@@ -48,24 +56,30 @@ const Regions = () => {
     setSelectedRegion(event.target.value)
   }
 
-  return loading ? (
-    <Loader />
-  ) : (
-    <div>
-      <select onChange={handleSelectChange}>
-        {regions.map(
-          (region, index) =>
-            region.KOD &&
-            region.Name && (
-              <option key={region.KOD} value={region.KOD} defaultChecked={index === 0}>
-                {region.Name}
-              </option>
-            )
-        )}
-      </select>
+  // TODO: reduce to helper ?
+  // TODO: fill-in animation
+  return (
+    <section>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <select onChange={handleSelectChange}>
+            {regions.map(
+              (region, index) =>
+                region.KOD &&
+                region.Name && (
+                  <option key={region.KOD} value={region.KOD} defaultChecked={index === 0}>
+                    {region.Name}
+                  </option>
+                )
+            )}
+          </select>
 
-      <Table data={intersection} />
-    </div>
+          <Table caption={`Прилегающие муниципальные образования`} data={intersection} />
+        </>
+      )}
+    </section>
   )
 }
 
