@@ -8,6 +8,8 @@ import { IContreg, IRegions } from 'interfaces'
 import { getRegions } from 'api/services/regions'
 import { get } from 'api/services'
 
+import './Regions.module.scss'
+
 /**
  * Regions page
  */

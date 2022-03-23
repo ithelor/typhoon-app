@@ -1,3 +1,5 @@
+import './Table.module.scss'
+
 /**
  * Table Component
  */

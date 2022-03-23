@@ -1,0 +1,59 @@
+tr {
+  transition: all 0.3s ease;
+  // display: table;
+}
+
+table {
+  table-layout: auto;
+  border-collapse: collapse;
+
+  text-align: center;
+  vertical-align: middle;
+
+  width: 100%;
+
+  caption {
+    font-size: 1.75rem;
+    font-weight: bold;
+
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+
+  thead {
+    font-size: 0.875rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    color: var(--color-background);
+    background-color: var(--color-accent);
+
+    tr th {
+      padding: 0.1rem 0.25rem;
+    }
+  }
+
+  tbody {
+    display: table-row-group;
+
+    // NOTE: i want to die
+    // display: block;
+    // max-height: 70vh;
+    // overflow-y: scroll;
+
+    tr {
+      td {
+        padding: 0.25rem;
+      }
+    }
+
+    tr:nth-child(odd) {
+      background-color: var(--color-background);
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--color-accent-alt);
+    }
+  }
+}
