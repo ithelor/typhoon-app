@@ -8,6 +8,7 @@
     fill: var(--color-danger);
 
     animation: spinner 30s linear infinite;
+    transition: fill 0.3s ease;
   }
 
   h2 {
