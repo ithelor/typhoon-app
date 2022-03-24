@@ -3,7 +3,7 @@ import React from 'react'
 import Block from 'components/Block'
 import Loader from 'components/Loader'
 
-import { IContreg, INPunkt, IRegions } from 'interfaces'
+import { IContreg, INPunkt, IRegion } from 'interfaces'
 
 import { getRegions } from 'api/services/regions'
 import { get } from 'api/services'
@@ -13,19 +13,19 @@ import './Regions.module.scss'
 /**
  * Regions page
  */
-interface IRegionsData {
+interface IData {
   contregs: IContreg[]
   npunkts: INPunkt[]
-  regions: IRegions[]
+  regions: IRegion[]
 }
 
 const Regions = () => {
-  const [data, setData] = React.useState<IRegionsData>({
+  const [data, setData] = React.useState<IData>({
       contregs: [],
       npunkts: [],
       regions: []
     }),
-    [currentRegion, setCurrentRegion] = React.useState<IRegions>({} as IRegions),
+    [currentRegion, setCurrentRegion] = React.useState<IRegion>({} as IRegion),
     [adjacentRegions, setAdjacentRegions] = React.useState<string[]>([]),
     [regionCenter, setRegionCenter] = React.useState(''),
     [loading, setLoading] = React.useState(true)
@@ -39,7 +39,7 @@ const Regions = () => {
 
       Promise.all([regionsResponse, contregsResponse, npunktResponse])
         .then(() => {
-          const sortedRegions: IRegions[] = regionsResponse.data.sort((a: IRegions, b: IRegions) =>
+          const sortedRegions: IRegion[] = regionsResponse.data.sort((a: IRegion, b: IRegion) =>
             a.Name < b.Name ? -1 : a.Name > b.Name ? 1 : 0
           )
 

@@ -1,4 +1,4 @@
-export default interface IRegions {
+export default interface IRegion {
   KOD: string
   Name: string
   RTYPE: string
