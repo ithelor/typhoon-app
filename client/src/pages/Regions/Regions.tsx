@@ -67,17 +67,12 @@ const Regions = () => {
       )
     )
 
-    // FIXME: idk what this shit is
-    setRegionCenter(() => {
-      const getCenter = data.npunkts.find((npunkt) => npunkt.KOD === currentRegion.Center)
-
-      return getCenter ? getCenter.NAME : 'yup, this option never fires, but I still need it fsr'
-    })
+    setRegionCenter(() => data.npunkts.find((npunkt) => npunkt.KOD === currentRegion.Center)?.NAME!)
   }, [currentRegion]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setAdjacentRegions([])
-    setCurrentRegion({ ...currentRegion, KOD: event.target.value })
+    setCurrentRegion(data.regions.find((region) => region.KOD === event.target.value)!)
   }
 
   // TODO: fill-in animation
