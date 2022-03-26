@@ -10,27 +10,42 @@ import { get } from 'api/services'
 
 import './Regions.module.scss'
 
-/**
- * Regions page
- */
-interface IData {
+// loaded from api on first render
+interface IStaticData {
   contregs: IContreg[]
   npunkts: INPunkt[]
   regions: IRegion[]
 }
 
-const Regions = () => {
-  const [data, setData] = React.useState<IData>({
-      contregs: [],
-      npunkts: [],
-      regions: []
-    }),
-    [currentRegion, setCurrentRegion] = React.useState<IRegion>({} as IRegion),
-    [adjacentRegions, setAdjacentRegions] = React.useState<string[]>([]),
-    [regionCenter, setRegionCenter] = React.useState(''),
-    [loading, setLoading] = React.useState(true)
+// recalculated on 'currentRegion' update
+interface IDynamicData {
+  adjacent: string[]
+  center: string
+}
 
-  // TODO: generalize into helpers
+/**
+ * Regions page
+ * TODO: reducer (state { static {...}, current, dynamic {...} })
+ * and / or TODO: move data processing to the server
+ *
+ * TODO: search params
+ * TODO: per-block loading, 'cause too long
+ */
+const Regions = () => {
+  const [staticData, setstaticData] = React.useState<IStaticData>({
+    contregs: [],
+    npunkts: [],
+    regions: []
+  })
+
+  const [currentRegion, setCurrentRegion] = React.useState({} as IRegion)
+  const [dynamicData, setDynamicData] = React.useState<IDynamicData>({
+    adjacent: [],
+    center: ''
+  })
+
+  const [loading, setLoading] = React.useState(true)
+
   React.useEffect(() => {
     ;(async () => {
       let contregsResponse = await get('contreg'),
@@ -39,44 +54,53 @@ const Regions = () => {
 
       Promise.all([regionsResponse, contregsResponse, npunktResponse])
         .then(() => {
-          const sortedRegions: IRegion[] = regionsResponse.data.sort((a: IRegion, b: IRegion) =>
-            a.Name < b.Name ? -1 : a.Name > b.Name ? 1 : 0
-          )
+          // TODO: move to helpers
+          const sortedRegions = (regionsResponse.data as IRegion[]).sort((a: IRegion, b: IRegion) =>
+              a.Name < b.Name ? -1 : a.Name > b.Name ? 1 : 0
+            ),
+            getFirstNotEmpty = sortedRegions.find((region) => region.KOD && region.Name)!
 
-          const getFirstNotEmpty = sortedRegions.find((region) => region.KOD && region.Name)!
-
-          setData({
+          setstaticData({
             contregs: contregsResponse.data,
             npunkts: npunktResponse.data,
             regions: sortedRegions
           })
+
           setCurrentRegion(getFirstNotEmpty)
         })
         .then(() => setLoading(false))
     })()
   }, [])
 
-  // TODO: generalize into helpers
   React.useEffect(() => {
-    data.regions.forEach((region) =>
-      data.contregs.forEach(
-        (contreg: IContreg) =>
-          contreg.KOD1 === currentRegion.KOD &&
-          contreg.KOD2 === region.KOD &&
-          setAdjacentRegions((prev) => [...prev, region.Name])
-      )
-    )
+    setDynamicData({
+      adjacent: (() => {
+        let result: string[] = []
 
-    setRegionCenter(() => data.npunkts.find((npunkt) => npunkt.KOD === currentRegion.Center)?.NAME!)
+        staticData.regions.forEach((region) =>
+          staticData.contregs.forEach(
+            (contreg) =>
+              contreg.KOD1 === currentRegion.KOD &&
+              contreg.KOD2 === region.KOD &&
+              result.push(region.Name)
+          )
+        )
+        return result
+      })(),
+      center: (() =>
+        staticData.npunkts.find((npunkt) => npunkt.KOD === currentRegion.Center)?.NAME!)()
+    })
   }, [currentRegion]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setAdjacentRegions([])
-    setCurrentRegion(data.regions.find((region) => region.KOD === event.target.value)!)
+    setCurrentRegion(staticData.regions.find((region) => region.KOD === event.target.value)!)
+    setDynamicData((prev) => ({
+      ...prev,
+      adjacent: []
+    }))
   }
 
   // TODO: fill-in animation
-  // TODO: per-block loading, 'cause too long
   return (
     <section>
       {loading ? (
@@ -84,7 +108,7 @@ const Regions = () => {
       ) : (
         <>
           <select onChange={handleSelectChange}>
-            {data.regions.map(
+            {staticData.regions.map(
               (region, index) =>
                 region.KOD &&
                 region.Name && (
@@ -95,8 +119,11 @@ const Regions = () => {
             )}
           </select>
 
-          <Block heading="Прилегающие муниципальные образования" data={adjacentRegions} />
-          <Block heading="Центр" data={regionCenter} />
+          <Block heading="Прилегающие муниципальные образования" data={dynamicData.adjacent} />
+          <Block heading="Центр" data={dynamicData.center} />
+          <Block heading="Глава Муниципального образования" data={currentRegion.Remark} />
+          <Block heading="Общая площадь территории" data={currentRegion.STER} />
+          <Block heading="Численность населения" data={currentRegion.POPULATION} />
         </>
       )}
     </section>
