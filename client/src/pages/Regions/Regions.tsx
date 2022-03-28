@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import Block from 'components/Block'
 import Loader from 'components/Loader'
@@ -25,19 +26,21 @@ interface IDynamicData {
 
 /**
  * Regions page
- * TODO: reducer (state { static {...}, current, dynamic {...} })
- * and / or TODO: move data processing to the server
+ * TODO: move data processing to the server
+ * TODO: reducer (state { static {...}, current, dynamic {...} }) ?
  *
- * TODO: search params
  * TODO: per-block loading, 'cause too long
+ * TODO: move auxiliaries to helpers
  */
 const Regions = () => {
+  const [searchParams, setSearchParams] = useSearchParams(),
+    paramCurrent = searchParams.get('current')
+
   const [staticData, setstaticData] = React.useState<IStaticData>({
     contregs: [],
     npunkts: [],
     regions: []
   })
-
   const [currentRegion, setCurrentRegion] = React.useState({} as IRegion)
   const [dynamicData, setDynamicData] = React.useState<IDynamicData>({
     adjacent: [],
@@ -54,23 +57,29 @@ const Regions = () => {
 
       Promise.all([regionsResponse, contregsResponse, npunktResponse])
         .then(() => {
-          // TODO: move to helpers
-          const sortedRegions = (regionsResponse.data as IRegion[]).sort((a: IRegion, b: IRegion) =>
-              a.Name < b.Name ? -1 : a.Name > b.Name ? 1 : 0
-            ),
-            getFirstNotEmpty = sortedRegions.find((region) => region.KOD && region.Name)!
+          ;(regionsResponse.data as IRegion[]).sort((a: IRegion, b: IRegion) =>
+            a.Name < b.Name ? -1 : a.Name > b.Name ? 1 : 0
+          )
 
           setstaticData({
             contregs: contregsResponse.data,
             npunkts: npunktResponse.data,
-            regions: sortedRegions
+            regions: regionsResponse.data
           })
 
-          setCurrentRegion(getFirstNotEmpty)
+          const getFirstNotEmpty = (regionsResponse.data as IRegion[]).find(
+            (region) => region.KOD && region.Name
+          )
+
+          const getRegionByCode = regionsResponse.data.find(
+            (region: IRegion) => region.KOD === paramCurrent
+          )
+
+          setCurrentRegion(paramCurrent ? getRegionByCode : getFirstNotEmpty)
         })
         .then(() => setLoading(false))
     })()
-  }, [])
+  }, [searchParams]) // eslint-disable-line react-hooks/exhaustive-deps
 
   React.useEffect(() => {
     setDynamicData({
@@ -90,10 +99,13 @@ const Regions = () => {
       center: (() =>
         staticData.npunkts.find((npunkt) => npunkt.KOD === currentRegion.Center)?.NAME!)()
     })
-  }, [currentRegion]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    paramCurrent &&
+      setCurrentRegion(staticData.regions.find((region) => region.KOD === paramCurrent)!)
+  }, [searchParams, currentRegion]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCurrentRegion(staticData.regions.find((region) => region.KOD === event.target.value)!)
+    setSearchParams({ current: event.target.value })
     setDynamicData((prev) => ({
       ...prev,
       adjacent: []
@@ -107,12 +119,12 @@ const Regions = () => {
         <Loader />
       ) : (
         <>
-          <select onChange={handleSelectChange}>
+          <select onChange={handleSelectChange} value={paramCurrent || undefined}>
             {staticData.regions.map(
               (region, index) =>
                 region.KOD &&
                 region.Name && (
-                  <option key={region.KOD} value={region.KOD} defaultChecked={index === 0}>
+                  <option key={region.KOD} value={region.KOD}>
                     {region.Name}
                   </option>
                 )
