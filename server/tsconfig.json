@@ -6,15 +6,18 @@
     "lib": [
       "es6"
     ],
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["../shared/*"],
+      "@models": ["./models"]
+    },
     "strict": true,
     "allowJs": false,
     "noImplicitAny": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "removeComments": true,
-    "rootDir": ".",
-    "outDir": "build",
+    "removeComments": true
   },
   "exclude": [
     "node_modules"
