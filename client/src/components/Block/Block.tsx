@@ -3,7 +3,7 @@
  */
 interface IBlock {
   heading: string
-  data: string | string[]
+  data: number | string | string[]
 }
 
 const Block = (props: IBlock) => {
