@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 
-const classchsSchema = new mongoose.Schema(
+import { IClassChs } from '@shared/interfaces'
+
+const ClassChsSchema = new mongoose.Schema<IClassChs>(
   {
     IST: String,
     KOD: String,
@@ -12,4 +14,4 @@ const classchsSchema = new mongoose.Schema(
   { collection: 'classchs' }
 )
 
-export default mongoose.model('classchs', classchsSchema)
+export default mongoose.model<IClassChs>('ClassChs', ClassChsSchema)

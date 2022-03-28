@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 
-const casualSchema = new mongoose.Schema(
+import { ICasual } from '@shared/interfaces'
+
+const CasualSchema = new mongoose.Schema<ICasual>(
   {
     KOD: Number,
     DAY: Number,
@@ -28,4 +30,4 @@ const casualSchema = new mongoose.Schema(
   }
 )
 
-export default mongoose.model('casual', casualSchema)
+export default mongoose.model<ICasual>('Casual', CasualSchema)

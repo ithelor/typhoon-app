@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 
-const contregSchema = new mongoose.Schema(
+import { IContreg } from '@shared/interfaces'
+
+const ContregSchema = new mongoose.Schema<IContreg>(
   {
     KOD1: { type: String, required: true },
     KOD2: { type: String, required: true }
@@ -8,4 +10,4 @@ const contregSchema = new mongoose.Schema(
   { collection: 'contreg' }
 )
 
-export default mongoose.model('contreg', contregSchema)
+export default mongoose.model<IContreg>('Contreg', ContregSchema)

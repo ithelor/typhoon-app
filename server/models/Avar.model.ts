@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 
-const avarSchema = new mongoose.Schema(
+import { IAvar } from '@shared/interfaces'
+
+const AvarSchema = new mongoose.Schema<IAvar>(
   {
     KOD: Number,
     DCAS: Number,
@@ -19,4 +21,4 @@ const avarSchema = new mongoose.Schema(
   }
 )
 
-export default mongoose.model('avar', avarSchema)
+export default mongoose.model<IAvar>('Avar', AvarSchema)

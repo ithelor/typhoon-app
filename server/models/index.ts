@@ -1,9 +1,9 @@
-import avar from './Avar.model'
-import casual from './Casual.model'
-import charchs from './CharCHS.model'
-import classchs from './ClassCHS.model'
-import contreg from './Contreg.model'
-import npunkt from './NPunkt.model'
-import regions from './Regions.model'
+import Avar from './Avar.model'
+import Casual from './Casual.model'
+import CharChs from './CharChs.model'
+import ClassChs from './ClassChs.model'
+import Contreg from './Contreg.model'
+import Npunkt from './Npunkt.model'
+import Region from './Region.model'
 
-export { avar, casual, charchs, classchs, contreg, npunkt, regions }
+export { Avar, Casual, CharChs, ClassChs, Contreg, Npunkt, Region }

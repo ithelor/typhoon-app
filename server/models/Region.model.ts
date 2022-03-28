@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 
-const regionsSchema = new mongoose.Schema(
+import { IRegion } from '@shared/interfaces'
+
+const RegionSchema = new mongoose.Schema<IRegion>(
   {
     KOD: { type: String, required: true },
     Name: { type: String, required: true },
@@ -24,4 +26,4 @@ const regionsSchema = new mongoose.Schema(
   }
 )
 
-export default mongoose.model('regions', regionsSchema)
+export default mongoose.model<IRegion>('Region', RegionSchema)

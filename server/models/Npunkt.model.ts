@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 
-const npunktSchema = new mongoose.Schema(
+import { INpunkt } from '@shared/interfaces'
+
+const NpunktSchema = new mongoose.Schema<INpunkt>(
   {
     KOD: String,
     NAME: String,
@@ -21,4 +23,4 @@ const npunktSchema = new mongoose.Schema(
   { collection: 'npunkt' }
 )
 
-export default mongoose.model('npunkt', npunktSchema)
+export default mongoose.model<INpunkt>('Npunkt', NpunktSchema)
