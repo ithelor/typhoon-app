@@ -1,4 +1,4 @@
-export default interface IClassCHS {
+export default interface IClassChs {
   IST: string
   KOD: string
   NAME: string

@@ -1,4 +1,4 @@
-export default interface INPunkt {
+export default interface INpunkt {
   KOD: string
   NAME: string
   REGION: string

@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import Block from 'components/Block'
 import Loader from 'components/Loader'
 
-import { IContreg, INPunkt, IRegion } from '@shared/interfaces'
+import { IContreg, INpunkt, IRegion } from '@shared/interfaces'
 
 import { getRegions } from 'api/services/regions'
 import { get } from 'api/services'
