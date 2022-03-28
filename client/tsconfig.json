@@ -11,7 +11,7 @@
         "../../shared/*"
       ],
     },
-    "jsx": "react",
+    "jsx": "react-jsx",
     "moduleResolution": "node",    
     "strict": true,
     "allowJs": false,
