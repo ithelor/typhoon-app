@@ -1,4 +1,4 @@
 export default interface IContreg {
-  KOD1: String
-  KOD2: String
+  KOD1: string
+  KOD2: string
 }
