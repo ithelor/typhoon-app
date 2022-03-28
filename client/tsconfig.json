@@ -3,23 +3,26 @@
     "target": "es6",
     "lib": [
       "dom",
-      "dom.iterable",
       "esnext"
     ],
+    "baseUrl": "./src",
+    "paths": {
+      "@shared/*": [
+        "../../shared/*"
+      ],
+    },
+    "jsx": "react",
+    "moduleResolution": "node",    
+    "strict": true,
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": true,
+    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "baseUrl": "src"
   },
   "include": [
     "src"
