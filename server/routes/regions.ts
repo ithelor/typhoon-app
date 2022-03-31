@@ -1,15 +1,17 @@
 import express from 'express'
 
-import { Contreg, Region } from '@models'
+import { Contreg, Npunkt, Region } from '@models'
 
 const regionsRouter = express.Router()
 
-// NOTE: can't select() while { _id: 0 }, so map() to omit _id
 regionsRouter.route('/').get(async (req, res) => {
   try {
-    const regions = (await Region.find({}).orFail().select('KOD Name'))
-      .filter((region) => (region.KOD && region.Name ? true : false))
-      .map((region) => ({ KOD: region.KOD, Name: region.Name }))
+    const regions = await Region.find({
+      KOD: { $exists: true, $ne: '' },
+      Name: { $exists: true, $ne: '' }
+    })
+      .select('-_id')
+      .orFail()
 
     res.json(regions)
   } catch (error) {
@@ -21,7 +23,7 @@ regionsRouter.route('/:code').get(async (req, res) => {
   const code = req.params.code
 
   try {
-    const region = await Region.find({ KOD: code }, { _id: 0 }).orFail()
+    const region = await Region.findOne({ KOD: code }).select('-_id').orFail()
 
     res.json(region)
   } catch (error) {
@@ -29,18 +31,32 @@ regionsRouter.route('/:code').get(async (req, res) => {
   }
 })
 
-regionsRouter.route('/:code/contreg').get(async (req, res) => {
+regionsRouter.route('/:code/adjacent').get(async (req, res) => {
   const code = req.params.code
 
   try {
-    const codes = (await Contreg.find({ KOD1: code }).orFail()).map((data) => data.KOD2),
-      adjacentRegions = (await Region.find({ KOD: { $in: codes } }).orFail()).map(
-        (region) => region.Name
-      )
+    const codes = (await Contreg.find({ KOD1: code }).select('-_id KOD2')).map(
+      (contreg) => contreg.KOD2
+    )
 
-    res.json(adjacentRegions)
+    const adjacent = (await Region.find({ KOD: { $in: codes } })).map((region) => region.Name)
+
+    adjacent.length > 0 ? res.json(adjacent) : res.status(204).send()
   } catch (error) {
-    res.status(404).send()
+    res.status(400).send()
+  }
+})
+
+regionsRouter.route('/:code/center').get(async (req, res) => {
+  const code = req.params.code
+
+  try {
+    const currentRegion = await Region.findOne({ KOD: code }).select('-_id Center')
+    const center = await Npunkt.findOne({ KOD: currentRegion?.Center }).select('-_id NAME')
+
+    res.json(center?.NAME)
+  } catch (error) {
+    res.status(400).send()
   }
 })
 
