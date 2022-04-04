@@ -1,6 +1,6 @@
 @use '~styles/partials/variables';
 
-@import url('https://fonts.googleapis.com/css2?family=Exo:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
   --color-primary: #7380ec;
@@ -9,6 +9,7 @@
 
   --color-background: #f6f6f9;
   --color-accent: #363949;
+  --color-accent-alt: #dbdbdb;
   --color-dark: rgba(132, 139, 200, 0.18);
 
   --header-height: 60px;
@@ -22,7 +23,8 @@
 
 [data-theme='dark'] {
   --color-background: #181a1e;
-  --color-accent: #efeffde5;
+  --color-accent: #efeffd;
+  --color-accent-alt: #2d2d33;
   --color-dark: rgba(0, 0, 0, 0.4);
 }
 
@@ -41,13 +43,18 @@ html {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
   width: 100vw;
   height: 100vh;
   background: var(--color-background);
   overflow-x: hidden;
 
   transition: background 0.3s ease;
+}
+
+body,
+button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 }
 
 .container {
