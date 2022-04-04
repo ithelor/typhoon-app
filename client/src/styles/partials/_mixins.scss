@@ -18,7 +18,7 @@
 
 @mixin Marquee() {
   display: inline-block;
-  animation: scrollText 3s ease 0s infinite normal;
+  animation: scrollText 3s ease-in-out 0s infinite normal;
 
   @keyframes scrollText {
     0% {
