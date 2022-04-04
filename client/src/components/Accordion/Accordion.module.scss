@@ -2,6 +2,14 @@
 @use '~styles/partials/variables';
 
 .container {
+  &.active {
+    background: var(--color-dark);
+
+    button {
+      color: var(--color-primary);
+    }
+  }
+
   transition: background 0.1s ease;
 
   &:hover {

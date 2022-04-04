@@ -1,16 +1,15 @@
 import React from 'react'
+import classNames from 'classnames'
+import { useLocation } from 'react-router-dom'
 import { MdExpandMore as ExpandMoreIcon, MdExpandLess as ExpandLessIcon } from 'react-icons/md'
 
 import { useIsOverflow } from 'hooks/useIsOverflow'
 
 import styles from './Accordion.module.scss'
 
-/**
- * Accordion Component
- */
 interface IAccordion {
   title: string
-  children: React.ReactElement | React.ReactElement[]
+  children: React.ReactElement[]
 }
 
 const Accordion = (props: IAccordion) => {
@@ -21,8 +20,15 @@ const Accordion = (props: IAccordion) => {
   const [expanded, setExpanded] = React.useState(false)
   const { isOverflow, scrollDistance } = useIsOverflow(outerRef, innerRef)
 
+  // expand accordion if child NavItem is [supposed to be] active
+  const location = useLocation()
+
+  const isActive = () => props.children.some((child) => location.pathname === child.props.to)
+
+  React.useEffect(() => setExpanded(isActive), []) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <li className={styles.container}>
+    <li className={classNames(styles.container, { [styles.active]: isActive() })}>
       <button
         className={isOverflow ? styles.marquee : undefined}
         onClick={() => setExpanded(!expanded)}
