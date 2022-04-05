@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { Contreg, Npunkt, Region, River, RiverReg } from '@models'
+import { Contreg, Komiss, Npunkt, Region, River, RiverReg } from '@models'
 
 const regionsRouter = express.Router()
 
@@ -70,6 +70,18 @@ regionsRouter.route('/:code/rivers').get(async (req, res) => {
     const rivers = await River.find({ KOD: { $in: riverregsCodes } }).select('-_id Name Remark')
 
     res.json(rivers)
+  } catch (error) {
+    res.status(400).send()
+  }
+})
+
+regionsRouter.route('/:code/komiss').get(async (req, res) => {
+  const code = req.params.code
+
+  try {
+    const komiss = await Komiss.find({ reg: code })
+
+    res.json(komiss)
   } catch (error) {
     res.status(400).send()
   }
