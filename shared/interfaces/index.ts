@@ -5,5 +5,7 @@ import IClassChs from './ClassChs.interface'
 import IContreg from './Contreg.interface'
 import INpunkt from './Npunkt.interface'
 import IRegion from './Region.interface'
+import IRiver from './River.interface'
+import IRiverReg from './RiverReg.interface'
 
-export type { IAvar, ICasual, ICharChs, IClassChs, IContreg, INpunkt, IRegion }
+export type { IAvar, ICasual, ICharChs, IClassChs, IContreg, INpunkt, IRegion, IRiver, IRiverReg }

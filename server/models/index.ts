@@ -5,5 +5,7 @@ import ClassChs from './ClassChs.model'
 import Contreg from './Contreg.model'
 import Npunkt from './Npunkt.model'
 import Region from './Region.model'
+import River from 'models/River.model'
+import RiverReg from 'models/RiverReg.model'
 
-export { Avar, Casual, CharChs, ClassChs, Contreg, Npunkt, Region }
+export { Avar, Casual, CharChs, ClassChs, Contreg, Npunkt, Region, River, RiverReg }
