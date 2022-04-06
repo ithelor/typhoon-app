@@ -1,14 +1,14 @@
 import express from 'express'
 
-import { Contreg, Komiss, Npunkt, Region, River, RiverReg } from '@models'
+import { NOT_EMPTY } from '@shared/constants'
 
 const regionsRouter = express.Router()
 
 regionsRouter.route('/').get(async (req, res) => {
   try {
     const regions = await Region.find({
-      KOD: { $exists: true, $ne: '' },
-      Name: { $exists: true, $ne: '' }
+      KOD: { $regex: NOT_EMPTY },
+      Name: { $regex: NOT_EMPTY }
     })
       .select('-_id')
       .orFail()
