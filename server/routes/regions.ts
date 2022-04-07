@@ -1,7 +1,9 @@
 import express from 'express'
 
+import { Contreg, Komiss, Npunkt, Region, River, RiverReg, Spop } from '@models'
 import { NOT_EMPTY } from '@shared/constants'
 
+// TODO: populate() the remaining models
 const regionsRouter = express.Router()
 
 regionsRouter.route('/').get(async (req, res) => {
@@ -97,6 +99,21 @@ regionsRouter.route('/:code/spop').get(async (req, res) => {
     }).select('-_id')
 
     res.json(spop)
+  } catch (error) {
+    res.status(400).send()
+  }
+})
+
+regionsRouter.route('/:code/npunkts').get(async (req, res) => {
+  const code = req.params.code
+
+  try {
+    const npunkts = await Npunkt.find({ REGION: code })
+      .lean()
+      .populate({ path: 'pstatus', select: '-_id -KOD Name' })
+      .select('-_id KOD NAME STATUS PEOPLE')
+
+    res.json(npunkts)
   } catch (error) {
     res.status(400).send()
   }
