@@ -5,6 +5,7 @@ import IClassChs from './ClassChs.interface'
 import IContreg from './Contreg.interface'
 import IKomiss from './Komiss.interface'
 import INpunkt from './Npunkt.interface'
+import IPstatus from './Pstatus.interface'
 import IRegion from './Region.interface'
 import IRiver from './River.interface'
 import IRiverReg from './RiverReg.interface'
@@ -18,6 +19,7 @@ export type {
   IContreg,
   IKomiss,
   INpunkt,
+  IPstatus,
   IRegion,
   IRiver,
   IRiverReg,

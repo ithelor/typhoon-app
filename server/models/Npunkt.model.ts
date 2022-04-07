@@ -20,7 +20,18 @@ const NpunktSchema = new mongoose.Schema<INpunkt>(
     BUS: String,
     PBUS: String
   },
-  { collection: 'npunkt' }
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+    collection: 'npunkt'
+  }
 )
+
+NpunktSchema.virtual('pstatus', {
+  ref: 'Pstatus',
+  localField: 'STATUS',
+  foreignField: 'KOD',
+  justOne: true
+})
 
 export default mongoose.model<INpunkt>('Npunkt', NpunktSchema)

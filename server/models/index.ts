@@ -5,6 +5,7 @@ import ClassChs from './ClassChs.model'
 import Contreg from './Contreg.model'
 import Komiss from './Komiss.model'
 import Npunkt from './Npunkt.model'
+import Pstatus from 'models/Pstatus.model'
 import Region from './Region.model'
 import River from 'models/River.model'
 import RiverReg from 'models/RiverReg.model'
@@ -18,6 +19,7 @@ export {
   Contreg,
   Komiss,
   Npunkt,
+  Pstatus,
   Region,
   River,
   RiverReg,
