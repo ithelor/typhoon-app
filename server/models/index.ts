@@ -8,5 +8,18 @@ import Npunkt from './Npunkt.model'
 import Region from './Region.model'
 import River from 'models/River.model'
 import RiverReg from 'models/RiverReg.model'
+import Spop from 'models/Spop.model'
 
-export { Avar, Casual, CharChs, ClassChs, Contreg, Komiss, Npunkt, Region, River, RiverReg }
+export {
+  Avar,
+  Casual,
+  CharChs,
+  ClassChs,
+  Contreg,
+  Komiss,
+  Npunkt,
+  Region,
+  River,
+  RiverReg,
+  Spop
+}

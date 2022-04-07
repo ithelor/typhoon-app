@@ -87,4 +87,19 @@ regionsRouter.route('/:code/komiss').get(async (req, res) => {
   }
 })
 
+regionsRouter.route('/:code/spop').get(async (req, res) => {
+  const code = req.params.code
+
+  try {
+    const spop = await Spop.find({
+      reg: code,
+      Name: { $regex: NOT_EMPTY }
+    }).select('-_id')
+
+    res.json(spop)
+  } catch (error) {
+    res.status(400).send()
+  }
+})
+
 export default regionsRouter

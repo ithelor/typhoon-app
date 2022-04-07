@@ -8,6 +8,7 @@ import INpunkt from './Npunkt.interface'
 import IRegion from './Region.interface'
 import IRiver from './River.interface'
 import IRiverReg from './RiverReg.interface'
+import ISpop from './Spop.interface'
 
 export type {
   IAvar,
@@ -19,5 +20,6 @@ export type {
   INpunkt,
   IRegion,
   IRiver,
-  IRiverReg
+  IRiverReg,
+  ISpop
 }
