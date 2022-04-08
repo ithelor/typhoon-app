@@ -25,7 +25,14 @@ regionsRouter.route('/:code').get(async (req, res) => {
   const code = req.params.code
 
   try {
-    const region = await Region.findOne({ KOD: code }).select('-_id').orFail()
+    const region = await Region.findOne({ KOD: code })
+      .lean()
+      .populate({
+        path: 'CenterNpunkt',
+        select: '-_id'
+      })
+      .select('-_id')
+      .orFail()
 
     res.json(region)
   } catch (error) {
@@ -44,19 +51,6 @@ regionsRouter.route('/:code/adjacent').get(async (req, res) => {
     const adjacentNames = adjacent.map((region) => region.Name)
 
     adjacentNames.length > 0 ? res.json(adjacentNames) : res.status(204).send()
-  } catch (error) {
-    res.status(400).send()
-  }
-})
-
-regionsRouter.route('/:code/center').get(async (req, res) => {
-  const code = req.params.code
-
-  try {
-    const currentRegion = await Region.findOne({ KOD: code }).select('-_id Center')
-    const center = await Npunkt.findOne({ KOD: currentRegion?.Center }).select('-_id NAME')
-
-    res.json(center?.NAME)
   } catch (error) {
     res.status(400).send()
   }
