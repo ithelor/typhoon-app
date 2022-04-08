@@ -4,8 +4,8 @@ import { IRegion } from '@shared/interfaces'
 
 const RegionSchema = new mongoose.Schema<IRegion>(
   {
-    KOD: { type: String, required: true },
-    Name: { type: String, required: true },
+    KOD: String,
+    Name: String,
     RTYPE: String,
     Center: String,
     Remark: String,
@@ -22,8 +22,17 @@ const RegionSchema = new mongoose.Schema<IRegion>(
     PBUS: String
   },
   {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
     collection: 'regions'
   }
 )
+
+RegionSchema.virtual('CenterNpunkt', {
+  ref: 'Npunkt',
+  localField: 'Center',
+  foreignField: 'KOD',
+  justOne: true
+})
 
 export default mongoose.model<IRegion>('Region', RegionSchema)
