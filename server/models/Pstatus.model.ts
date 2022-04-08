@@ -4,7 +4,7 @@ import { IPstatus } from '@shared/interfaces'
 
 const PstatusSchema = new mongoose.Schema<IPstatus>(
   {
-    KOD: { type: String, ref: 'Npunkt' },
+    KOD: String,
     Name: String,
     Attribute: String
   },
