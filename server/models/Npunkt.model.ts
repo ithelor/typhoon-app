@@ -27,11 +27,19 @@ const NpunktSchema = new mongoose.Schema<INpunkt>(
   }
 )
 
+// settlement type
 NpunktSchema.virtual('pstatus', {
   ref: 'Pstatus',
   localField: 'STATUS',
   foreignField: 'KOD',
   justOne: true
+})
+
+// hazardous facilities
+NpunktSchema.virtual('ObjektsData', {
+  ref: 'Objekt',
+  localField: 'KOD',
+  foreignField: 'PUNKT'
 })
 
 export default mongoose.model<INpunkt>('Npunkt', NpunktSchema)

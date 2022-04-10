@@ -113,4 +113,26 @@ regionsRouter.route('/:code/npunkts').get(async (req, res) => {
   }
 })
 
+regionsRouter.route('/:code/objekts').get(async (req, res) => {
+  const code = req.params.code
+
+  try {
+    const objekts = await Npunkt.find({ REGION: code })
+      .lean()
+      .populate({
+        path: 'ObjektsData',
+        select: '-_id KOD NAME ADRESS CHAF CHAFGO HAR Remark TYPOBJ',
+        populate: {
+          path: 'TypData',
+          select: '-_id -KOD NAME'
+        }
+      })
+      .select('-_id KOD NAME')
+
+    res.json(objekts)
+  } catch (error) {
+    res.status(400).send()
+  }
+})
+
 export default regionsRouter
