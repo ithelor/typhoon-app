@@ -3,6 +3,7 @@ import Casual from './Casual.model'
 import CharChs from './CharChs.model'
 import ClassChs from './ClassChs.model'
 import Contreg from './Contreg.model'
+import Division from 'models/Division.model'
 import Komiss from './Komiss.model'
 import Npunkt from './Npunkt.model'
 import Objekt from 'models/Objekt.model'
@@ -12,6 +13,7 @@ import River from 'models/River.model'
 import RiverReg from 'models/RiverReg.model'
 import Spop from 'models/Spop.model'
 import TypObj from 'models/TypObj.model'
+import Typss from 'models/Typss.model'
 
 export {
   Avar,
@@ -19,6 +21,7 @@ export {
   CharChs,
   ClassChs,
   Contreg,
+  Division,
   Komiss,
   Npunkt,
   Objekt,
@@ -27,5 +30,6 @@ export {
   River,
   RiverReg,
   Spop,
-  TypObj
+  TypObj,
+  Typss
 }

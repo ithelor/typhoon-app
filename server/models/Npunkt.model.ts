@@ -42,4 +42,11 @@ NpunktSchema.virtual('ObjektsData', {
   foreignField: 'PUNKT'
 })
 
+// operational units data
+NpunktSchema.virtual('DivisionsData', {
+  ref: 'Division',
+  localField: 'KOD',
+  foreignField: 'PUNKT'
+})
+
 export default mongoose.model<INpunkt>('Npunkt', NpunktSchema)

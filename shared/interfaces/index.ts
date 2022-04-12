@@ -3,6 +3,7 @@ import ICasual from './Casual.interface'
 import ICharChs from './CharChs.interface'
 import IClassChs from './ClassChs.interface'
 import IContreg from './Contreg.interface'
+import IDivision from './Division.interface'
 import IKomiss from './Komiss.interface'
 import INpunkt from './Npunkt.interface'
 import IObjekt from './Objekt.interface'
@@ -12,6 +13,7 @@ import IRiver from './River.interface'
 import IRiverReg from './RiverReg.interface'
 import ISpop from './Spop.interface'
 import ITypObj from './TypObj.interface'
+import ITypss from './Typss.interface'
 
 export type {
   IAvar,
@@ -19,6 +21,7 @@ export type {
   ICharChs,
   IClassChs,
   IContreg,
+  IDivision,
   IKomiss,
   INpunkt,
   IObjekt,
@@ -27,5 +30,6 @@ export type {
   IRiver,
   IRiverReg,
   ISpop,
-  ITypObj
+  ITypObj,
+  ITypss
 }

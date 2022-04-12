@@ -135,4 +135,26 @@ regionsRouter.route('/:code/objekts').get(async (req, res) => {
   }
 })
 
+regionsRouter.route('/:code/divisions').get(async (req, res) => {
+  const code = req.params.code
+
+  try {
+    const divisions = await Npunkt.find({ REGION: code })
+      .lean()
+      .populate({
+        path: 'DivisionsData',
+        select: '-_id KOD NAME ADRESS CHAF CHAFGO POPUL TECHNIK TREADY REMARK HAR TYPSS',
+        populate: {
+          path: 'TypData',
+          select: '-_id -KOD NAME'
+        }
+      })
+      .select('-_id KOD NAME')
+
+    res.json(divisions)
+  } catch (error) {
+    res.status(400).send()
+  }
+})
+
 export default regionsRouter
