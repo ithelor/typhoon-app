@@ -1,3 +1,5 @@
+import { INpunkt } from '@shared/interfaces'
+
 export default interface IRegion {
   KOD: string
   Name: string
@@ -15,4 +17,5 @@ export default interface IRegion {
   RAILST: string
   BUS: string
   PBUS: string
+  CenterNpunkt: INpunkt
 }

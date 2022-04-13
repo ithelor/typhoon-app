@@ -14,4 +14,5 @@ export default interface INpunkt {
   Glava: string
   BUS: string
   PBUS: string
+  pstatus: { Name: string }
 }
