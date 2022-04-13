@@ -3,10 +3,21 @@ import { useSearchParams } from 'react-router-dom'
 
 import Block from 'components/Block'
 import Loader from 'components/Loader'
+import Table from 'components/Table'
 
-import { IRegion } from '@shared/interfaces'
+import { IDivision, IKomiss, INpunkt, IObjekt, IRegion, ISpop } from '@shared/interfaces'
 
-import { getRegions, getRegion, getAdjacent, getCenter } from 'api/services/regions'
+import {
+  getRegions,
+  getRegion,
+  getAdjacent,
+  getRivers,
+  getKomiss,
+  getSpop,
+  getNpunkts,
+  getObjekts,
+  getDivisions
+} from 'api/services/regions'
 
 import './Regions.module.scss'
 
@@ -20,7 +31,12 @@ import './Regions.module.scss'
 
 interface IDynamicData {
   adjacent: string | string[]
-  center: string
+  rivers: string[]
+  komiss: IKomiss[]
+  spop: ISpop[]
+  npunkts: INpunkt[]
+  objekts: IObjekt[]
+  divisions: IDivision[]
 }
 
 const Regions = () => {
@@ -28,17 +44,22 @@ const Regions = () => {
     paramCurrent = searchParams.get('current') ?? 'VVPR'
 
   // loaded once on first render
-  const [loading, setLoading] = React.useState(true)
+  const [isLoading, setIsLoading] = React.useState(true)
   const [regions, setRegions] = React.useState<IRegion[]>([])
 
   // either found by search params or taken first from regions
   const [currentRegion, setCurrentRegion] = React.useState({} as IRegion)
 
   // updated on currentRegion update
-  const [fetching, setFetching] = React.useState(false)
+  const [isFetching, setIsFetching] = React.useState(false)
   const [dynamicData, setDynamicData] = React.useState<IDynamicData>({
     adjacent: [],
-    center: ''
+    rivers: [],
+    komiss: [],
+    spop: [],
+    npunkts: [],
+    objekts: [],
+    divisions: []
   })
 
   React.useEffect(() => {
@@ -56,18 +77,39 @@ const Regions = () => {
       const region = (await getRegion(paramCurrent)).data
 
       try {
-        const [adjacentData, centerData] = await Promise.all([
+        const [
+          adjacentQuery,
+          riversQuery,
+          komissQuery,
+          spopQuery,
+          npunktsQuery,
+          objektsQuery,
+          divisionsQuery
+        ] = await Promise.all([
           getAdjacent(region.KOD),
-          getCenter(region.KOD)
+          getRivers(region.KOD),
+          getKomiss(region.KOD),
+          getSpop(region.KOD),
+          getNpunkts(region.KOD),
+          getObjekts(region.KOD),
+          getDivisions(region.KOD)
         ])
 
         setCurrentRegion(region)
-        setDynamicData({ adjacent: adjacentData.data, center: centerData.data })
+        setDynamicData({
+          adjacent: adjacentQuery.data,
+          rivers: riversQuery.data,
+          komiss: komissQuery.data,
+          spop: spopQuery.data,
+          npunkts: npunktsQuery.data,
+          objekts: objektsQuery.data,
+          divisions: divisionsQuery.data
+        })
       } catch (error) {
         console.error(error)
       } finally {
-        setLoading(false)
-        setFetching(false)
+        setIsLoading(false)
+        setIsFetching(false)
       }
     }
 
@@ -75,13 +117,13 @@ const Regions = () => {
   }, [searchParams]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSelectChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setFetching(true)
+    setIsFetching(true)
     setSearchParams({ current: event.target.value })
   }
 
   return (
     <section>
-      {loading ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <>
@@ -97,15 +139,36 @@ const Regions = () => {
             )}
           </select>
 
-          {fetching ? (
+          {isFetching ? (
             <Loader />
           ) : (
             <>
               <Block heading="Прилегающие муниципальные образования" data={dynamicData.adjacent} />
-              <Block heading="Центр" data={dynamicData.center} />
+              <Block heading="Центр" data={currentRegion.CenterNpunkt.NAME} />
               <Block heading="Глава Муниципального образования" data={currentRegion.Remark} />
               <Block heading="Общая площадь территории" data={currentRegion.STER} />
               <Block heading="Численность населения" data={currentRegion.POPULATION} />
+              <Block heading="Реки" data={dynamicData.rivers} />
+
+              {dynamicData.komiss.length > 0 && (
+                <Table
+                  caption="Состав комиссий по предупреждению и ликвидации чрезвычайных ситуаций и обеспечению пожарной безопасности"
+                  data={dynamicData.komiss}
+                />
+              )}
+
+              {dynamicData.spop.length > 0 && (
+                <Table
+                  caption="СПИСОК глав муниципальных образований, председателей КЧС, уполномоченных по делам ГОЧС"
+                  data={dynamicData.spop}
+                />
+              )}
+
+              {/*
+                <Table caption="Населенные пункты" data={dynamicData.npunkts} /> 
+                <Table caption="Потенциально опасные объекты" data={dynamicData.objekts} />
+                <Table caption="Подразделения" data={dynamicData.divisions} />
+              */}
             </>
           )}
         </>
