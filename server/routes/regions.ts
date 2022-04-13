@@ -63,9 +63,10 @@ regionsRouter.route('/:code/rivers').get(async (req, res) => {
     const riverregsToRegion = await RiverReg.find({ KODP: code }).select('-_id KODR')
     const riverregsCodes = riverregsToRegion.map((riverreg) => riverreg.KODR)
 
-    const rivers = await River.find({ KOD: { $in: riverregsCodes } }).select('-_id Name Remark')
+    const rivers = await River.find({ KOD: { $in: riverregsCodes } }).select('-_id Name')
+    const riversNames = rivers.map((river) => river.Name)
 
-    res.json(rivers)
+    res.json(riversNames)
   } catch (error) {
     res.status(400).send()
   }
@@ -75,7 +76,7 @@ regionsRouter.route('/:code/komiss').get(async (req, res) => {
   const code = req.params.code
 
   try {
-    const komiss = await Komiss.find({ reg: code })
+    const komiss = await Komiss.find({ reg: code }).lean().select('-_id')
 
     res.json(komiss)
   } catch (error) {
