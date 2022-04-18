@@ -1,3 +1,5 @@
+import styles from './Block.module.scss'
+
 /**
  * Block component
  */
@@ -11,7 +13,7 @@ const Block = (props: IBlock) => {
     props.data instanceof Array ? props.data.map((item) => <li key={item}>{item}</li>) : props.data
 
   return (
-    <section>
+    <section className={styles.block}>
       <h3>{props.heading}</h3>
       <ul>{dataToMap}</ul>
     </section>
