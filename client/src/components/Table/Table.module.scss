@@ -1,61 +1,58 @@
-tr {
-  transition: all 0.3s ease;
-  // display: table;
-}
-
-table {
-  table-layout: auto;
-  border-collapse: collapse;
+.caption {
+  font-size: 1.5rem;
+  font-weight: bold;
 
   text-align: center;
-  vertical-align: middle;
+  margin: 0.5rem 0;
 
-  width: 100%;
+  transition: all 0.3s ease;
+}
 
-  caption {
-    font-size: 1.75rem;
-    font-weight: bold;
+.wrapper {
+  overflow: auto;
+  max-height: 400px;
 
-    text-align: center;
-    margin: 0.5rem 0;
-  }
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
 
-  thead {
-    position: sticky;
-    top: calc(var(--header-height) - 1px);
-    z-index: 10;
+  table {
+    border-collapse: collapse;
+    overflow-x: scroll;
 
-    font-size: 0.875rem;
-    font-weight: bold;
+    thead {
+      position: sticky;
+      top: 0;
 
-    color: var(--color-background);
-    background-color: var(--color-accent);
+      font-size: 0.875rem;
+      font-weight: bold;
 
-    tr th {
-      padding: 0.1rem 0.25rem;
-    }
-  }
+      color: var(--color-background);
+      background-color: var(--color-accent);
 
-  tbody {
-    display: table-row-group;
+      transition: all 0.3s ease;
 
-    // NOTE: i want to die
-    // display: block;
-    // max-height: 70vh;
-    // overflow-y: scroll;
-
-    tr {
-      td {
-        padding: 0.25rem;
+      tr th {
+        padding: 0.25rem 0.5rem;
       }
     }
 
-    tr:nth-child(odd) {
-      background-color: var(--color-background);
-    }
+    tbody {
+      tr td {
+        padding: 0.25rem;
+        text-align: center;
+      }
 
-    tr:nth-child(even) {
-      background-color: var(--color-accent-alt);
+      tr {
+        transition: all 0.3s ease;
+      }
+
+      tr:nth-child(odd) {
+        background-color: var(--color-background);
+      }
+
+      tr:nth-child(even) {
+        background-color: var(--color-accent-alt);
+      }
     }
   }
 }

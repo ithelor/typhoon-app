@@ -1,4 +1,4 @@
-import './Table.module.scss'
+import styles from './Table.module.scss'
 
 /**
  * Table Component
@@ -17,28 +17,32 @@ const Table = (props: ITable) => {
     Object.keys(props.data[0]).map((item, key) => <th key={key}>{item}</th>)
 
   return (
-    <table>
-      {props.caption && <caption>{props.caption}</caption>}
-      <thead>
-        <tr>
-          {headData || (
-            <th>
-              <h3>Nothing to display</h3>
-            </th>
-          )}
-        </tr>
-      </thead>
+    <>
+      <h3 className={styles.caption}>{props.caption}</h3>
+      <div className={styles.wrapper}>
+        <table>
+          <thead>
+            <tr>
+              {headData || (
+                <th>
+                  <h3>Nothing to display</h3>
+                </th>
+              )}
+            </tr>
+          </thead>
 
-      <tbody>
-        {props.data.map((item: Object, key) => (
-          <tr key={key}>
-            {Object.values(item).map((item, key) => (
-              <td key={key}>{item}</td>
+          <tbody>
+            {props.data.map((item: Object, key) => (
+              <tr key={key}>
+                {Object.values(item).map((item, key) => (
+                  <td key={key}>{item}</td>
+                ))}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+    </>
   )
 }
 
