@@ -8,8 +8,7 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@shared/*": ["../shared/*"],
-      "@models": ["./models"]
+      "@shared/*": ["../shared/*"]
     },
     "strict": true,
     "allowJs": false,
