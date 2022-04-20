@@ -1,6 +1,6 @@
 import express from 'express'
 
-import regionsRouter from './regions'
+import regionsRouter from './region.route'
 
 const apiRouter = express.Router()
 
