@@ -1,33 +1,52 @@
-import API from 'api/api.instance'
+import { AxiosResponse } from 'axios'
 
+import API from 'api/api.instance'
 import { IDivision, IKomiss, INpunkt, IObjekt, IRegion, ISpop } from '@shared/interfaces'
 
-const getRegions = () => API.get<IRegion[]>(`regions`)
+const getRegions = (): Promise<AxiosResponse<IRegion[]>> => {
+  return API.get(`regions`)
+}
 
-const getRegion = (code: string) => API.get<IRegion>(`regions/${code}`)
+const getRegion = (code: string): Promise<AxiosResponse<IRegion>> => {
+  return API.get(`regions/${code}`)
+}
 
-const getAdjacent = (code: string) => API.get<string[]>(`regions/${code}/adjacent`)
+const getAdjacent = (code: string): Promise<AxiosResponse<string[]>> => {
+  return API.get(`regions/${code}/adjacent`)
+}
 
-const getRivers = (code: string) => API.get<string[]>(`regions/${code}/rivers`)
+const getRivers = (code: string): Promise<AxiosResponse<string[]>> => {
+  return API.get(`regions/${code}/rivers`)
+}
 
-const getKomiss = (code: string) => API.get<IKomiss[]>(`regions/${code}/komiss`)
+const getComission = (code: string): Promise<AxiosResponse<IKomiss[]>> => {
+  return API.get(`regions/${code}/comission`)
+}
 
-const getSpop = (code: string) => API.get<ISpop[]>(`regions/${code}/spop`)
+const getChiefs = (code: string): Promise<AxiosResponse<ISpop[]>> => {
+  return API.get(`regions/${code}/chiefs`)
+}
 
-const getNpunkts = (code: string) => API.get<INpunkt[]>(`regions/${code}/npunkts`)
+const getSettlements = (code: string): Promise<AxiosResponse<INpunkt[]>> => {
+  return API.get(`regions/${code}/settlements`)
+}
 
-const getObjekts = (code: string) => API.get<IObjekt[]>(`regions/${code}/objekts`)
+const getHazard = (code: string): Promise<AxiosResponse<IObjekt[]>> => {
+  return API.get(`regions/${code}/hazard`)
+}
 
-const getDivisions = (code: string) => API.get<IDivision[]>(`regions/${code}/divisions`)
+const getDivisions = (code: string): Promise<AxiosResponse<IDivision[]>> => {
+  return API.get(`regions/${code}/divisions`)
+}
 
 export {
   getRegions,
   getRegion,
   getAdjacent,
   getRivers,
-  getKomiss,
-  getSpop,
-  getNpunkts,
-  getObjekts,
+  getComission,
+  getChiefs,
+  getSettlements,
+  getHazard,
   getDivisions
 }
