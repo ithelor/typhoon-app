@@ -16,4 +16,8 @@
 
   animation: loader 0.7s linear infinite;
   transition: border 0.3s ease;
+
+  &.fillGrid {
+    grid-column: 1/-1;
+  }
 }

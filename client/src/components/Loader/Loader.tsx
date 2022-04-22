@@ -1,5 +1,13 @@
+import classNames from 'classnames'
+
 import styles from './Loader.module.scss'
 
-const Loader = () => <svg className={styles.loader} />
+interface ILoader {
+  fillGrid?: boolean
+}
+
+const Loader = (props: ILoader) => (
+  <svg className={classNames(styles.loader, { [styles.fillGrid]: props.fillGrid })} />
+)
 
 export default Loader
