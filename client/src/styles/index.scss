@@ -11,6 +11,9 @@
   --color-accent: #363949;
   --color-accent-alt: #dbdbdb;
   --color-dark: rgba(132, 139, 200, 0.18);
+  --color-shadow: rgba(0, 0, 0, 0.4);
+
+  --box-shadow: 0.25rem 0.25rem 0.5rem 1px var(--color-shadow);
 
   --header-height: 60px;
   --content-margin: calc(var(--header-height) + 2rem);

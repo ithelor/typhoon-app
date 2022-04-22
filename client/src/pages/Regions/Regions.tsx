@@ -12,14 +12,14 @@ import {
   getRegion,
   getAdjacent,
   getRivers,
-  getKomiss,
-  getSpop,
-  getNpunkts,
-  getObjekts,
+  getComission,
+  getChiefs,
+  getSettlements,
+  getHazard,
   getDivisions
 } from 'api/services/regions'
 
-import './Regions.module.scss'
+import styles from './Regions.module.scss'
 
 /**
  * Regions page
@@ -27,15 +27,16 @@ import './Regions.module.scss'
  *
  * TODO: move auxiliaries to helpers
  * TODO: fill-in animation
+ * FIXME: sections in a section? wow.
  */
 
 interface IDynamicData {
   adjacent: string | string[]
   rivers: string[]
-  komiss: IKomiss[]
-  spop: ISpop[]
-  npunkts: INpunkt[]
-  objekts: IObjekt[]
+  comission: IKomiss[]
+  chiefs: ISpop[]
+  settlements: INpunkt[]
+  hazard: IObjekt[]
   divisions: IDivision[]
 }
 
@@ -55,10 +56,10 @@ const Regions = () => {
   const [dynamicData, setDynamicData] = React.useState<IDynamicData>({
     adjacent: [],
     rivers: [],
-    komiss: [],
-    spop: [],
-    npunkts: [],
-    objekts: [],
+    comission: [],
+    chiefs: [],
+    settlements: [],
+    hazard: [],
     divisions: []
   })
 
@@ -80,18 +81,18 @@ const Regions = () => {
         const [
           adjacentQuery,
           riversQuery,
-          komissQuery,
-          spopQuery,
-          npunktsQuery,
-          objektsQuery,
+          comissionQuery,
+          chiefsQuery,
+          settlementsQuery,
+          hazardQuery,
           divisionsQuery
         ] = await Promise.all([
           getAdjacent(region.KOD),
           getRivers(region.KOD),
-          getKomiss(region.KOD),
-          getSpop(region.KOD),
-          getNpunkts(region.KOD),
-          getObjekts(region.KOD),
+          getComission(region.KOD),
+          getChiefs(region.KOD),
+          getSettlements(region.KOD),
+          getHazard(region.KOD),
           getDivisions(region.KOD)
         ])
 
@@ -99,10 +100,10 @@ const Regions = () => {
         setDynamicData({
           adjacent: adjacentQuery.data,
           rivers: riversQuery.data,
-          komiss: komissQuery.data,
-          spop: spopQuery.data,
-          npunkts: npunktsQuery.data,
-          objekts: objektsQuery.data,
+          comission: comissionQuery.data,
+          chiefs: chiefsQuery.data,
+          settlements: settlementsQuery.data,
+          hazard: hazardQuery.data,
           divisions: divisionsQuery.data
         })
       } catch (error) {
@@ -122,58 +123,70 @@ const Regions = () => {
   }
 
   return (
-    <section>
+    <main className={styles.container}>
       {isLoading ? (
         <Loader />
       ) : (
         <>
-          <select onChange={handleSelectChange} value={paramCurrent}>
-            {regions.map(
-              (region) =>
-                region.KOD &&
-                region.Name && (
-                  <option key={region.KOD} value={region.KOD}>
-                    {region.Name}
-                  </option>
-                )
-            )}
-          </select>
-
+          <section className={styles.controls}>
+            <h2>Муниципальные образования Приморского края</h2>
+            <select value={paramCurrent} onChange={handleSelectChange}>
+              {regions.map(
+                (region) =>
+                  region.KOD &&
+                  region.Name && (
+                    <option key={region.KOD} value={region.KOD}>
+                      {region.Name}
+                    </option>
+                  )
+              )}
+            </select>
+          </section>
           {isFetching ? (
-            <Loader />
+            <Loader fillGrid />
           ) : (
             <>
-              <Block heading="Прилегающие муниципальные образования" data={dynamicData.adjacent} />
-              <Block heading="Центр" data={currentRegion.CenterNpunkt.NAME} />
-              <Block heading="Глава Муниципального образования" data={currentRegion.Remark} />
-              <Block heading="Общая площадь территории" data={currentRegion.STER} />
-              <Block heading="Численность населения" data={currentRegion.POPULATION} />
-              <Block heading="Реки" data={dynamicData.rivers} />
+              <section className={styles.main}>
+                <>
+                  {dynamicData.comission.length > 0 && (
+                    <Table
+                      caption="Состав комиссий по предупреждению и ликвидации чрезвычайных ситуаций и обеспечению пожарной безопасности"
+                      data={dynamicData.comission}
+                    />
+                  )}
 
-              {dynamicData.komiss.length > 0 && (
-                <Table
-                  caption="Состав комиссий по предупреждению и ликвидации чрезвычайных ситуаций и обеспечению пожарной безопасности"
-                  data={dynamicData.komiss}
-                />
-              )}
+                  {dynamicData.chiefs.length > 0 && (
+                    <Table
+                      caption="СПИСОК глав муниципальных образований, председателей КЧС, уполномоченных по делам ГОЧС"
+                      data={dynamicData.chiefs}
+                    />
+                  )}
 
-              {dynamicData.spop.length > 0 && (
-                <Table
-                  caption="СПИСОК глав муниципальных образований, председателей КЧС, уполномоченных по делам ГОЧС"
-                  data={dynamicData.spop}
-                />
-              )}
-
-              {/*
-                <Table caption="Населенные пункты" data={dynamicData.npunkts} /> 
-                <Table caption="Потенциально опасные объекты" data={dynamicData.objekts} />
-                <Table caption="Подразделения" data={dynamicData.divisions} />
-              */}
+                  {/* <Table caption="Населенные пункты" data={dynamicData.settlements} />
+                  <Table caption="Потенциально опасные объекты" data={dynamicData.hazard} />
+                  <Table caption="Подразделения" data={dynamicData.divisions} /> */}
+                </>
+              </section>
+              <section className={styles.side}>
+                {
+                  <>
+                    <Block
+                      heading="Прилегающие муниципальные образования"
+                      data={dynamicData.adjacent}
+                    />
+                    <Block heading="Центр" data={currentRegion.CenterNpunkt.NAME} />
+                    <Block heading="Глава Муниципального образования" data={currentRegion.Remark} />
+                    <Block heading="Общая площадь территории" data={currentRegion.STER} />
+                    <Block heading="Численность населения" data={currentRegion.POPULATION} />
+                    <Block heading="Реки" data={dynamicData.rivers} />
+                  </>
+                }
+              </section>
             </>
           )}
         </>
       )}
-    </section>
+    </main>
   )
 }
 

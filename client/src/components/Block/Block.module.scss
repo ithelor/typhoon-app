@@ -1,22 +1,25 @@
-.block {
+.container {
   font-size: 1.1rem;
   font-weight: 500;
   text-align: center;
 
   background-color: var(--color-dark);
-  border-radius: 0.5rem;
 
-  // min-width: 100px;
+  height: min-content;
   max-height: 400px;
-  overflow-y: auto;
+  // overflow-y: auto;
 
   color: var(--color-background);
   box-shadow: var(--box-shadow);
+
+  // NOTE: idk why but I need this
+  border-radius: 0 0 0.5rem 0.5rem;
 
   h3 {
     position: sticky;
     top: 0;
     padding: 0.5rem 1rem;
+    border-radius: 0.5rem 0.5rem 0 0;
 
     background-color: var(--color-accent);
 
@@ -28,6 +31,7 @@
     background-color: var(--color-accent-alt);
 
     padding: 0.25rem 1rem;
+    border-radius: 0 0 0.5rem 0.5rem;
 
     transition: all 0.3s ease;
 

@@ -1,8 +1,42 @@
-section {
-  display: flex;
-  flex-direction: column;
+@use '~styles/partials/variables';
+
+.container {
+  display: grid;
   justify-content: center;
-  align-items: center;
+
+  grid-template-areas:
+    'controls controls'
+    'main side';
+
+  // grid-template-columns: auto 1fr;
+  grid-template-columns: unset;
+  gap: 1rem;
+
+  height: min-content;
+
+  .controls {
+    grid-area: controls;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main {
+    grid-area: main;
+  }
+
+  .side {
+    grid-area: side;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: 0.5rem;
+
+    max-height: 80vh;
+    overflow-y: auto;
+  }
 
   select {
     font-size: 1.25rem;
@@ -11,5 +45,14 @@ section {
     color: var(--color-accent);
 
     transition: background-color 0.3s ease;
+  }
+}
+
+@media screen and (max-width: variables.$mobile-width) {
+  .container {
+    grid-template-areas:
+      'controls controls'
+      'side side'
+      'main main';
   }
 }

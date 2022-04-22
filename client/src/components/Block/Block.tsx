@@ -15,6 +15,7 @@ const Block = (props: IBlock) => {
   return props.data instanceof Array && props.data.length === 0 ? (
     <></>
   ) : (
+    <section className={styles.container}>
       <h3>{props.heading}</h3>
       <ul>{dataToMap}</ul>
     </section>
