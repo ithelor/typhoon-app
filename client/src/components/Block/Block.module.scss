@@ -7,23 +7,27 @@
 
   height: min-content;
   max-height: 400px;
-  // overflow-y: auto;
 
   color: var(--color-background);
   box-shadow: var(--box-shadow);
 
   // NOTE: idk why but I need this
-  border-radius: 0 0 0.5rem 0.5rem;
+  border-radius: var(--border-radius-down);
+
+  // make sure shadow is displayed
+  &:last-child {
+    margin-bottom: 1rem;
+  }
 
   h3 {
     position: sticky;
     top: 0;
     padding: 0.5rem 1rem;
-    border-radius: 0.5rem 0.5rem 0 0;
+    border-radius: var(--border-radius-up);
 
     background-color: var(--color-accent);
 
-    transition: all 0.3s ease;
+    transition: all var(--transition-duration) var(--transition-timing-function);
   }
 
   ul {
@@ -31,9 +35,9 @@
     background-color: var(--color-accent-alt);
 
     padding: 0.25rem 1rem;
-    border-radius: 0 0 0.5rem 0.5rem;
+    border-radius: var(--border-radius-down);
 
-    transition: all 0.3s ease;
+    transition: all var(--transition-duration) var(--transition-timing-function);
 
     li {
       height: 100%;

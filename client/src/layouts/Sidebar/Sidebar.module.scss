@@ -9,7 +9,7 @@
 
   background: var(--color-background);
 
-  transition: background 0.3s ease;
+  transition: background var(--transition-duration) var(--transition-timing-function);
 
   .navMenu {
     height: calc(100vh - var(--content-margin) - 2rem);
@@ -36,7 +36,7 @@
 
       color: var(--color-info-dark);
 
-      transition: all 0.1s ease;
+      transition: all 0.1s var(--transition-timing-function);
 
       &:hover {
         color: var(--color-primary);
@@ -61,7 +61,7 @@
         width: 1.5rem;
         height: 1.5rem;
 
-        transition: all 0.3s ease;
+        transition: all var(--transition-duration) var(--transition-timing-function);
       }
 
       h3 {
@@ -103,7 +103,7 @@
     box-shadow: 1rem 3rem 4rem var(--color-dark);
     z-index: 3;
 
-    transition: left 0.3s ease-in-out;
+    transition: left var(--transition-duration) ease-in-out;
 
     &.open {
       left: 0;

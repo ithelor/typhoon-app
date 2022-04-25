@@ -10,7 +10,7 @@
   color: var(--color-accent);
   background: var(--color-dark);
 
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius);
 
   svg {
     width: 50%;
@@ -21,12 +21,12 @@
     align-items: center;
 
     padding: 0.15rem;
-    border-radius: 0.5rem 0 0 0.5rem;
+    border-radius: var(--border-radius-left);
 
-    transition: all 0.3s ease;
+    transition: all var(--transition-duration) var(--transition-timing-function);
 
     &:last-child {
-      border-radius: 0 0.5rem 0.5rem 0;
+      border-radius: var(--border-radius-right);
     }
 
     &.active {

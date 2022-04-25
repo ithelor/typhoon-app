@@ -13,7 +13,7 @@
   box-shadow: 0 1rem 1rem var(--color-dark);
   z-index: 5;
 
-  transition: background 0.3s ease;
+  transition: background var(--transition-duration) var(--transition-timing-function);
 
   display: grid;
   align-items: center;
@@ -61,7 +61,7 @@
         height: 3rem;
         fill: var(--color-accent);
 
-        transition: fill 0.3s ease;
+        transition: fill var(--transition-duration) var(--transition-timing-function);
       }
     }
   }

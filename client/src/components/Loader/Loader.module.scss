@@ -1,10 +1,10 @@
-@keyframes loader {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .loader {
+  @keyframes loader {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   box-sizing: border-box;
   width: 4em;
   height: 4em;
@@ -15,7 +15,7 @@
   border-top-color: var(--color-background);
 
   animation: loader 0.7s linear infinite;
-  transition: border 0.3s ease;
+  transition: border var(--transition-duration) var(--transition-timing-function);
 
   &.fillGrid {
     grid-column: 1/-1;

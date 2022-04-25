@@ -5,7 +5,6 @@ import RegionController from 'controllers/region.controller'
 const regionsRouter = express.Router()
 
 regionsRouter.get('/', RegionController.getRegions)
-
 regionsRouter.get('/:code', RegionController.getRegion)
 regionsRouter.get('/:code/adjacent', RegionController.getAdjacent)
 regionsRouter.get('/:code/rivers', RegionController.getRivers)

@@ -8,11 +8,8 @@ import apiRouter from './routes'
 dotenv.config()
 
 const app = express()
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL
-  })
-)
+
+app.use(cors({ origin: process.env.CLIENT_URL }))
 app.use('/api', apiRouter)
 
 const PORT = process.env.SERVER_PORT || 8080

@@ -15,6 +15,7 @@ const getRegions = async (req: Request, res: Response) => {
     res.status(400).send()
   }
 }
+
 const getRegion = async (req: Request, res: Response) => {
   const code = req.params.code
 

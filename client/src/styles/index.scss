@@ -15,6 +15,15 @@
 
   --box-shadow: 0.25rem 0.25rem 0.5rem 1px var(--color-shadow);
 
+  --border-radius: 0.5rem;
+  --border-radius-up: 0.5rem 0.5rem 0 0;
+  --border-radius-down: 0 0 0.5rem 0.5rem;
+  --border-radius-left: 0.5rem 0 0 0.5rem;
+  --border-radius-right: 0 0.5rem 0.5rem 0;
+
+  --transition-duration: 0.3s;
+  --transition-timing-function: ease;
+
   --header-height: 60px;
   --content-margin: calc(var(--header-height) + 2rem);
   --sidebar-width: 16rem;
@@ -51,7 +60,7 @@ body {
   background: var(--color-background);
   overflow-x: hidden;
 
-  transition: background 0.3s ease;
+  transition: background var(--transition-duration) var(--transition-timing-function);
 }
 
 body,
