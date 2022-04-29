@@ -3,7 +3,16 @@ import ICasual from './Casual.interface'
 import ICharChs from './CharChs.interface'
 import IClassChs from './ClassChs.interface'
 import IContreg from './Contreg.interface'
+import ICrim from './Crim.interface'
 import IDivision from './Division.interface'
+import IDocs from './Docs.interface'
+import IDocsType from './DocsType.interface'
+import IEpidemy from './Epidemy.interface'
+import IF2 from './F2.interface'
+import IFire from './Fire.interface'
+import IFirewood from './Firewood.interface'
+import IFlood from './Flood.interface'
+import IFwStat from './FwStat.interface'
 import IKomiss from './Komiss.interface'
 import INpunkt from './Npunkt.interface'
 import IObjekt from './Objekt.interface'
@@ -21,7 +30,16 @@ export type {
   ICharChs,
   IClassChs,
   IContreg,
+  ICrim,
   IDivision,
+  IDocs,
+  IDocsType,
+  IEpidemy,
+  IF2,
+  IFire,
+  IFirewood,
+  IFlood,
+  IFwStat,
   IKomiss,
   INpunkt,
   IObjekt,
