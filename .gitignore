@@ -3,5 +3,6 @@ client/.env
 client/src/assets
 client/src/react-app-env.d.ts
 
+server/dist
 server/node_modules
 server/.env
