@@ -1,0 +1,13 @@
+{
+  "name": "shared",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Shared client-server stuff, such as constants and interfaces",
+  "keywords": [
+    "shared",
+    "constants",
+    "interfaces"
+  ],
+  "author": "Vladislav 'ithelor' Dietrich",
+  "license": "ISC"
+}
