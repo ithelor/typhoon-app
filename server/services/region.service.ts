@@ -79,7 +79,7 @@ const getSettlements = async (query: { REGION: string }) => {
   try {
     const settlements = await Npunkt.find(query)
       .lean()
-      .populate({ path: 'pstatus', select: '-_id -KOD Name' })
+      .populate({ path: 'PstatusData', select: '-_id -KOD Name' })
       .select('-_id KOD NAME STATUS PEOPLE')
 
     return settlements

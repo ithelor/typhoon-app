@@ -28,7 +28,7 @@ const NpunktSchema = new mongoose.Schema<INpunkt>(
 )
 
 // settlement type
-NpunktSchema.virtual('pstatus', {
+NpunktSchema.virtual('PstatusData', {
   ref: 'Pstatus',
   localField: 'STATUS',
   foreignField: 'KOD',
