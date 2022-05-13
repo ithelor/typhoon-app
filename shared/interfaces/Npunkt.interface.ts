@@ -1,3 +1,5 @@
+import { IDivision, IObjekt, IPstatus } from '@shared/interfaces'
+
 export default interface INpunkt {
   KOD: string
   NAME: string
@@ -14,5 +16,7 @@ export default interface INpunkt {
   Glava: string
   BUS: string
   PBUS: string
-  pstatus: { Name: string }
+  PstatusData: IPstatus
+  ObjektsData: IObjekt[]
+  DivisionsData: IDivision[]
 }
