@@ -6,6 +6,7 @@
   "main": "server.ts",
   "scripts": {
     "build": "tsc",
+    "start": "node --no-warnings --loader ts-paths-esm-loader --experimental-specifier-resolution=node dist/server/server.js",
     "serve": "node --no-warnings --loader ts-paths-esm-loader --experimental-specifier-resolution=node server.ts",
     "dev": "nodemon -e ts --exec \"npm run serve\""
   },
