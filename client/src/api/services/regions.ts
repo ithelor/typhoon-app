@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 
 import API from 'api/api.instance'
-import { IDivision, IKomiss, INpunkt, IObjekt, IRegion, ISpop } from '@shared/interfaces'
+import { IKomiss, INpunkt, IRegion, ISpop } from '@shared/interfaces'
 
 const getRegions = (): Promise<AxiosResponse<IRegion[]>> => {
   return API.get(`regions`)
@@ -31,11 +31,11 @@ const getSettlements = (code: string): Promise<AxiosResponse<INpunkt[]>> => {
   return API.get(`regions/${code}/settlements`)
 }
 
-const getHazard = (code: string): Promise<AxiosResponse<IObjekt[]>> => {
+const getHazard = (code: string): Promise<AxiosResponse<INpunkt[]>> => {
   return API.get(`regions/${code}/hazard`)
 }
 
-const getDivisions = (code: string): Promise<AxiosResponse<IDivision[]>> => {
+const getDivisions = (code: string): Promise<AxiosResponse<INpunkt[]>> => {
   return API.get(`regions/${code}/divisions`)
 }
 
