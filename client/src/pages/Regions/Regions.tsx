@@ -5,7 +5,7 @@ import Block from 'components/Block'
 import Loader from 'components/Loader'
 import Table from 'components/Table'
 
-import { IDivision, IKomiss, INpunkt, IObjekt, IRegion, ISpop } from '@shared/interfaces'
+import { IKomiss, INpunkt, IRegion, ISpop } from '@shared/interfaces'
 
 import {
   getRegions,
@@ -36,8 +36,8 @@ interface IDynamicData {
   comission: IKomiss[]
   chiefs: ISpop[]
   settlements: INpunkt[]
-  hazard: IObjekt[]
-  divisions: IDivision[]
+  hazard: INpunkt[]
+  divisions: INpunkt[]
 }
 
 const Regions = () => {
@@ -162,9 +162,33 @@ const Regions = () => {
                     />
                   )}
 
-                  {/* <Table caption="Населенные пункты" data={dynamicData.settlements} />
-                  <Table caption="Потенциально опасные объекты" data={dynamicData.hazard} />
-                  <Table caption="Подразделения" data={dynamicData.divisions} /> */}
+                  {dynamicData.settlements.length > 0 && (
+                    <Table caption="Населенные пункты" data={dynamicData.settlements} />
+                  )}
+
+                  {dynamicData.hazard.length > 0 &&
+                    dynamicData.hazard.map(
+                      (value, index) =>
+                        value.ObjektsData.length > 0 && (
+                          <Table
+                            key={index}
+                            caption={`Потенциально опасные объекты (${value.NAME})`}
+                            data={value.ObjektsData}
+                          />
+                        )
+                    )}
+
+                  {dynamicData.divisions.length > 0 &&
+                    dynamicData.divisions.map(
+                      (value, index) =>
+                        value.DivisionsData.length > 0 && (
+                          <Table
+                            key={index}
+                            caption={`Подразделения (${value.NAME})`}
+                            data={value.DivisionsData}
+                          />
+                        )
+                    )}
                 </>
               </section>
               <section className={styles.side}>
