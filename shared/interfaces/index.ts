@@ -17,6 +17,7 @@ import IKomiss from './Komiss.interface'
 import INpunkt from './Npunkt.interface'
 import IObjekt from './Objekt.interface'
 import IPstatus from './Pstatus.interface'
+import IPunkt from './Punkt.interface'
 import IRegion from './Region.interface'
 import IRiver from './River.interface'
 import IRiverReg from './RiverReg.interface'
@@ -44,6 +45,7 @@ export type {
   INpunkt,
   IObjekt,
   IPstatus,
+  IPunkt,
   IRegion,
   IRiver,
   IRiverReg,

@@ -17,6 +17,7 @@ import Komiss from './Komiss.model'
 import Npunkt from './Npunkt.model'
 import Objekt from 'models/Objekt.model'
 import Pstatus from 'models/Pstatus.model'
+import Punkt from './Punkt.model'
 import Region from './Region.model'
 import River from 'models/River.model'
 import RiverReg from 'models/RiverReg.model'
@@ -44,6 +45,7 @@ export {
   Npunkt,
   Objekt,
   Pstatus,
+  Punkt,
   Region,
   River,
   RiverReg,
