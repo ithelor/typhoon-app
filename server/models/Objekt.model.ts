@@ -21,7 +21,15 @@ const ObjektSchema = new mongoose.Schema<IObjekt>(
   }
 )
 
-// join by TYPOBJ to get actual data
+// populate with settlement data
+ObjektSchema.virtual('PunktData', {
+  ref: 'Punkt',
+  localField: 'PUNKT',
+  foreignField: 'KOD',
+  justOne: true
+})
+
+// populate with type data
 ObjektSchema.virtual('TypData', {
   ref: 'TypObj',
   localField: 'TYPOBJ',
