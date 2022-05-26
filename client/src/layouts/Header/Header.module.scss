@@ -33,12 +33,22 @@
 
       color: var(--color-accent);
       background: transparent;
+
+      transition: color 0.1s ease-in;
+
+      &:hover {
+        color: var(--color-danger);
+      }
+
+      svg {
+        font-size: 2rem;
+      }
     }
   }
 
   @media screen and (max-width: variables.$mobile-width) {
     .left button {
-        display: block;
+      display: block;
     }
   }
 }
