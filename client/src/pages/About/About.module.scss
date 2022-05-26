@@ -1,0 +1,33 @@
+.container {
+  margin-top: var(--content-margin);
+  font-size: 1.2rem;
+
+  h3 {
+    font-size: 1.6rem;
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  ul {
+    margin: 1rem 0;
+
+    li {
+      list-style-type: disc;
+
+      a {
+        font-weight: 500;
+        color: var(--color-danger);
+
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+    }
+  }
+}
