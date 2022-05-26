@@ -20,6 +20,7 @@
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   .left {
     display: flex;
@@ -35,50 +36,9 @@
     }
   }
 
-  .right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-
-    .profile {
-      display: flex;
-      gap: 1rem;
-      text-align: right;
-
-      .info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        line-height: 16px;
-
-        small {
-          color: var(--color-info-dark);
-        }
-      }
-
-      svg {
-        width: 3rem;
-        height: 3rem;
-        fill: var(--color-accent);
-
-        transition: fill var(--transition-duration) var(--transition-timing-function);
-      }
-    }
-  }
-
   @media screen and (max-width: variables.$mobile-width) {
-    .left {
-      button {
+    .left button {
         display: block;
-
-        svg {
-          font-size: 2rem;
-        }
-      }
-    }
-
-    .right .profile .info {
-      display: none;
     }
   }
 }

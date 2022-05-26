@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import { MdLogout as LogoutIcon } from 'react-icons/md'
 
 import NavItem from 'layouts/Sidebar/components/NavItem'
 import Accordion from 'components/Accordion/Accordion'
@@ -44,7 +43,6 @@ const Sidebar = () => {
         <NavItem title="Оперативная обстановка" to="/situation" />
         <NavItem title="Сводка оперативной обстановки" to="/summary" />
         <NavItem title="Архив ЧС, снятых с контроля" to="/archive" />
-        <NavItem icon={<LogoutIcon />} title="Выйти" to="/logout" />
       </nav>
     </aside>
   )

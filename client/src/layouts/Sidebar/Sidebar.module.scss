@@ -43,10 +43,6 @@
         background: var(--color-dark);
       }
 
-      &:last-child {
-        margin-top: auto;
-      }
-
       &.marquee {
         &:hover {
           h3 span {
