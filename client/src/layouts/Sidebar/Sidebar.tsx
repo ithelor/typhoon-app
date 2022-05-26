@@ -9,11 +9,11 @@ import { useSidebar } from 'hooks/useSidebar'
 import styles from './Sidebar.module.scss'
 
 const Sidebar = () => {
-  const { sidebarOpen } = useSidebar()
+  const sidebarContext = useSidebar()
 
   // TODO: reduce to .map()
   return (
-    <aside className={classNames(styles.container, { [styles.open]: sidebarOpen })}>
+    <aside className={classNames(styles.container, { [styles.open]: sidebarContext?.isOpen })}>
       <nav className={styles.navMenu}>
         <NavItem title="О системе" to="/about" />
         <Accordion title="Паспорт Приморского Края">

@@ -7,10 +7,10 @@ interface ISidebarProvider {
 }
 
 const SidebarProvider = (props: ISidebarProvider) => {
-  const [sidebarOpen, setSidebarOpen] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState(false)
 
   return (
-    <SidebarContext.Provider value={{ sidebarOpen, setSidebarOpen }}>
+    <SidebarContext.Provider value={{ isOpen, setIsOpen }}>
       {props.children}
     </SidebarContext.Provider>
   )

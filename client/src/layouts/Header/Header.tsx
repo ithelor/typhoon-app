@@ -13,12 +13,12 @@ import styles from './Header.module.scss'
  * Header Component
  */
 const Header = () => {
-  const { sidebarOpen, setSidebarOpen } = useSidebar()
+  const sidebarContext = useSidebar()
 
   return (
     <header className={styles.container}>
       <div className={styles.left}>
-        <button onClick={() => setSidebarOpen(!sidebarOpen)}>
+        <button onClick={() => sidebarContext?.setIsOpen(!sidebarContext.isOpen)}>
           <MenuIcon />
         </button>
         <Logo />
