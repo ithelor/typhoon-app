@@ -9,7 +9,7 @@ const Logo = () => (
   <div className={styles.container}>
     <ReactLogo />
     <h2>
-      Typ<span>hoon</span>
+      Тай<span>фун</span>
     </h2>
   </div>
 )
