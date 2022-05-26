@@ -17,23 +17,22 @@ const Accordion = (props: IAccordion) => {
     outerRef = React.useRef<HTMLHeadingElement>(null),
     innerRef = React.useRef<HTMLSpanElement>(null)
 
-  const [expanded, setExpanded] = React.useState(false)
+  const [isExpanded, setIsExpanded] = React.useState(false)
   const { isOverflow, scrollDistance } = useIsOverflow(outerRef, innerRef)
 
-  // expand accordion if child NavItem is [supposed to be] active
+  // expand accordion if child NavItem is active
   const location = useLocation()
+  const isChildActive = () => props.children.some((child) => location.pathname === child.props.to)
 
-  const isActive = () => props.children.some((child) => location.pathname === child.props.to)
-
-  React.useEffect(() => setExpanded(isActive), []) // eslint-disable-line react-hooks/exhaustive-deps
+  React.useEffect(() => setIsExpanded(isChildActive), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <li className={classNames(styles.container, { [styles.active]: isActive() })}>
+    <li className={classNames(styles.container, { [styles.active]: isChildActive() })}>
       <button
         className={isOverflow ? styles.marquee : undefined}
-        onClick={() => setExpanded(!expanded)}
+        onClick={() => setIsExpanded(!isExpanded)}
       >
-        {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        {isExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         <h3 ref={outerRef}>
           <span
             ref={innerRef}
@@ -50,7 +49,7 @@ const Accordion = (props: IAccordion) => {
         ref={contentRef}
         className={styles.content}
         style={
-          expanded
+          isExpanded
             ? { height: contentRef.current?.scrollHeight, marginBottom: '1rem' }
             : { height: '0' }
         }
