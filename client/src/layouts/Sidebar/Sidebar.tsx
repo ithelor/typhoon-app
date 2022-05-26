@@ -10,18 +10,11 @@ import styles from './Sidebar.module.scss'
 const Sidebar = () => {
   const sidebarContext = useSidebar()
 
-  // TODO: reduce to .map()
   return (
     <aside className={classNames(styles.container, { [styles.open]: sidebarContext?.isOpen })}>
       <nav className={styles.navMenu}>
         <NavItem title="О системе" to="/about" />
-        <Accordion title="Паспорт Приморского Края">
-          <NavItem title="Муниципальные образования" to="/regions" />
-          <NavItem title="Населенные пункты" to="/localities" />
-          <NavItem title="Реки" to="/rivers" />
-          <NavItem title="Объекты жизнеобеспечения" to="/facilities" />
-          <NavItem title="Телефонные справочники" to="/phonebooks" />
-        </Accordion>
+        <NavItem title="Паспорт Приморского Края" to="/regions" />
         <NavItem title="Угроза ЧС" to="/outlook" />
         <NavItem title="Краевая комиссия по ЧС" to="/committee" />
         <Accordion title="Нормативные акты">
