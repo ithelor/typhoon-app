@@ -9,49 +9,54 @@ interface ITable {
   data: Object[]
 }
 
-const handleHead = (head: ITable['head'], data: ITable['data']) => {
-  // if "head" is not being provided
-  // thead is being composed of "data" keys
-
-  return (
-    <tr>
-      {(head || Object.keys(data[0])).map((item, key) => (
-        <th key={key}>{item}</th>
-      ))}
-    </tr>
-  )
-}
-
-const handleData = (data: ITable['data']) => {
-  // besides numbers or strings "data" may contain objects
-  // due to mongoose populations (usually only one property).
-  // if so, the property value is being returned.
-  // if not, the original value is being returned.
-
-  return data.map((item, index) => (
-    <tr key={index}>
-      {Object.values(item).map((value: number | string | Object, key) => {
-        // some mongoose populations result in null
-        // due to db values referring to invalid keys.
-        // because of that checking for null.
-
-        return (
-          <td key={key}>
-            {typeof value === 'object' && value !== null ? Object.values(value)[0] : value ?? '-'}
-          </td>
-        )
-      })}
-    </tr>
-  ))
-}
-
 const Table = (props: ITable) => (
   <>
     <h3 className={styles.caption}>{props.caption}</h3>
     <div className={styles.wrapper}>
       <table>
-        <thead>{handleHead(props.head, props.data)}</thead>
-        <tbody>{handleData(props.data)}</tbody>
+        <thead>
+          <tr>
+            {
+              // if "head" is not being provided
+              // thead is being composed of "data" keys
+
+              (props.head || Object.keys(props.data[0])).map((item, key) => (
+                <th key={key}>{item}</th>
+              ))
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {props.data.map((item, index) => (
+            <tr key={index}>
+              {
+                // besides numbers or strings "data" may contain objects
+                // due to mongoose populations (usually only one property).
+                // if so, the property value is being used.
+                // if not, the original value is being used.
+
+                // data-label duplicates th content to display it in mobile layout
+
+                Object.values(item).map((value: number | string | Object, index) => (
+                  <td
+                    key={index}
+                    data-label={props.head ? props.head[index] : Object.keys(props.data[0])[index]}
+                  >
+                    {
+                      // some mongoose populations result in null
+                      // due to db values referring to invalid keys.
+                      // because of that checking for null.
+
+                      typeof value === 'object' && value !== null
+                        ? Object.values(value)[0]
+                        : value ?? '-'
+                    }
+                  </td>
+                ))
+              }
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   </>
