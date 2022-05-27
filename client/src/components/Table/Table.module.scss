@@ -1,18 +1,23 @@
+@use '~styles/partials/variables';
+
 .caption {
   font-size: 1.5rem;
   font-weight: bold;
 
   text-align: center;
-  margin: 0.5rem 0;
+  margin: 2rem 0 0.5rem;
 
   transition: all var(--transition-duration) var(--transition-timing-function);
+
+  &:first-child {
+    margin-top: 1rem;
+  }
 }
 
 .wrapper {
   display: flex;
   justify-content: center;
 
-  width: fit-content;
   max-height: 400px;
   margin: 0 auto;
   overflow: auto;
@@ -21,8 +26,8 @@
   box-shadow: var(--box-shadow);
 
   table {
+    width: 100%;
     border-collapse: collapse;
-    overflow-x: scroll;
 
     thead {
       position: sticky;
@@ -37,26 +42,59 @@
       transition: all var(--transition-duration) var(--transition-timing-function);
 
       tr th {
-        padding: 0.25rem 0.5rem;
+        font-size: 1rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+
+        padding: 0.5rem;
       }
     }
 
     tbody {
-      tr td {
-        padding: 0.25rem;
-        text-align: center;
-      }
-
       tr {
         transition: all var(--transition-duration) var(--transition-timing-function);
+
+        &:nth-child(odd) {
+          background-color: var(--color-background);
+        }
+
+        &:nth-child(even) {
+          background-color: var(--color-accent-alt);
+        }
       }
 
-      tr:nth-child(odd) {
-        background-color: var(--color-background);
+      td {
+        padding: 0.5rem;
+      }
+    }
+
+    @media screen and (max-width: variables.$mobile-width) {
+      thead {
+        display: none;
       }
 
-      tr:nth-child(even) {
-        background-color: var(--color-accent-alt);
+      tbody {
+        tr {
+          min-height: 20px;
+          display: block;
+
+          td {
+            // NOTE: ?? '-' fallback not always working, FIXME:
+            min-height: 30px;
+
+            font-size: 1.2rem;
+            display: block;
+            text-align: right;
+
+            &:before {
+              content: attr(data-label);
+
+              font-weight: bold;
+              text-transform: uppercase;
+              float: left;
+            }
+          }
+        }
       }
     }
   }
