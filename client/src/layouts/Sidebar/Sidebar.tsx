@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
 import NavItem from 'layouts/Sidebar/components/NavItem'
-import Accordion from 'components/Accordion/Accordion'
+import Accordion from './components/Accordion'
 
 import { useSidebar } from 'hooks/useSidebar'
 
