@@ -3,12 +3,12 @@
   font-weight: 500;
   text-align: center;
 
-  background-color: var(--color-dark);
+  color: var(--color-accent);
+  background-color: var(--color-accent-alt);
 
   height: min-content;
   max-height: 400px;
 
-  color: var(--color-background);
   box-shadow: var(--box-shadow);
 
   // NOTE: idk why but I need this
@@ -25,17 +25,17 @@
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius-up);
 
+    color: var(--color-accent-alt);
     background-color: var(--color-accent);
 
     transition: all var(--transition-duration) var(--transition-timing-function);
   }
 
   ul {
-    color: var(--color-accent);
-    background-color: var(--color-accent-alt);
-
     padding: 0.25rem 1rem;
     border-radius: var(--border-radius-down);
+
+    background-color: var(--color-accent-alt); // for overflow-y: auto
 
     transition: all var(--transition-duration) var(--transition-timing-function);
 
