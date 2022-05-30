@@ -148,47 +148,39 @@ const Regions = () => {
             <>
               <section className={styles.main}>
                 <>
-                  {dynamicData.comission.length > 0 && (
-                    <Table
-                      caption="Состав комиссий по предупреждению и ликвидации чрезвычайных ситуаций и обеспечению пожарной безопасности"
-                      data={dynamicData.comission}
-                    />
+                  <Table
+                    caption="Состав комиссий по предупреждению и ликвидации чрезвычайных ситуаций и обеспечению пожарной безопасности"
+                    data={dynamicData.comission}
+                  />
+
+                  <Table
+                    caption="СПИСОК глав муниципальных образований, председателей КЧС, уполномоченных по делам ГОЧС"
+                    data={dynamicData.chiefs}
+                  />
+
+                  <Table caption="Населенные пункты" data={dynamicData.settlements} />
+
+                  {dynamicData.hazard.map(
+                    (value, index) =>
+                      value.ObjektsData.length > 0 && (
+                        <Table
+                          key={index}
+                          caption={`Потенциально опасные объекты (${value.NAME})`}
+                          data={value.ObjektsData}
+                        />
+                      )
                   )}
 
-                  {dynamicData.chiefs.length > 0 && (
-                    <Table
-                      caption="СПИСОК глав муниципальных образований, председателей КЧС, уполномоченных по делам ГОЧС"
-                      data={dynamicData.chiefs}
-                    />
+                  {dynamicData.divisions.map(
+                    (value, index) =>
+                      value.DivisionsData.length > 0 && (
+                        <Table
+                          key={index}
+                          caption={`Подразделения (${value.NAME})`}
+                          data={value.DivisionsData}
+                        />
+                      )
                   )}
-
-                  {dynamicData.settlements.length > 0 && (
-                    <Table caption="Населенные пункты" data={dynamicData.settlements} />
-                  )}
-
-                  {dynamicData.hazard.length > 0 &&
-                    dynamicData.hazard.map(
-                      (value, index) =>
-                        value.ObjektsData.length > 0 && (
-                          <Table
-                            key={index}
-                            caption={`Потенциально опасные объекты (${value.NAME})`}
-                            data={value.ObjektsData}
-                          />
-                        )
-                    )}
-
-                  {dynamicData.divisions.length > 0 &&
-                    dynamicData.divisions.map(
-                      (value, index) =>
-                        value.DivisionsData.length > 0 && (
-                          <Table
-                            key={index}
-                            caption={`Подразделения (${value.NAME})`}
-                            data={value.DivisionsData}
-                          />
-                        )
-                    )}
                 </>
               </section>
               <section className={styles.side}>
