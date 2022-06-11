@@ -1,4 +1,4 @@
-import { ReactComponent as ReactLogo } from 'assets/shared/logo.svg'
+import { ReactComponent as AppLogo } from 'assets/shared/logo.svg'
 
 import styles from './Logo.module.scss'
 
@@ -7,7 +7,7 @@ import styles from './Logo.module.scss'
  */
 const Logo = () => (
   <div className={styles.container}>
-    <ReactLogo />
+    <AppLogo />
     <h2>
       Тай<span>фун</span>
     </h2>
