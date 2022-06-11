@@ -31,16 +31,18 @@
     transition: all var(--transition-duration) var(--transition-timing-function);
   }
 
-  ul {
+  .content {
     padding: 0.25rem 1rem;
-    border-radius: var(--border-radius-down);
 
-    background-color: var(--color-accent-alt); // for overflow-y: auto
+    ul {
+      border-radius: var(--border-radius-down);
+      background-color: var(--color-accent-alt); // for overflow-y: auto
 
-    transition: all var(--transition-duration) var(--transition-timing-function);
+      transition: all var(--transition-duration) var(--transition-timing-function);
 
-    li {
-      height: 100%;
+      li {
+        height: 100%;
+      }
     }
   }
 }

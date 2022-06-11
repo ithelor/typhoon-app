@@ -25,7 +25,7 @@ const Block = (props: IBlock) => {
   ) : (
     <div className={styles.container}>
       <h3>{props.heading}</h3>
-      {dataToMap}
+      <div className={styles.content}>{dataToMap}</div>
     </div>
   )
 }
