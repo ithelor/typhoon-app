@@ -38,7 +38,7 @@ const Table = (props: ITable) =>
                   // if so, the property value is being used.
                   // if not, the original value is being used.
 
-                  // data-label duplicates th content to display it in mobile layout
+                  // data-label attr duplicates th content to display it in mobile layout
 
                   Object.values(item).map((value: number | string | Object, index) => (
                     <td
@@ -50,11 +50,13 @@ const Table = (props: ITable) =>
                       {
                         // some mongoose populations result in null
                         // due to db values referring to invalid keys.
-                        // because of that checking for null.
+                        // because of that checking for null
 
-                        typeof value === 'object' && value !== null
+                        // also for spaces (yup)
+
+                        typeof value === 'object'
                           ? Object.values(value)[0]
-                          : value ?? '-'
+                          : (value !== ' ' && value) || '-'
                       }
                     </td>
                   ))
