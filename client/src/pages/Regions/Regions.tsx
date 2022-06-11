@@ -6,6 +6,13 @@ import Loader from 'components/Loader'
 import Table from 'components/Table'
 
 import { IKomiss, INpunkt, IRegion, ISpop } from '@shared/interfaces'
+import {
+  COMISSION_LABELS,
+  CHIEFS_LABELS,
+  SETTLEMENTS_LABELS,
+  HAZARD_LABELS,
+  DIVISIONS_LABELS
+} from 'shared/constants'
 
 import {
   getRegions,
@@ -150,15 +157,21 @@ const Regions = () => {
                 <>
                   <Table
                     caption="Состав комиссий по предупреждению и ликвидации чрезвычайных ситуаций и обеспечению пожарной безопасности"
+                    head={COMISSION_LABELS}
                     data={dynamicData.comission}
                   />
 
                   <Table
                     caption="СПИСОК глав муниципальных образований, председателей КЧС, уполномоченных по делам ГОЧС"
+                    head={CHIEFS_LABELS}
                     data={dynamicData.chiefs}
                   />
 
-                  <Table caption="Населенные пункты" data={dynamicData.settlements} />
+                  <Table
+                    caption="Населенные пункты"
+                    head={SETTLEMENTS_LABELS}
+                    data={dynamicData.settlements}
+                  />
 
                   {dynamicData.hazard.map(
                     (value, index) =>
@@ -166,6 +179,7 @@ const Regions = () => {
                         <Table
                           key={index}
                           caption={`Потенциально опасные объекты (${value.NAME})`}
+                          head={HAZARD_LABELS}
                           data={value.ObjektsData}
                         />
                       )
@@ -177,6 +191,7 @@ const Regions = () => {
                         <Table
                           key={index}
                           caption={`Подразделения (${value.NAME})`}
+                          head={DIVISIONS_LABELS}
                           data={value.DivisionsData}
                         />
                       )
