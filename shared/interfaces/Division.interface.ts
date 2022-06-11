@@ -1,12 +1,12 @@
 export default interface IDivision {
-  KOD: number
+  KOD?: number
   NAME: string
   Region: string
   PUNKT: string
   ADRESS: string
   CHAF: string
   CHAFGO: string
-  TYPSS: string
+  TYPSS?: string
   POPUL: number
   TECHNIK: number
   TREADY: string

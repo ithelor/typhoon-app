@@ -1,10 +1,10 @@
 import { IDivision, IObjekt, IPstatus } from '@shared/interfaces'
 
 export default interface INpunkt {
-  KOD: string
+  KOD?: string
   NAME: string
   REGION: string
-  STATUS: string
+  STATUS?: string
   PEOPLE: number
   STER: string
   COAL: string

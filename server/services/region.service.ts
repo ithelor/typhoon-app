@@ -57,7 +57,7 @@ const getRivers = async (query: { KODP: string }) => {
 
 const getComission = async (query: { reg: string }) => {
   try {
-    const comission = await Komiss.find(query).lean().select('-_id')
+    const comission = await Komiss.find(query).lean().select('-_id -KOD -prio -sot -reg')
 
     return comission
   } catch (error) {
@@ -67,7 +67,7 @@ const getComission = async (query: { reg: string }) => {
 
 const getChiefs = async (query: { reg: string; Name: { $regex: RegExp } }) => {
   try {
-    const chiefs = await Spop.find(query).select('-_id')
+    const chiefs = await Spop.find(query).select('-_id -KOD -TPRI -MIAL -prio -reg ')
 
     return chiefs
   } catch (error) {
@@ -82,6 +82,11 @@ const getSettlements = async (query: { REGION: string }) => {
       .populate({ path: 'PstatusData', select: '-_id -KOD Name' })
       .select('-_id KOD NAME STATUS PEOPLE')
 
+    settlements.forEach((element) => {
+      delete element.KOD
+      delete element.STATUS
+    })
+
     return settlements
   } catch (error) {
     throw Error('Error while fetching settlements')
@@ -94,13 +99,20 @@ const getHazard = async (query: { REGION: string }) => {
       .lean()
       .populate({
         path: 'ObjektsData',
-        select: '-_id KOD NAME ADRESS CHAF CHAFGO HAR Remark TYPOBJ',
+        select: '-_id KOD NAME -PUNKT ADRESS CHAF CHAFGO TYPOBJ HAR Remark',
         populate: {
           path: 'TypData',
           select: '-_id -KOD NAME'
         }
       })
       .select('-_id KOD NAME')
+
+    hazard.forEach((element) => {
+      element.ObjektsData.forEach((objekt) => {
+        delete objekt.KOD
+        delete objekt.TYPOBJ
+      })
+    })
 
     return hazard
   } catch (error) {
@@ -114,13 +126,20 @@ const getDivisions = async (query: { REGION: string }) => {
       .lean()
       .populate({
         path: 'DivisionsData',
-        select: '-_id KOD NAME ADRESS CHAF CHAFGO POPUL TECHNIK TREADY REMARK HAR TYPSS',
+        select: '-_id KOD NAME -PUNKT ADRESS CHAF CHAFGO POPUL TECHNIK TREADY REMARK HAR TYPSS',
         populate: {
           path: 'TypData',
           select: '-_id -KOD NAME'
         }
       })
       .select('-_id KOD NAME')
+
+    divisions.forEach((element) => {
+      element.DivisionsData.forEach((division) => {
+        delete division.KOD
+        delete division.TYPSS
+      })
+    })
 
     return divisions
   } catch (error) {
