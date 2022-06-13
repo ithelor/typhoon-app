@@ -1,5 +1,5 @@
 export default interface IDoc {
-  KOD: number
+  KOD: string
   Name: string
   TYP: string
   SRC: string
