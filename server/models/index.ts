@@ -5,7 +5,7 @@ import ClassChs from './ClassChs.model'
 import Contreg from './Contreg.model'
 import Crim from 'models/Crim.model'
 import Division from 'models/Division.model'
-import Docs from 'models/Docs.model'
+import Doc from 'models/Doc.model'
 import DocsType from 'models/DocsType.model'
 import Epidemy from 'models/Epidemy.model'
 import F2 from 'models/F2.model'
@@ -33,7 +33,7 @@ export {
   Contreg,
   Crim,
   Division,
-  Docs,
+  Doc,
   DocsType,
   Epidemy,
   F2,
