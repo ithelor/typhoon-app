@@ -5,7 +5,7 @@ import IClassChs from './ClassChs.interface'
 import IContreg from './Contreg.interface'
 import ICrim from './Crim.interface'
 import IDivision from './Division.interface'
-import IDocs from './Docs.interface'
+import IDoc from './Doc.interface'
 import IDocsType from './DocsType.interface'
 import IEpidemy from './Epidemy.interface'
 import IF2 from './F2.interface'
@@ -33,7 +33,7 @@ export type {
   IContreg,
   ICrim,
   IDivision,
-  IDocs,
+  IDoc,
   IDocsType,
   IEpidemy,
   IF2,

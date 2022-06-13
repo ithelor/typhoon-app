@@ -1,4 +1,4 @@
-export default interface IDocs {
+export default interface IDoc {
   KOD: number
   Name: string
   TYP: string

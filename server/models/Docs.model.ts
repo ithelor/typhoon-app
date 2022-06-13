@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 
-import { IDocs } from '@shared/interfaces'
+import { IDoc } from '@shared/interfaces'
 
-const DocsSchema = new mongoose.Schema<IDocs>(
+const DocsSchema = new mongoose.Schema<IDoc>(
   {
     KOD: Number,
     Name: String,
@@ -14,4 +14,4 @@ const DocsSchema = new mongoose.Schema<IDocs>(
   }
 )
 
-export default mongoose.model<IDocs>('Docs', DocsSchema)
+export default mongoose.model<IDoc>('Docs', DocsSchema)
