@@ -4,7 +4,7 @@ import { IDoc } from '@shared/interfaces'
 
 const getDocs = async (query: { TYP?: IDoc['TYP'] }) => {
   try {
-    const docs = await Doc.find(query).select('-_id').orFail()
+    const docs = await Doc.find(query).select('-_id')
 
     return docs
   } catch (error) {
