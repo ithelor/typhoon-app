@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { MdInfo as DefaultIcon } from 'react-icons/md'
 
 import { useIsOverflow } from 'hooks/useIsOverflow'
@@ -14,6 +14,8 @@ interface INavItem {
 }
 
 const NavItem = (props: INavItem) => {
+  const location = useLocation()
+
   const outerRef = React.useRef<HTMLHeadingElement>(null),
     innerRef = React.useRef<HTMLSpanElement>(null)
 
@@ -22,12 +24,10 @@ const NavItem = (props: INavItem) => {
   return (
     <NavLink
       to={props.to}
-      className={(nav) =>
-        classNames(styles.navlink, {
-          [styles.active]: nav.isActive,
-          [styles.marquee]: isOverflow
-        })
-      }
+      className={classNames(styles.navlink, {
+        [styles.active]: props.to === location.pathname + location.search,
+        [styles.marquee]: isOverflow
+      })}
     >
       {props.icon ?? <DefaultIcon />}
       <h3 ref={outerRef}>
