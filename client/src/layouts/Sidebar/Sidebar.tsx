@@ -18,17 +18,17 @@ const Sidebar = () => {
         <NavItem title="Угроза ЧС" to="/outlook" />
         <NavItem title="Краевая комиссия по ЧС" to="/committee" />
         <Accordion title="Нормативные акты">
-          <NavItem title="Законы РФ" to="/legal/ZRF" />
-          <NavItem title="Указы президента РФ" to="/legal/UPR" />
-          <NavItem title="Постановления и распоряжения правительства РФ" to="/legal/PPR" />
-          <NavItem title="Законы Приморского края" to="/legal/ZPK" />
+          <NavItem title="Законы РФ" to="/legal?type=ZRF" />
+          <NavItem title="Указы президента РФ" to="/legal?type=UPR" />
+          <NavItem title="Постановления и распоряжения правительства РФ" to="/legal?type=PPR" />
+          <NavItem title="Законы Приморского края" to="/legal?type=ZPK" />
           <NavItem
             title="Постановления и Распоряжения Губернатора (Администрации) Приморского края"
-            to="/legal/PG"
+            to="/legal?type=PG"
           />
-          <NavItem title="Документы МЧС" to="/legal/VD" />
-          <NavItem title="Документы ГО ЧС" to="/legal/DGC" />
-          <NavItem title="Документы других ведомств" to="/legal/VDO" />
+          <NavItem title="Документы МЧС" to="/legal?type=VD" />
+          <NavItem title="Документы ГО ЧС" to="/legal?type=DGC" />
+          <NavItem title="Документы других ведомств" to="/legal?type=VDO" />
         </Accordion>
         <NavItem title="Критерии информации о ЧС" to="/synopsis" />
         <NavItem title="Особо опасные объекты края" to="/targets" />
