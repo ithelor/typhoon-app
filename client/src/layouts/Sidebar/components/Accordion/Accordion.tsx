@@ -22,7 +22,8 @@ const Accordion = (props: IAccordion) => {
 
   // expand accordion if child NavItem is active
   const location = useLocation()
-  const isChildActive = () => props.children.some((child) => location.pathname === child.props.to)
+  const isChildActive = () =>
+    props.children.some((child) => child.props.to === location.pathname + location.search)
 
   React.useEffect(() => setIsExpanded(isChildActive), []) // eslint-disable-line react-hooks/exhaustive-deps
 
