@@ -3,29 +3,45 @@ import { Link, useSearchParams } from 'react-router-dom'
 
 import Loader from 'components/Loader'
 
-import { getDocs, getDocsByType } from 'api/services/legal'
+import { getDocs, getDocsByType, getDocsTypes } from 'api/services/legal'
 
-import { IDoc } from '@shared/interfaces'
+import { IDoc, IDocsType } from '@shared/interfaces'
 
 /**
- * Docs page
- * TODO: currently displayed docs type (if paramType), via docstype collection
+ * Legal page
+ * NOTE: full docs page is only accessible via address bar 'cause I need to justify accordion
  */
+
+interface IData {
+  docs: IDoc[]
+  docsTypes: IDocsType[]
+}
+
 const Legal = () => {
   const [searchParams] = useSearchParams(),
     paramType = searchParams.get('type')
 
   const [isLoading, setIsLoading] = React.useState(true)
-  const [docs, setDocs] = React.useState<IDoc[]>()
+
+  const [data, setData] = React.useState<IData>({
+    docs: [],
+    docsTypes: []
+  })
+
+  // whether or not to display doc type heading
+  const someOfTypeExist = (type: string) => data.docs.some((doc) => doc.TYP === type)
 
   React.useEffect(() => {
-    const fetchStatic = async () => {
+    const fetchData = async () => {
       try {
         setIsLoading(true)
 
-        const docsQuery = await (paramType ? getDocsByType(paramType) : getDocs())
+        const [docsQuery, docsTypesQuery] = await Promise.all([
+          paramType ? getDocsByType(paramType) : getDocs(),
+          getDocsTypes()
+        ])
 
-        setDocs(docsQuery.data)
+        setData({ docs: docsQuery.data, docsTypes: docsTypesQuery.data })
       } catch (error) {
         console.error(error)
       } finally {
@@ -33,7 +49,7 @@ const Legal = () => {
       }
     }
 
-    fetchStatic()
+    fetchData()
   }, [paramType])
 
   return (
@@ -41,16 +57,52 @@ const Legal = () => {
       <h3>Нормативные акты и документы</h3>
       {isLoading ? (
         <Loader />
+      ) : paramType ? (
+        <>
+          <h4>{data.docsTypes.find((docsType) => paramType === docsType.KOD)?.NAME}</h4>
+          <ul>
+            {data.docs.length ? (
+              data.docs.map(
+                (doc) =>
+                  doc.TYP === paramType && (
+                    <li key={doc.KOD}>
+                      <Link key={doc.KOD} to={`/${doc.SRC}`} target="_blank" download={doc.Name}>
+                        {doc.Name}
+                      </Link>
+                    </li>
+                  )
+              )
+            ) : (
+              <span>Документы отсутствуют</span>
+            )}
+          </ul>
+        </>
       ) : (
-        <ul>
-          {docs?.map((doc) => (
-            <li key={doc.KOD}>
-              <Link key={doc.KOD} to={`/${doc.SRC}`} target="_blank" download={doc.Name}>
-                {doc.Name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        data.docsTypes.map(
+          (docsType) =>
+            someOfTypeExist(docsType.KOD) && (
+              <>
+                <h4>{docsType.NAME}</h4>
+                <ul>
+                  {data.docs.map(
+                    (doc) =>
+                      docsType.KOD === doc.TYP && (
+                        <li key={doc.KOD}>
+                          <Link
+                            key={doc.KOD}
+                            to={`/${doc.SRC}`}
+                            target="_blank"
+                            download={doc.Name}
+                          >
+                            {doc.Name}
+                          </Link>
+                        </li>
+                      )
+                  )}
+                </ul>
+              </>
+            )
+        )
       )}
     </main>
   )
