@@ -1,5 +1,6 @@
 // regex to match any string that contains at least one non-space character
-export const NOT_EMPTY = /^(?!\s*$).+/
+// U+00a0 = " " // this one is in the docs table god knows why
+export const NOT_EMPTY = /^(?!(\s|\xa0)*$).+/
 
 // labels for regions page tables
 export const COMISSION_LABELS = ['ФИО', 'Должность', 'Мобильный', 'Домашний']
