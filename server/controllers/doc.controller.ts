@@ -2,11 +2,15 @@ import { Request, Response } from 'express'
 
 import DocService from 'services/doc.service'
 
+import { NOT_EMPTY } from '@shared/constants'
+
 const getDocs = async (req: Request, res: Response) => {
   const type = req.params.type
 
   try {
-    const docs = await DocService.getDocs(type ? { TYP: type } : {})
+    const docs = await DocService.getDocs(
+      type ? { Name: { $regex: NOT_EMPTY }, TYP: type } : { Name: { $regex: NOT_EMPTY } }
+    )
 
     res.json(docs)
   } catch (error) {

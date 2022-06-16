@@ -2,7 +2,7 @@ import { Doc, DocsType } from 'models'
 
 import { IDoc, IDocsType } from '@shared/interfaces'
 
-const getDocs = async (query: { TYP?: IDoc['TYP'] }) => {
+const getDocs = async (query: { Name: { $regex: RegExp }; TYP?: IDoc['TYP'] }) => {
   try {
     const docs = await Doc.find(query).select('-_id')
 
