@@ -15,3 +15,7 @@ export const getDocsByType = (type: string): Promise<AxiosResponse<IDoc[]>> => {
 export const getDocsTypes = (): Promise<AxiosResponse<IDocsType[]>> => {
   return API.get(`docs/types`)
 }
+
+export const getDocsType = (code: string): Promise<AxiosResponse<IDocsType>> => {
+  return API.get(`docs/types/${code}`)
+}

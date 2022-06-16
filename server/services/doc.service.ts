@@ -1,6 +1,6 @@
 import { Doc, DocsType } from 'models'
 
-import { IDoc } from '@shared/interfaces'
+import { IDoc, IDocsType } from '@shared/interfaces'
 
 const getDocs = async (query: { TYP?: IDoc['TYP'] }) => {
   try {
@@ -22,4 +22,14 @@ const getDocsTypes = async (query: {}) => {
   }
 }
 
-export default { getDocs, getDocsTypes }
+const getDocsType = async (query: { KOD: IDocsType['KOD'] }) => {
+  try {
+    const docsType = await DocsType.findOne(query).select('-_id').orFail()
+
+    return docsType
+  } catch (error) {
+    throw Error('Error while fetching docs')
+  }
+}
+
+export default { getDocs, getDocsTypes, getDocsType }

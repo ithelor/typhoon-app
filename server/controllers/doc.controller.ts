@@ -24,4 +24,16 @@ const getDocsTypes = async (req: Request, res: Response) => {
   }
 }
 
-export default { getDocs, getDocsTypes }
+const getDocsType = async (req: Request, res: Response) => {
+  const code = req.params.code
+
+  try {
+    const docsType = await DocService.getDocsType({ KOD: code })
+
+    res.json(docsType)
+  } catch (error) {
+    res.status(400).send()
+  }
+}
+
+export default { getDocs, getDocsTypes, getDocsType }
