@@ -54,7 +54,7 @@ const Table = (props: ITable) =>
 
                         // also for spaces (yup)
 
-                        typeof value === 'object'
+                        value && typeof value === 'object'
                           ? Object.values(value)[0]
                           : (value !== ' ' && value) || '-'
                       }
