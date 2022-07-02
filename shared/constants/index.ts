@@ -1,6 +1,10 @@
-// regex to match any string that contains at least one non-space character
+// regex to match any string that contains at least one non-space character.
 // U+00a0 = " " // this one is in the docs table god knows why
 export const NOT_EMPTY = /^(?!(\s|\xa0)*$).+/
+
+// locations whose sidebar navlinks have search params.
+// these need both "pathname" and "search" for navlink activeness check
+export const CONTAINS_SEARCH = ['/legal']
 
 // labels for regions page tables
 export const COMISSION_LABELS = ['ФИО', 'Должность', 'Мобильный', 'Домашний']
