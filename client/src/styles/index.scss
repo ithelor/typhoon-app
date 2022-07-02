@@ -11,8 +11,10 @@
   --color-accent: #363949;
   --color-accent-alt: #dbdbdb;
   --color-dark: rgba(132, 139, 200, 0.18);
-  --color-shadow: rgba(0, 0, 0, 0.4);
 
+  --color-table-head: #363949;
+
+  --color-shadow: rgba(0, 0, 0, 0.4);
   --box-shadow: 0.25rem 0.25rem 0.5rem 1px var(--color-shadow);
 
   --border-radius: 0.5rem;
@@ -38,6 +40,8 @@
   --color-accent: #efeffd;
   --color-accent-alt: #2d2d33;
   --color-dark: rgba(0, 0, 0, 0.4);
+
+  --color-table-head: #c8c8cf;
 }
 
 * {
@@ -77,7 +81,14 @@ button {
   color: var(--color-accent);
 
   .content {
-    margin: var(--content-margin) 2rem 2rem;
+    margin: 0 2rem 2rem;
+
+    // NOTE: .content always has one child which is a page container, so making sure there's padding for position: sticky
+    & > *:first-child {
+      & > *:first-child {
+        margin-top: var(--content-margin);
+      }
+    }
   }
 }
 

@@ -22,6 +22,8 @@
     overflow-x: hidden;
     overflow-y: auto;
 
+    @include mixins.ScrollShadow(var(--color-background));
+
     &::-webkit-scrollbar {
       display: none;
     }

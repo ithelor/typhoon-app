@@ -37,7 +37,7 @@
       font-weight: bold;
 
       color: var(--color-background);
-      background-color: var(--color-accent);
+      background-color: var(--color-table-head);
 
       transition: all var(--transition-duration) var(--transition-timing-function);
 
@@ -45,6 +45,7 @@
         font-size: 1rem;
         letter-spacing: 1px;
         text-transform: uppercase;
+        text-align: left;
 
         padding: 0.5rem;
       }
@@ -55,11 +56,11 @@
         transition: all var(--transition-duration) var(--transition-timing-function);
 
         &:nth-child(odd) {
-          background-color: var(--color-background);
+          background-color: var(--color-accent-alt);
         }
 
         &:nth-child(even) {
-          background-color: var(--color-accent-alt);
+          background-color: var(--color-background);
         }
       }
 
@@ -77,9 +78,10 @@
         tr {
           min-height: 20px;
           display: block;
+          padding-right: 0.5rem;
 
           td {
-            // NOTE: ?? '-' fallback not always working, FIXME:
+            // FIXME: ?? '-' fallback not always working
             min-height: 30px;
 
             font-size: 1.2rem;
@@ -92,6 +94,8 @@
               font-weight: bold;
               text-transform: uppercase;
               float: left;
+
+              margin-right: 1rem;
             }
           }
         }

@@ -14,11 +14,13 @@
   height: min-content;
 
   .controls {
+    margin-top: var(--content-margin);
     grid-area: controls;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 1rem;
   }
 
   .main {
@@ -35,6 +37,8 @@
 
     max-height: 80vh;
     overflow-y: auto;
+
+    padding: 0 1rem;
   }
 
   select {
