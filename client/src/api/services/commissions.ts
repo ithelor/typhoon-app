@@ -8,6 +8,6 @@ export const getCommissions = (): Promise<AxiosResponse<IKomiss[]>> => {
   return API.get(`commissions`)
 }
 
-export const getCommission = (code: string): Promise<AxiosResponse<IKomiss>> => {
+export const getCommission = (code: string): Promise<AxiosResponse<IKomiss[]>> => {
   return API.get(`commissions/${code}`)
 }
