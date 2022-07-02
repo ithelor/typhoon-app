@@ -5,6 +5,8 @@ import { MdInfo as DefaultIcon } from 'react-icons/md'
 
 import { useIsOverflow } from 'hooks/useIsOverflow'
 
+import { CONTAINS_SEARCH } from 'shared/constants'
+
 import styles from 'layouts/Sidebar/Sidebar.module.scss'
 
 interface INavItem {
@@ -21,11 +23,15 @@ const NavItem = (props: INavItem) => {
 
   const { isOverflow, scrollDistance } = useIsOverflow(outerRef, innerRef)
 
+  const isActive = CONTAINS_SEARCH.find((value) => value === location.pathname)
+    ? props.to === location.pathname + location.search
+    : props.to === location.pathname
+
   return (
     <NavLink
       to={props.to}
       className={classNames(styles.navlink, {
-        [styles.active]: props.to === location.pathname + location.search,
+        [styles.active]: isActive,
         [styles.marquee]: isOverflow
       })}
     >
