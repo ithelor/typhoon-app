@@ -7,6 +7,8 @@ import { getDocs, getDocsByType, getDocsTypes } from 'api/services/legal'
 
 import { IDoc, IDocsType } from '@shared/interfaces'
 
+import styles from './Legal.module.scss'
+
 /**
  * Legal page
  * NOTE: full docs page is only accessible via address bar 'cause I need to justify accordion
@@ -53,7 +55,7 @@ const Legal = () => {
   }, [paramType])
 
   return (
-    <main>
+    <main className={styles.container}>
       <h3>Нормативные акты и документы</h3>
       {isLoading ? (
         <Loader />
