@@ -1,1 +1,1 @@
-# Graduation project Typhoon reference and information system
+# Graduation project reference and information system
