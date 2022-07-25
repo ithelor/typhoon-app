@@ -38,3 +38,8 @@
   background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
   background-attachment: local, local, scroll, scroll;
 }
+
+@mixin Disabled() {
+  opacity: 0.5;
+  pointer-events: none;
+}
