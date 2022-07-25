@@ -93,7 +93,7 @@
     }
   }
 
-  @media screen and (max-width: variables.$mobile-width) {
+  @media screen and (max-width: variables.$no-sidebar-width) {
     width: var(--sidebar-width);
     position: fixed;
     left: calc(0px - var(--sidebar-width));

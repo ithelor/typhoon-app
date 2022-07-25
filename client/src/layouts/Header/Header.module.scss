@@ -47,7 +47,7 @@
     }
   }
 
-  @media screen and (max-width: variables.$mobile-width) {
+  @media screen and (max-width: variables.$no-sidebar-width) {
     .left button {
       display: block;
     }
