@@ -7,23 +7,21 @@ import Table from 'components/Table'
 import { getCommission } from 'api/services/commissions'
 import { getRegions } from 'api/services/regions'
 
+import { COMMISSIONS_LABELS } from 'shared/constants'
+
 import { IKomiss, IRegion } from '@shared/interfaces'
 
 import styles from './Commissions.module.scss'
 
 const Commissions = () => {
   const [searchParams, setSearchParams] = useSearchParams(),
-    paramReg = searchParams.get('reg') ?? 'ALL'
+    paramReg = searchParams.get('reg') ?? 'VVPR'
 
   const [regions, setRegions] = React.useState<IRegion[]>([])
   const [commissions, setCommissions] = React.useState<IKomiss[] | IKomiss[][]>([])
 
   const [isLoading, setIsLoading] = React.useState(true)
   const [isFetching, setIsFetching] = React.useState(false)
-
-  const getRegionName = (code: string) => {
-    return regions.find((region) => region.KOD === code)?.Name
-  }
 
   React.useEffect(() => {
     const fetchStatic = async () => {
@@ -92,18 +90,18 @@ const Commissions = () => {
             <Loader />
           ) : paramReg === 'ALL' ? (
             Array.isArray(commissions[0]) &&
-            commissions.map((commission) => (
+            commissions.map((commission, index) => (
               <Table
-                caption={getRegionName(
-                  Array.isArray(commission) ? commission[0] && commission[0].reg : commission.reg
-                )}
+                caption={regions[index].Name}
+                head={COMMISSIONS_LABELS}
                 data={commission as IKomiss[]}
               />
             ))
           ) : (
             <Table
-              caption={getRegionName((commissions[0] as IKomiss).reg)}
+              head={COMMISSIONS_LABELS}
               data={commissions as []}
+              style={{ maxHeight: '100vh' }}
             />
           )}
         </>
