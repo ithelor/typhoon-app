@@ -4,7 +4,7 @@ import { IKomiss } from '@shared/interfaces'
 
 const getCommissions = async (query: {}) => {
   try {
-    const commission = await Komiss.find(query).select('-_id').orFail()
+    const commission = await Komiss.find(query).select('-_id -KOD -sot -reg').orFail()
 
     return commission
   } catch (error) {
@@ -15,7 +15,7 @@ const getCommissions = async (query: {}) => {
 
 const getCommission = async (query: { reg: IKomiss['reg'] }) => {
   try {
-    const commission = await Komiss.find(query).select('-_id')
+    const commission = await Komiss.find(query).select('-_id -KOD -sot -reg')
 
     return commission
   } catch (error) {
