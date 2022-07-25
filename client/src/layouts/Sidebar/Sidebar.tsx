@@ -3,11 +3,11 @@ import {
   BsInfoCircle as AboutIcon,
   BsLayoutTextWindow as RegionsIcon,
   BsExclamationTriangle as DangerIcon,
-  BsPeople as CommitteeIcon,
+  BsPeople as CommissionsIcon,
   BsCheck2All as LegalIcon,
   BsFileText as DocsIcon,
   BsPerson as PersonIcon,
-  BsFileCheck as SynopsisIcon,
+  BsFileCheck as CriteriaIcon,
   BsShieldCheck as UnitsIcon,
   BsClipboard as SituationIcon,
   BsClipboardData as SummaryIcon,
@@ -29,8 +29,8 @@ const Sidebar = () => {
       <nav className={styles.navMenu}>
         <NavItem title="О системе" to="/about" icon={<AboutIcon />} />
         <NavItem title="Паспорт Приморского Края" to="/regions" icon={<RegionsIcon />} />
-        <NavItem title="Угроза ЧС" to="/outlook" icon={<DangerIcon />} />
-        <NavItem title="Краевая комиссия по ЧС" to="/committee" icon={<CommitteeIcon />} />
+        <NavItem title="Угроза ЧС" to="/outlook" icon={<DangerIcon />} disabled />
+        <NavItem title="Краевая комиссия по ЧС" to="/commissions" icon={<CommissionsIcon />} />
         <Accordion title="Нормативные акты">
           <NavItem title="Все" to="/legal" icon={<LegalIcon />} />
           <NavItem title="Законы РФ" to="/legal?type=ZRF" icon={<DocsIcon />} />
@@ -50,12 +50,22 @@ const Sidebar = () => {
           <NavItem title="Документы ГО ЧС" to="/legal?type=DGC" icon={<DocsIcon />} />
           <NavItem title="Документы других ведомств" to="/legal?type=VDO" icon={<DocsIcon />} />
         </Accordion>
-        <NavItem title="Критерии информации о ЧС" to="/synopsis" icon={<SynopsisIcon />} />
-        <NavItem title="Особо опасные объекты края" to="/targets" icon={<DangerIcon />} />
-        <NavItem title="Силы и средства защиты" to="/units" icon={<UnitsIcon />} />
-        <NavItem title="Оперативная обстановка" to="/situation" icon={<SituationIcon />} />
-        <NavItem title="Сводка оперативной обстановки" to="/summary" icon={<SummaryIcon />} />
-        <NavItem title="Архив ЧС, снятых с контроля" to="/archive" icon={<ArchiveIcon />} />
+        <NavItem title="Критерии информации о ЧС" to="/criteria" icon={<CriteriaIcon />} disabled />
+        <NavItem title="Особо опасные объекты края" to="/hazard" icon={<DangerIcon />} disabled />
+        <NavItem title="Силы и средства защиты" to="/units" icon={<UnitsIcon />} disabled />
+        <NavItem title="Оперативная обстановка" to="/situation" icon={<SituationIcon />} disabled />
+        <NavItem
+          title="Сводка оперативной обстановки"
+          to="/summary"
+          icon={<SummaryIcon />}
+          disabled
+        />
+        <NavItem
+          title="Архив ЧС, снятых с контроля"
+          to="/archive"
+          icon={<ArchiveIcon />}
+          disabled
+        />
       </nav>
     </aside>
   )

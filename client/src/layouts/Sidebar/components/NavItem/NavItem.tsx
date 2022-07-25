@@ -13,6 +13,7 @@ interface INavItem {
   title: string
   to: string
   icon?: React.ReactElement
+  disabled?: boolean
 }
 
 const NavItem = (props: INavItem) => {
@@ -32,7 +33,8 @@ const NavItem = (props: INavItem) => {
       to={props.to}
       className={classNames(styles.navlink, {
         [styles.active]: isActive,
-        [styles.marquee]: isOverflow
+        [styles.marquee]: isOverflow,
+        [styles.disabled]: props.disabled
       })}
     >
       {props.icon ?? <DefaultIcon />}

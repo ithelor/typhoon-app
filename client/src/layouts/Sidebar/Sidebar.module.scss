@@ -22,7 +22,7 @@
     overflow-x: hidden;
     overflow-y: auto;
 
-    @include mixins.ScrollShadow(var(--color-background));
+    // @include mixins.ScrollShadow(var(--color-background));
 
     &::-webkit-scrollbar {
       display: none;
@@ -58,8 +58,6 @@
 
         width: 1.5rem;
         height: 1.5rem;
-
-        transition: all var(--transition-duration) var(--transition-timing-function);
       }
 
       h3 {
@@ -87,6 +85,10 @@
         svg {
           margin-left: calc(1rem - 3px);
         }
+      }
+
+      &.disabled {
+        @include mixins.Disabled();
       }
     }
   }

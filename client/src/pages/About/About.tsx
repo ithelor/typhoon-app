@@ -22,34 +22,48 @@ const About = () => (
     <p>После загрузки "Тайфуна" на экране появится главное меню, содержащее надписи:</p>
     <ul>
       <li>
-        <a href="/regions">Паспорт Приморского края.</a>
+        <a href="/regions">Паспорт Приморского края</a>
       </li>
       <li>
-        <a href="">Оперативные данные</a>
+        <a href="/outlook" className={styles.disabled}>
+          Оперативные данные
+        </a>
       </li>
       <li>
-        <a href="">Краевая комиссия по ЧС и списки оповещения</a>
+        <a href="/commissions">Краевая комиссия по ЧС и списки оповещения</a>
       </li>
       <li>
         <a href="/legal">Нормативные акты</a>
       </li>
       <li>
-        <a href="">Основные типы ЧС края. </a>
+        <a href="/criteria" className={styles.disabled}>
+          Основные типы ЧС края
+        </a>
       </li>
       <li>
-        <a href="">Особо опасные объекты края.</a>
+        <a href="/hazard" className={styles.disabled}>
+          Особо опасные объекты края
+        </a>
       </li>
       <li>
-        <a href="">Силы и средства защиты</a>
+        <a href="/units" className={styles.disabled}>
+          Силы и средства защиты
+        </a>
       </li>
       <li>
-        <a href="">Оперативная обстановка</a>
+        <a href="/situation" className={styles.disabled}>
+          Оперативная обстановка
+        </a>
       </li>
       <li>
-        <a href="">Сводка оперативной обстановки</a>
+        <a href="/summary" className={styles.disabled}>
+          Сводка оперативной обстановки
+        </a>
       </li>
       <li>
-        <a href="">Архив ЧС, снятых с контроля</a>
+        <a href="/archive" className={styles.disabled}>
+          Архив ЧС, снятых с контроля
+        </a>
       </li>
     </ul>
     <hr className={styles.inset} />
