@@ -7,7 +7,7 @@ import Table from 'components/Table'
 
 import { IKomiss, INpunkt, IRegion, ISpop } from '@shared/interfaces'
 import {
-  COMISSION_LABELS,
+  COMMISSION_LABELS,
   CHIEFS_LABELS,
   SETTLEMENTS_LABELS,
   HAZARD_LABELS,
@@ -157,7 +157,7 @@ const Regions = () => {
                 <>
                   <Table
                     caption="Состав комиссий по предупреждению и ликвидации чрезвычайных ситуаций и обеспечению пожарной безопасности"
-                    head={COMISSION_LABELS}
+                    head={COMMISSION_LABELS}
                     data={dynamicData.comission}
                   />
 

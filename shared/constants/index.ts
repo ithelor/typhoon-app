@@ -7,7 +7,7 @@ export const NOT_EMPTY = /^(?!(\s|\xa0)*$).+/
 export const CONTAINS_SEARCH = ['/legal']
 
 // labels for regions page tables
-export const COMISSION_LABELS = ['ФИО', 'Должность', 'Мобильный', 'Домашний']
+export const COMMISSION_LABELS = ['ФИО', 'Должность', 'Мобильный', 'Домашний']
 export const CHIEFS_LABELS = ['Должность', 'Имя', 'Телефон', 'Факс', 'Мобильный', 'Домашний']
 export const SETTLEMENTS_LABELS = ['Название', 'Население', 'Тип']
 export const HAZARD_LABELS = [
@@ -30,4 +30,13 @@ export const DIVISIONS_LABELS = [
   'Максимальное количество личного состава',
   'Характеристика',
   'Тип'
+]
+
+// labels for commissions page tables
+export const COMMISSIONS_LABELS = [
+  'ФИО',
+  'Должность',
+  'Член комиссии / Работник',
+  'Мобильный',
+  'Домашний'
 ]
