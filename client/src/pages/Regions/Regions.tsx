@@ -153,12 +153,28 @@ const Regions = () => {
             <Loader fillGrid />
           ) : (
             <>
+              <section className={styles.base}>
+                {
+                  <>
+                    <Block
+                      heading="Прилегающие муниципальные образования"
+                      data={dynamicData.adjacent}
+                    />
+                    <Block heading="Центр" data={currentRegion.CenterNpunkt.NAME} />
+                    <Block heading="Глава Муниципального образования" data={currentRegion.Remark} />
+                    <Block heading="Общая площадь территории" data={currentRegion.STER} />
+                    <Block heading="Численность населения" data={currentRegion.POPULATION} />
+                    <Block heading="Реки" data={dynamicData.rivers} />
+                  </>
+                }
+              </section>
               <section className={styles.main}>
                 <>
                   <Table
                     caption="Состав комиссий по предупреждению и ликвидации чрезвычайных ситуаций и обеспечению пожарной безопасности"
                     head={COMMISSION_LABELS}
                     data={dynamicData.comission}
+                    style={paramCurrent === 'PRIK' ? { maxHeight: '55vh' } : {}}
                   />
 
                   <Table
@@ -197,21 +213,6 @@ const Regions = () => {
                       )
                   )}
                 </>
-              </section>
-              <section className={styles.side}>
-                {
-                  <>
-                    <Block
-                      heading="Прилегающие муниципальные образования"
-                      data={dynamicData.adjacent}
-                    />
-                    <Block heading="Центр" data={currentRegion.CenterNpunkt.NAME} />
-                    <Block heading="Глава Муниципального образования" data={currentRegion.Remark} />
-                    <Block heading="Общая площадь территории" data={currentRegion.STER} />
-                    <Block heading="Численность населения" data={currentRegion.POPULATION} />
-                    <Block heading="Реки" data={dynamicData.rivers} />
-                  </>
-                }
               </section>
             </>
           )}

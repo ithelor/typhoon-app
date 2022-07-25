@@ -11,11 +11,9 @@ interface IBlock {
 const Block = (props: IBlock) => {
   const dataToMap =
     props.data instanceof Array ? (
-      <ul>
-        {props.data.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
+      props.data.map((item, index, array) => {
+        return index === array.length - 1 ? item : <>{item}, </>
+      })
     ) : (
       <span>{props.data}</span>
     )

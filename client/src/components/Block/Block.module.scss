@@ -1,18 +1,15 @@
 .container {
   font-size: 1.1rem;
   font-weight: 500;
-  text-align: center;
+
+  display: flex;
+  align-items: center;
 
   color: var(--color-accent);
   background-color: var(--color-accent-alt);
-
-  height: min-content;
-  max-height: 400px;
-
   box-shadow: var(--box-shadow);
 
-  // NOTE: idk why but I need this
-  border-radius: var(--border-radius-down);
+  transition: all var(--transition-duration) var(--transition-timing-function);
 
   // make sure shadow is displayed
   &:last-child {
@@ -20,10 +17,10 @@
   }
 
   h3 {
-    position: sticky;
-    top: 0;
+    height: 100%;
+
     padding: 0.5rem 1rem;
-    border-radius: var(--border-radius-up);
+    border-radius: var(--border-radius-left);
 
     color: var(--color-accent-alt);
     background-color: var(--color-table-head);
@@ -33,16 +30,5 @@
 
   .content {
     padding: 0.25rem 1rem;
-
-    ul {
-      border-radius: var(--border-radius-down);
-      background-color: var(--color-accent-alt); // for overflow-y: auto
-
-      transition: all var(--transition-duration) var(--transition-timing-function);
-
-      li {
-        height: 100%;
-      }
-    }
   }
 }
