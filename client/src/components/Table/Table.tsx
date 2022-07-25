@@ -7,6 +7,7 @@ interface ITable {
   caption?: string
   head?: string[]
   data: Object[]
+  style?: {}
 }
 
 const Table = (props: ITable) =>
@@ -15,7 +16,7 @@ const Table = (props: ITable) =>
   ) : (
     <>
       <h3 className={styles.caption}>{props.caption}</h3>
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} style={props.style}>
         <table>
           <thead>
             <tr>
