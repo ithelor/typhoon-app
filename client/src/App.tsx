@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
-import NoMatch from 'components/NoMatch'
 import Header from 'layouts/Header'
 import Sidebar from 'layouts/Sidebar'
 import SidebarProvider from 'layouts/SidebarProvider'
 import About from 'pages/About'
 import Commissions from 'pages/Commissions'
 import Legal from 'pages/Legal'
+import NoMatch from 'pages/NoMatch'
 import Regions from 'pages/Regions'
 
 import 'styles/index.scss'
