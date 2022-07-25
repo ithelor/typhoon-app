@@ -9,7 +9,7 @@ export const useIsOverflow = (
 
   React.useEffect(() => {
     setIsOverflow(outerRef.current!.scrollWidth > outerRef.current!.clientWidth && true)
-    setScrollDistance(innerRef.current!.offsetWidth - outerRef.current!.clientWidth + 3)
+    setScrollDistance(innerRef.current!.offsetWidth - outerRef.current!.clientWidth + 5)
   }, [outerRef, innerRef])
 
   return { isOverflow, scrollDistance }
