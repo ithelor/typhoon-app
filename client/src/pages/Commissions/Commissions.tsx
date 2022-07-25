@@ -101,7 +101,7 @@ const Commissions = () => {
             <Table
               head={COMMISSIONS_LABELS}
               data={commissions as []}
-              style={{ maxHeight: '100vh' }}
+              style={{ maxHeight: '70vh' }}
             />
           )}
         </>
