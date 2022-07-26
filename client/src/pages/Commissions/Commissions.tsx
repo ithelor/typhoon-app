@@ -88,7 +88,8 @@ const Commissions = () => {
 
           {isFetching ? (
             <Loader />
-          ) : paramReg === 'ALL' ? (
+          ) : commissions.length ? (
+            paramReg === 'ALL' ? (
             Array.isArray(commissions[0]) &&
             commissions.map((commission, index) => (
               <Table
@@ -103,6 +104,9 @@ const Commissions = () => {
               data={commissions as []}
               style={{ maxHeight: '70vh' }}
             />
+            )
+          ) : (
+            <span className={styles.noData}>Данные о составе комиссий по ЧС не найдены</span>
           )}
         </>
       )}

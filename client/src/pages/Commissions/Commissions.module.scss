@@ -12,4 +12,9 @@
 
     transition: background-color var(--transition-duration) var(--transition-timing-function);
   }
+
+  .noData {
+    font-size: 1.6rem;
+    margin-top: 1rem;
+  }
 }
