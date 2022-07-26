@@ -68,7 +68,7 @@ const Legal = () => {
                 (doc) =>
                   doc.TYP === paramType && (
                     <li key={doc.KOD}>
-                      <Link key={doc.KOD} to={`/${doc.SRC}`} target="_blank" download={doc.Name}>
+                      <Link to={`/${doc.SRC}`} target="_blank" download={doc.Name}>
                         {doc.Name}
                       </Link>
                     </li>
@@ -83,26 +83,21 @@ const Legal = () => {
         data.docsTypes.map(
           (docsType) =>
             someOfTypeExist(docsType.KOD) && (
-              <>
+              <div key={docsType.KOD}>
                 <h4>{docsType.NAME}</h4>
                 <ul>
                   {data.docs.map(
                     (doc) =>
                       docsType.KOD === doc.TYP && (
                         <li key={doc.KOD}>
-                          <Link
-                            key={doc.KOD}
-                            to={`/${doc.SRC}`}
-                            target="_blank"
-                            download={doc.Name}
-                          >
+                          <Link to={`/${doc.SRC}`} target="_blank" download={doc.Name}>
                             {doc.Name}
                           </Link>
                         </li>
                       )
                   )}
                 </ul>
-              </>
+              </div>
             )
         )
       )}

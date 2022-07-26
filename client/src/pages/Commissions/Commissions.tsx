@@ -90,20 +90,21 @@ const Commissions = () => {
             <Loader />
           ) : commissions.length ? (
             paramReg === 'ALL' ? (
-            Array.isArray(commissions[0]) &&
-            commissions.map((commission, index) => (
+              Array.isArray(commissions[0]) &&
+              commissions.map((commission, index) => (
+                <Table
+                  key={(commission as IKomiss).KOD}
+                  caption={regions[index].Name}
+                  head={COMMISSIONS_LABELS}
+                  data={commission as IKomiss[]}
+                />
+              ))
+            ) : (
               <Table
-                caption={regions[index].Name}
                 head={COMMISSIONS_LABELS}
-                data={commission as IKomiss[]}
+                data={commissions as []}
+                style={{ maxHeight: '70vh' }}
               />
-            ))
-          ) : (
-            <Table
-              head={COMMISSIONS_LABELS}
-              data={commissions as []}
-              style={{ maxHeight: '70vh' }}
-            />
             )
           ) : (
             <span className={styles.noData}>Данные о составе комиссий по ЧС не найдены</span>

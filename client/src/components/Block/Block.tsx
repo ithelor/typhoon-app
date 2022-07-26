@@ -12,7 +12,7 @@ const Block = (props: IBlock) => {
   const dataToMap =
     props.data instanceof Array ? (
       props.data.map((item, index, array) => {
-        return index === array.length - 1 ? item : <>{item}, </>
+        return index === array.length - 1 ? item : `${item}, `
       })
     ) : (
       <span>{props.data}</span>
